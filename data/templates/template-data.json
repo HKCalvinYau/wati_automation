@@ -1,0 +1,3989 @@
+{
+  "metadata": {
+    "totalTemplates": 98,
+    "categories": {
+      "ic": 20,
+      "ac": 20,
+      "ps": 20,
+      "pp": 4,
+      "pi": 10,
+      "ci": 5,
+      "li": 9,
+      "oi": 10
+    },
+    "lastUpdated": "2025-06-18T03:21:21.253Z",
+    "version": "2.0.0"
+  },
+  "templates": [
+    {
+      "id": "IC_RESP",
+      "code": "IC_RESP",
+      "category": "ic",
+      "title": {
+        "zh": "回應初步查詢",
+        "en": "Response to Initial Inquiry"
+      },
+      "description": {
+        "zh": "回應客戶通過電話、電郵或WhatsApp發送的初步查詢，提供服務資訊。",
+        "en": "Respond to initial inquiries from customers via phone, email, or WhatsApp, providing service information."
+      },
+      "content": {
+        "zh": "您好{{1}}，感謝您的查詢。我們提供專業的寵物善終服務，包括：\n                        \n                                {{2}}\n                                {{3}}\n                                {{4}}\n                                {{5}}\n                        \n                        請問您需要了解哪方面的服務詳情？",
+        "en": "Hello {{1}}, thank you for your inquiry. We provide professional pet memorial services, including:\n                            \n                                {{2}}\n                                {{3}}\n                                {{4}}\n                                {{5}}\n                            \n                            Which service details would you like to know more about?"
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.267Z",
+      "updatedAt": "2025-06-18T03:21:21.267Z"
+    },
+    {
+      "id": "IC_COND",
+      "code": "IC_COND",
+      "category": "ic",
+      "title": {
+        "zh": "主動慰問新客戶",
+        "en": "Condolences to New Clients"
+      },
+      "description": {
+        "zh": "主動聯繫剛失去寵物的客戶，表達同情並介紹服務。",
+        "en": "Proactively reach out to clients who have lost their pets, express condolences and introduce services."
+      },
+      "content": {
+        "zh": "親愛的{{1}}，\n                            得知您的寵物{{2}}離世，我們深感遺憾。在這個艱難的時刻，我們希望能為您提供專業的寵物善終服務。\n                        我們提供：\n                        \n                                {{3}}\n                                {{4}}\n                                {{5}}\n                        \n                            如需協助，請隨時聯絡我們。",
+        "en": "Dear {{1}},\n                            We are deeply sorry to hear about the loss of your pet {{2}}. During this difficult time, we would like to offer our professional pet memorial services.\n                            We provide:\n                            \n                                {{3}}\n                                {{4}}\n                                {{5}}\n                            \n                            Please contact us if you need assistance."
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.268Z",
+      "updatedAt": "2025-06-18T03:21:21.268Z"
+    },
+    {
+      "id": "IC_SRVINTRO",
+      "code": "IC_SRVINTRO",
+      "category": "ic",
+      "title": {
+        "zh": "介紹服務概覽",
+        "en": "Service Overview Introduction"
+      },
+      "description": {
+        "zh": "向新客戶概述寵物善終服務，如火化、紀念儀式等。",
+        "en": "Provide new clients with an overview of pet memorial services, such as cremation and memorial ceremonies."
+      },
+      "content": {
+        "zh": "我們的寵物善終服務包括：\n                        \n                                {{1}}\n                                {{2}}\n                                {{3}}\n                                {{4}}\n                                {{5}}\n                        \n                        我們致力於為您提供最貼心的服務。",
+        "en": "Our pet memorial services include:\n                            \n                                {{1}}\n                                {{2}}\n                                {{3}}\n                                {{4}}\n                                {{5}}\n                            \n                            We are committed to providing you with the most caring service."
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.268Z",
+      "updatedAt": "2025-06-18T03:21:21.268Z"
+    },
+    {
+      "id": "IC_CONSULT",
+      "code": "IC_CONSULT",
+      "category": "ic",
+      "title": {
+        "zh": "安排初步諮詢",
+        "en": ""
+      },
+      "description": {
+        "zh": "安排與客戶的電話或面對面諮詢，討論需求。",
+        "en": ""
+      },
+      "content": {
+        "zh": "您好，\n                        感謝您對我們服務的關注。我們可以安排一個諮詢時間，詳細討論您的需求。\n                        您可以選擇：\n                        \n                            電話諮詢（約30分鐘）\n                            現場諮詢（約1小時）\n                            視訊諮詢（約45分鐘）",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.269Z",
+      "updatedAt": "2025-06-18T03:21:21.269Z"
+    },
+    {
+      "id": "IC_EMERG",
+      "code": "IC_EMERG",
+      "category": "ic",
+      "title": {
+        "zh": "提供緊急服務指引",
+        "en": ""
+      },
+      "description": {
+        "zh": "為需要緊急遺體處理的客戶提供快速指引。",
+        "en": ""
+      },
+      "content": {
+        "zh": "緊急服務指引：\n                        \n                            請將遺體放置在陰涼處\n                            用乾淨的毛巾包裹\n                            避免直接接觸\n                            立即聯繫我們：\n                        \n                        我們提供24小時緊急服務。",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.269Z",
+      "updatedAt": "2025-06-18T03:21:21.269Z"
+    },
+    {
+      "id": "IC_WEBSUB",
+      "code": "IC_WEBSUB",
+      "category": "ic",
+      "title": {
+        "zh": "回應網站表單提交",
+        "en": ""
+      },
+      "description": {
+        "zh": "回應客戶通過網站表單提交的查詢，確認收到信息並提供後續步驟。",
+        "en": ""
+      },
+      "content": {
+        "zh": "感謝您透過我們的網站提交表單。我們已收到您的訊息，並將盡快與您聯繫。\n                        為了更好地服務您，請確認以下信息：\n                        \n                            您的聯繫方式是否正確\n                            您希望我們在什麼時間聯繫您\n                            您是否需要緊急服務",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.269Z",
+      "updatedAt": "2025-06-18T03:21:21.269Z"
+    },
+    {
+      "id": "IC_REFER",
+      "code": "IC_REFER",
+      "category": "ic",
+      "title": {
+        "zh": "處理轉介客戶",
+        "en": ""
+      },
+      "description": {
+        "zh": "處理來自合作夥伴或現有客戶的轉介，提供專業服務介紹和後續安排。",
+        "en": ""
+      },
+      "content": {
+        "zh": "您好，我們收到了來自[轉介來源]的轉介，了解到您可能需要我們的服務。\n                        我們提供專業的寵物善終服務，包括：\n                        \n                            個別火化服務\n                            紀念儀式安排\n                            骨灰處理與紀念品\n                            悲傷輔導支持",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.269Z",
+      "updatedAt": "2025-06-18T03:21:21.269Z"
+    },
+    {
+      "id": "IC_MULTILANG",
+      "code": "IC_MULTILANG",
+      "category": "ic",
+      "title": {
+        "zh": "提供多語言支持",
+        "en": ""
+      },
+      "description": {
+        "zh": "提供多語言服務支持，包括繁體中文、英文、日文和韓文，確保所有客戶都能獲得最佳服務體驗。",
+        "en": ""
+      },
+      "content": {
+        "zh": "您好，我們提供多語言服務支持。\n                        您可以選擇以下語言進行溝通：\n                        \n                            繁體中文\n                            English\n                            日本語\n                            한국어",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.269Z",
+      "updatedAt": "2025-06-18T03:21:21.269Z"
+    },
+    {
+      "id": "IC_INFOSESS",
+      "code": "IC_INFOSESS",
+      "category": "ic",
+      "title": {
+        "zh": "邀請參加線上說明會",
+        "en": ""
+      },
+      "description": {
+        "zh": "邀請客戶參加線上說明會，詳細介紹服務流程、費用和常見問題解答。",
+        "en": ""
+      },
+      "content": {
+        "zh": "誠邀您參加我們的線上說明會\n                        主題：寵物善終服務說明會\n                        時間：[日期] [時間]\n                        說明會內容：\n                        \n                            專業服務流程介紹\n                            常見問題解答\n                            服務費用說明\n                            現場問答環節",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.269Z",
+      "updatedAt": "2025-06-18T03:21:21.269Z"
+    },
+    {
+      "id": "IC_STORIES",
+      "code": "IC_STORIES",
+      "category": "ic",
+      "title": {
+        "zh": "分享客戶故事與見證",
+        "en": ""
+      },
+      "description": {
+        "zh": "分享其他客戶的經驗和見證，幫助新客戶了解服務流程和效果，建立信任感。",
+        "en": ""
+      },
+      "content": {
+        "zh": "親愛的客戶，\n                        我們想與您分享一些其他客戶的故事，希望能為您帶來一些安慰和力量...",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.270Z",
+      "updatedAt": "2025-06-18T03:21:21.270Z"
+    },
+    {
+      "id": "IC_SOCIAL",
+      "code": "IC_SOCIAL",
+      "category": "ic",
+      "title": {
+        "zh": "回應社交媒體查詢",
+        "en": ""
+      },
+      "description": {
+        "zh": "回應來自社交媒體平台的客戶查詢，提供服務介紹和聯繫方式。",
+        "en": ""
+      },
+      "content": {
+        "zh": "您好！感謝您在社交媒體上關注我們。\n                        我們是專業的寵物善終服務團隊，為您提供以下服務：\n                        \n                            專業的寵物遺體處理\n                            溫馨的告別儀式\n                            個性化紀念品製作\n                            情感支持與輔導",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.270Z",
+      "updatedAt": "2025-06-18T03:21:21.270Z"
+    },
+    {
+      "id": "IC_NEEDS",
+      "code": "IC_NEEDS",
+      "category": "ic",
+      "title": {
+        "zh": "服務前需求評估",
+        "en": ""
+      },
+      "description": {
+        "zh": "收集客戶的服務需求，包括寵物資訊、服務類型和特殊要求，以便提供最適合的服務方案。",
+        "en": ""
+      },
+      "content": {
+        "zh": "親愛的客戶，\n                        為了更好地為您提供服務，請協助我們完成以下需求評估：\n                        \n                            寵物基本資訊\n                            服務需求\n                            特殊要求",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.270Z",
+      "updatedAt": "2025-06-18T03:21:21.270Z"
+    },
+    {
+      "id": "IC_COMMUNITY",
+      "code": "IC_COMMUNITY",
+      "category": "ic",
+      "title": {
+        "zh": "社區推廣聯繫",
+        "en": ""
+      },
+      "description": {
+        "zh": "與社區建立合作關係，提供寵物善終服務講座、紀念活動支援和情感支持小組等服務。",
+        "en": ""
+      },
+      "content": {
+        "zh": "親愛的社區夥伴，\n                        我們是專業的寵物善終服務團隊，致力於為社區提供溫馨、專業的寵物告別服務。我們希望與您建立合作關係，共同為社區居民提供更好的服務。\n                        我們可以為您的社區提供：\n                        \n                            免費的寵物善終服務講座\n                            社區寵物紀念活動支援\n                            寵物主人情感支持小組\n                            社區寵物關懷計劃",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.270Z",
+      "updatedAt": "2025-06-18T03:21:21.270Z"
+    },
+    {
+      "id": "IC_SUPPORTGRP",
+      "code": "IC_SUPPORTGRP",
+      "category": "ic",
+      "title": {
+        "zh": "邀請加入寵物喪失支持小組",
+        "en": ""
+      },
+      "description": {
+        "zh": "邀請客戶加入支持小組，提供專業心理輔導和互助交流活動，幫助度過失去寵物的艱難時期。",
+        "en": ""
+      },
+      "content": {
+        "zh": "親愛的客戶，\n                        我們理解失去寵物帶來的痛苦和悲傷。為了幫助您度過這個艱難時期，我們誠邀您加入我們的寵物喪失支持小組。\n                        支持小組活動內容：\n                        \n                            每週線上分享會\n                            專業心理輔導\n                            互助交流活動",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.270Z",
+      "updatedAt": "2025-06-18T03:21:21.270Z"
+    },
+    {
+      "id": "IC_VET",
+      "code": "IC_VET",
+      "category": "ic",
+      "title": {
+        "zh": "跟進獸醫合作夥伴轉介",
+        "en": ""
+      },
+      "description": {
+        "zh": "與獸醫合作夥伴建立良好的轉介關係，確保客戶獲得及時且專業的善終服務。",
+        "en": ""
+      },
+      "content": {
+        "zh": "親愛的獸醫夥伴，\n                        感謝您將客戶轉介給我們。我們已收到轉介信息，並將立即跟進處理。\n                        為了提供更好的服務，請確認以下信息：\n                        \n                            寵物基本資料\n                            客戶聯繫方式\n                            特殊服務需求",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.270Z",
+      "updatedAt": "2025-06-18T03:21:21.270Z"
+    },
+    {
+      "id": "IC_COUNSEL",
+      "code": "IC_COUNSEL",
+      "category": "ic",
+      "title": {
+        "zh": "提供初步悲傷輔導",
+        "en": ""
+      },
+      "description": {
+        "zh": "為失去寵物的客戶提供專業的心理支持和輔導，幫助他們度過悲傷期。",
+        "en": ""
+      },
+      "content": {
+        "zh": "親愛的客戶，\n                        我們理解失去寵物帶來的痛苦和悲傷。在這個艱難的時刻，我們希望為您提供一些支持：\n                        悲傷是正常的：\n                        \n                            允許自己感受悲傷\n                            不要壓抑情緒\n                            給自己時間療癒",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.271Z",
+      "updatedAt": "2025-06-18T03:21:21.271Z"
+    },
+    {
+      "id": "IC_BROCHURE",
+      "code": "IC_BROCHURE",
+      "category": "ic",
+      "title": {
+        "zh": "回應服務手冊請求",
+        "en": ""
+      },
+      "description": {
+        "zh": "回應客戶對服務手冊的請求，提供多種獲取方式，確保客戶能夠全面了解我們的服務。",
+        "en": ""
+      },
+      "content": {
+        "zh": "親愛的客戶，\n                        感謝您對我們的服務手冊感興趣。我們已收到您的請求，並將立即為您安排：\n                        服務手冊包含以下內容：\n                        \n                            完整的服務項目說明\n                            服務流程介紹\n                            價格方案詳情\n                            常見問題解答",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.271Z",
+      "updatedAt": "2025-06-18T03:21:21.271Z"
+    },
+    {
+      "id": "IC_WELCOME",
+      "code": "IC_WELCOME",
+      "category": "ic",
+      "title": {
+        "zh": "歡迎首次客戶",
+        "en": ""
+      },
+      "description": {
+        "zh": "以溫馨、專業的態度歡迎首次接觸的客戶，介紹我們的服務承諾和支持方式。",
+        "en": ""
+      },
+      "content": {
+        "zh": "親愛的客戶，\n                        歡迎您選擇我們的寵物善終服務。我們深知失去寵物帶來的痛苦，我們將以專業、溫馨的態度陪伴您度過這個艱難時刻。\n                        我們的服務承諾：\n                        \n                            24小時專業服務\n                            全程溫馨陪伴\n                            個性化紀念方案\n                            專業心理支持",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.271Z",
+      "updatedAt": "2025-06-18T03:21:21.271Z"
+    },
+    {
+      "id": "IC_EVENT",
+      "code": "IC_EVENT",
+      "category": "ic",
+      "title": {
+        "zh": "基於事件的聯繫",
+        "en": ""
+      },
+      "description": {
+        "zh": "在客戶參與活動後進行跟進，了解體驗並提供後續服務。",
+        "en": ""
+      },
+      "content": {
+        "zh": "親愛的客戶，\n                        感謝您參加我們的活動。希望您能分享您的體驗和感受。\n                        我們提供以下後續服務：\n                        \n                            一對一諮詢\n                            紀念品定制\n                            支持小組活動\n                        \n                        期待您的回饋。",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.271Z",
+      "updatedAt": "2025-06-18T03:21:21.271Z"
+    },
+    {
+      "id": "IC_FAQ",
+      "code": "IC_FAQ",
+      "category": "ic",
+      "title": {
+        "zh": "解答常見問題",
+        "en": ""
+      },
+      "description": {
+        "zh": "提供常見問題的標準回答，幫助客戶快速了解服務細節。",
+        "en": ""
+      },
+      "content": {
+        "zh": "親愛的客戶，\n                        感謝您的提問。以下是關於我們服務的常見問題解答：\n                        \n                            服務流程相關問題\n                            價格相關問題\n                            紀念服務相關問題\n                        \n                        如果您有其他問題，請隨時聯繫我們。",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.271Z",
+      "updatedAt": "2025-06-18T03:21:21.271Z"
+    },
+    {
+      "id": "AC_PICKUP",
+      "code": "AC_PICKUP",
+      "category": "ac",
+      "title": {
+        "zh": "遺體接收預約確認",
+        "en": "Body Reception Appointment Confirmation"
+      },
+      "description": {
+        "zh": "確認客戶的遺體接收預約，提供詳細的時間和地點信息。",
+        "en": "Confirm the client's body reception appointment, providing detailed time and location information."
+      },
+      "content": {
+        "zh": "親愛的客戶，\n                        我們已確認您的遺體接收預約：\n                        \n                                預約時間：{{2}} {{3}}\n                                接收地點：{{4}}\n                                聯繫電話：{{7}}\n                        \n                        請確保在預約時間前做好準備。如有任何變更，請提前通知我們。",
+        "en": "Dear client,\n                            We have confirmed your body reception appointment:\n                            \n                                Appointment Time: {{2}} {{3}}\n                                Reception Location: {{4}}\n                                Contact Number: {{7}}\n                            \n                            Please ensure you are prepared before the appointment time. If there are any changes, please notify us in advance."
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.278Z",
+      "updatedAt": "2025-06-18T03:21:21.278Z"
+    },
+    {
+      "id": "AC_CEREMONY",
+      "code": "AC_CEREMONY",
+      "category": "ac",
+      "title": {
+        "zh": "紀念儀式預約確認",
+        "en": ""
+      },
+      "description": {
+        "zh": "確認客戶的紀念儀式預約，提供儀式流程和注意事項。",
+        "en": ""
+      },
+      "content": {
+        "zh": "親愛的客戶，\n                        我們已確認您的紀念儀式預約：\n                        \n                            儀式時間：[日期] [時間]\n                            儀式地點：[地址]\n                            預計時長：約1小時\n                        \n                        儀式流程：\n                        \n                            歡迎致辭\n                            追思分享\n                            告別儀式\n                            紀念品贈送",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.279Z",
+      "updatedAt": "2025-06-18T03:21:21.279Z"
+    },
+    {
+      "id": "AC_CREMATE",
+      "code": "AC_CREMATE",
+      "category": "ac",
+      "title": {
+        "zh": "火化服務預約確認",
+        "en": ""
+      },
+      "description": {
+        "zh": "確認客戶的火化服務預約，提供服務流程和注意事項。",
+        "en": ""
+      },
+      "content": {
+        "zh": "親愛的客戶，\n                        我們已確認您的火化服務預約：\n                        \n                            預約時間：[日期] [時間]\n                            服務地點：[地址]\n                            服務類型：[個別/團體]火化\n                        \n                        服務流程：\n                        \n                            遺體接收\n                            身份確認\n                            火化服務\n                            骨灰收集",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.281Z",
+      "updatedAt": "2025-06-18T03:21:21.281Z"
+    },
+    {
+      "id": "AC_VISIT",
+      "code": "AC_VISIT",
+      "category": "ac",
+      "title": {
+        "zh": "現場拜訪預約確認",
+        "en": ""
+      },
+      "description": {
+        "zh": "確認客戶的現場拜訪預約，提供拜訪流程和準備事項。",
+        "en": ""
+      },
+      "content": {
+        "zh": "親愛的客戶，\n                        我們已確認您的現場拜訪預約：\n                        \n                            拜訪時間：[日期] [時間]\n                            拜訪地點：[地址]\n                            預計時長：約1小時\n                        \n                        拜訪內容：\n                        \n                            場地參觀\n                            服務介紹\n                            需求討論\n                            方案建議",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.281Z",
+      "updatedAt": "2025-06-18T03:21:21.281Z"
+    },
+    {
+      "id": "AC_MEETING",
+      "code": "AC_MEETING",
+      "category": "ac",
+      "title": {
+        "zh": "諮詢會議預約確認",
+        "en": ""
+      },
+      "description": {
+        "zh": "確認客戶的諮詢會議預約，提供會議流程和準備事項。",
+        "en": ""
+      },
+      "content": {
+        "zh": "親愛的客戶，\n                        我們已確認您的諮詢會議預約：\n                        \n                            會議時間：[日期] [時間]\n                            會議地點：[地址]\n                            會議時長：約45分鐘\n                        \n                        會議內容：\n                        \n                            需求評估\n                            服務介紹\n                            方案討論\n                            問題解答",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.281Z",
+      "updatedAt": "2025-06-18T03:21:21.281Z"
+    },
+    {
+      "id": "AC_SPECIAL",
+      "code": "AC_SPECIAL",
+      "category": "ac",
+      "title": {
+        "zh": "特殊要求調整確認",
+        "en": ""
+      },
+      "description": {
+        "zh": "確認客戶的特殊服務要求，提供調整後的服務方案。",
+        "en": ""
+      },
+      "content": {
+        "zh": "親愛的客戶，\n                        我們已收到您的特殊要求，並已進行相應調整：\n                        \n                            原始預約：[日期] [時間]\n                            調整項目：[具體調整內容]\n                            調整原因：[原因說明]\n                        \n                        調整後的服務方案：\n                        \n                            [調整項目1]\n                            [調整項目2]\n                            [調整項目3]",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.281Z",
+      "updatedAt": "2025-06-18T03:21:21.281Z"
+    },
+    {
+      "id": "AC_TIMECHG",
+      "code": "AC_TIMECHG",
+      "category": "ac",
+      "title": {
+        "zh": "預約時間變更通知",
+        "en": ""
+      },
+      "description": {
+        "zh": "通知客戶預約時間的變更，提供新的時間安排。",
+        "en": ""
+      },
+      "content": {
+        "zh": "親愛的客戶，\n                        關於您的預約時間變更通知：\n                        \n                            原預約時間：[原日期] [原時間]\n                            新預約時間：[新日期] [新時間]\n                            變更原因：[原因說明]\n                        \n                        請確認新的預約時間是否合適。如需調整，請盡快與我們聯繫。",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.281Z",
+      "updatedAt": "2025-06-18T03:21:21.281Z"
+    },
+    {
+      "id": "AC_CANCEL",
+      "code": "AC_CANCEL",
+      "category": "ac",
+      "title": {
+        "zh": "預約取消確認",
+        "en": ""
+      },
+      "description": {
+        "zh": "確認客戶的預約取消請求，提供後續處理方案。",
+        "en": ""
+      },
+      "content": {
+        "zh": "親愛的客戶，\n                        我們已收到您的預約取消請求：\n                        \n                            原預約時間：[日期] [時間]\n                            取消原因：[原因說明]\n                            取消確認時間：[時間]\n                        \n                        取消政策說明：\n                        \n                            24小時前取消：全額退款\n                            12-24小時內取消：收取50%費用\n                            12小時內取消：收取全額費用",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.281Z",
+      "updatedAt": "2025-06-18T03:21:21.281Z"
+    },
+    {
+      "id": "AC_MULTIPARTY",
+      "code": "AC_MULTIPARTY",
+      "category": "ac",
+      "title": {
+        "zh": "多人參與預約確認",
+        "en": ""
+      },
+      "description": {
+        "zh": "確認多人參與的預約，提供參與者名單和注意事項。",
+        "en": ""
+      },
+      "content": {
+        "zh": "親愛的客戶，\n                        我們已確認您的多人參與預約：\n                        \n                            預約時間：[日期] [時間]\n                            預約地點：[地址]\n                            參與人數：[人數]\n                        \n                        參與者名單：\n                        \n                            [參與者1]\n                            [參與者2]\n                            [參與者3]\n                        \n                        注意事項：\n                        \n                            請提前15分鐘到達\n                            請攜帶身份證明文件\n                            如有變更請提前通知",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.282Z",
+      "updatedAt": "2025-06-18T03:21:21.282Z"
+    },
+    {
+      "id": "AC_TRANS",
+      "code": "AC_TRANS",
+      "category": "ac",
+      "title": {
+        "zh": "交通安排確認",
+        "en": ""
+      },
+      "description": {
+        "zh": "確認客戶的交通安排，提供接送服務詳情。",
+        "en": ""
+      },
+      "content": {
+        "zh": "親愛的客戶，\n                        我們已確認您的交通安排：\n                        \n                            接送時間：[日期] [時間]\n                            接送地點：[地址]\n                            車型：[車型說明]\n                        \n                        交通安排詳情：\n                        \n                            司機聯繫方式：[電話號碼]\n                            車牌號碼：[車牌號]\n                            預計行程時間：[時間]",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.282Z",
+      "updatedAt": "2025-06-18T03:21:21.282Z"
+    },
+    {
+      "id": "AC_VIRTCONSULT",
+      "code": "AC_VIRTCONSULT",
+      "category": "ac",
+      "title": {
+        "zh": "虛擬諮詢預約確認",
+        "en": ""
+      },
+      "description": {
+        "zh": "確認客戶的線上虛擬諮詢預約，提供會議連結和準備事項。",
+        "en": ""
+      },
+      "content": {
+        "zh": "親愛的客戶，\n                        我們已確認您的虛擬諮詢預約：\n                        \n                            預約時間：[日期] [時間]\n                            會議平台：[平台名稱]\n                            會議時長：約45分鐘\n                        \n                        會議資訊：\n                        \n                            會議連結：[連結]\n                            會議ID：[ID]\n                            密碼：[密碼]\n                        \n                        準備事項：\n                        \n                            請提前測試設備\n                            確保網絡穩定\n                            準備相關問題",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.282Z",
+      "updatedAt": "2025-06-18T03:21:21.282Z"
+    },
+    {
+      "id": "AC_PRODDEL",
+      "code": "AC_PRODDEL",
+      "category": "ac",
+      "title": {
+        "zh": "紀念品交付安排確認",
+        "en": ""
+      },
+      "description": {
+        "zh": "確認客戶的紀念品交付安排，提供交付詳情和注意事項。",
+        "en": ""
+      },
+      "content": {
+        "zh": "親愛的客戶，\n                        我們已確認您的紀念品交付安排：\n                        \n                            交付時間：[日期] [時間]\n                            交付地點：[地址]\n                            交付方式：[方式說明]\n                        \n                        交付物品：\n                        \n                            [物品1]\n                            [物品2]\n                            [物品3]\n                        \n                        注意事項：\n                        \n                            請攜帶身份證明文件\n                            請確認物品完整性\n                            請簽收確認",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.282Z",
+      "updatedAt": "2025-06-18T03:21:21.282Z"
+    },
+    {
+      "id": "AC_REMIND",
+      "code": "AC_REMIND",
+      "category": "ac",
+      "title": {
+        "zh": "預約前提醒",
+        "en": ""
+      },
+      "description": {
+        "zh": "在預約時間前提醒客戶，提供準備事項和注意事項。",
+        "en": ""
+      },
+      "content": {
+        "zh": "親愛的客戶，\n                        提醒您即將到來的預約：\n                        \n                            預約時間：[日期] [時間]\n                            預約地點：[地址]\n                            預約項目：[項目說明]\n                        \n                        準備事項：\n                        \n                            請提前15分鐘到達\n                            請攜帶必要文件\n                            請確認聯繫方式\n                        \n                        如有任何變更，請盡快與我們聯繫。",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.282Z",
+      "updatedAt": "2025-06-18T03:21:21.282Z"
+    },
+    {
+      "id": "AC_WEATHER",
+      "code": "AC_WEATHER",
+      "category": "ac",
+      "title": {
+        "zh": "天氣相關預約更新",
+        "en": ""
+      },
+      "description": {
+        "zh": "因天氣原因更新預約安排，提供替代方案和注意事項。",
+        "en": ""
+      },
+      "content": {
+        "zh": "親愛的客戶，\n                        由於天氣原因，我們需要更新您的預約安排：\n                        \n                            原預約時間：[日期] [時間]\n                            天氣狀況：[天氣說明]\n                            影響程度：[影響說明]\n                        \n                        更新安排：\n                        \n                            新預約時間：[新日期] [新時間]\n                            替代方案：[方案說明]\n                            注意事項：[注意事項]",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.282Z",
+      "updatedAt": "2025-06-18T03:21:21.282Z"
+    },
+    {
+      "id": "AC_GROUPCER",
+      "code": "AC_GROUPCER",
+      "category": "ac",
+      "title": {
+        "zh": "團體儀式協調確認",
+        "en": ""
+      },
+      "description": {
+        "zh": "確認團體儀式的協調安排，提供儀式流程和參與者信息。",
+        "en": ""
+      },
+      "content": {
+        "zh": "親愛的客戶，\n                        我們已確認您的團體儀式安排：\n                        \n                            儀式時間：[日期] [時間]\n                            儀式地點：[地址]\n                            參與人數：[人數]\n                        \n                        儀式流程：\n                        \n                            歡迎致辭\n                            追思分享\n                            團體儀式\n                            紀念活動\n                        \n                        注意事項：\n                        \n                            請提前30分鐘到達\n                            請遵守儀式秩序\n                            請保持安靜肅穆",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.283Z",
+      "updatedAt": "2025-06-18T03:21:21.283Z"
+    },
+    {
+      "id": "AC_SAFETY",
+      "code": "AC_SAFETY",
+      "category": "ac",
+      "title": {
+        "zh": "家訪安全確認",
+        "en": ""
+      },
+      "description": {
+        "zh": "確認家訪服務的安全安排，提供安全措施和注意事項。",
+        "en": ""
+      },
+      "content": {
+        "zh": "親愛的客戶，\n                        關於您的家訪服務安全確認：\n                        \n                            訪問時間：[日期] [時間]\n                            訪問地點：[地址]\n                            服務人員：[姓名]\n                        \n                        安全措施：\n                        \n                            工作人員身份確認\n                            安全防護裝備\n                            緊急聯繫方式\n                        \n                        注意事項：\n                        \n                            請確認工作人員身份\n                            請保持環境通風\n                            請準備必要防護用品",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.283Z",
+      "updatedAt": "2025-06-18T03:21:21.283Z"
+    },
+    {
+      "id": "AC_PAYCONF",
+      "code": "AC_PAYCONF",
+      "category": "ac",
+      "title": {
+        "zh": "預約付款確認",
+        "en": ""
+      },
+      "description": {
+        "zh": "確認客戶的預約付款，提供付款詳情和收據信息。",
+        "en": ""
+      },
+      "content": {
+        "zh": "親愛的客戶，\n                        我們已確認收到您的付款：\n                        \n                            付款金額：[金額]\n                            付款時間：[時間]\n                            付款方式：[方式]\n                        \n                        付款詳情：\n                        \n                            服務項目：[項目]\n                            預約時間：[時間]\n                            收據編號：[編號]\n                        \n                        感謝您的信任，我們將為您提供優質的服務。",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.283Z",
+      "updatedAt": "2025-06-18T03:21:21.283Z"
+    },
+    {
+      "id": "AC_RESCHED",
+      "code": "AC_RESCHED",
+      "category": "ac",
+      "title": {
+        "zh": "預約重新安排提議",
+        "en": ""
+      },
+      "description": {
+        "zh": "提議重新安排預約時間，提供新的時間選項。",
+        "en": ""
+      },
+      "content": {
+        "zh": "親愛的客戶，\n                        關於您的預約重新安排提議：\n                        \n                            原預約時間：[日期] [時間]\n                            重新安排原因：[原因]\n                            建議新時間：\n                        \n                        可選時間：\n                        \n                            [日期1] [時間1]\n                            [日期2] [時間2]\n                            [日期3] [時間3]\n                        \n                        請選擇適合您的時間，或提供其他時間選項。",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.283Z",
+      "updatedAt": "2025-06-18T03:21:21.283Z"
+    },
+    {
+      "id": "AC_DOCSUB",
+      "code": "AC_DOCSUB",
+      "category": "ac",
+      "title": {
+        "zh": "客戶文件提交確認",
+        "en": ""
+      },
+      "description": {
+        "zh": "確認客戶提交的文件，提供文件處理進度。",
+        "en": ""
+      },
+      "content": {
+        "zh": "親愛的客戶，\n                        我們已收到您提交的文件：\n                        \n                            提交時間：[時間]\n                            文件類型：[類型]\n                            文件數量：[數量]\n                        \n                        文件清單：\n                        \n                            [文件1]\n                            [文件2]\n                            [文件3]\n                        \n                        處理進度：\n                        \n                            接收確認：已完成\n                            文件審核：進行中\n                            後續處理：待處理",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.283Z",
+      "updatedAt": "2025-06-18T03:21:21.283Z"
+    },
+    {
+      "id": "AC_POSTPONE",
+      "code": "AC_POSTPONE",
+      "category": "ac",
+      "title": {
+        "zh": "預約延期通知",
+        "en": ""
+      },
+      "description": {
+        "zh": "通知客戶預約延期，提供新的時間安排和補償方案。",
+        "en": ""
+      },
+      "content": {
+        "zh": "親愛的客戶，\n                        關於您的預約延期通知：\n                        \n                            原預約時間：[日期] [時間]\n                            延期原因：[原因]\n                            新預約時間：[新日期] [新時間]\n                        \n                        補償方案：\n                        \n                            [補償項目1]\n                            [補償項目2]\n                            [補償項目3]\n                        \n                        我們為造成的不便深表歉意，感謝您的理解。",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.283Z",
+      "updatedAt": "2025-06-18T03:21:21.283Z"
+    },
+    {
+      "id": "PS_SURVEY",
+      "code": "PS_SURVEY",
+      "category": "ps",
+      "title": {
+        "zh": "服務滿意度調查",
+        "en": ""
+      },
+      "description": {
+        "zh": "用於收集客戶對服務的滿意度反饋，幫助我們持續改進服務質量。",
+        "en": ""
+      },
+      "content": {
+        "zh": "您好，感謝您選擇我們的服務。我們希望了解您對服務的滿意度，以便我們能夠持續改進。\n                        請花一點時間回答以下問題：\n                        \n                            您對整體服務的滿意度如何？\n                            您對工作人員的專業程度評價如何？\n                            您對服務流程的順暢度評價如何？\n                            您是否願意向親友推薦我們的服務？\n                        \n                        您的反饋對我們非常重要，感謝您的寶貴意見。",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.287Z",
+      "updatedAt": "2025-06-18T03:21:21.287Z"
+    },
+    {
+      "id": "PS_THANKS",
+      "code": "PS_THANKS",
+      "category": "ps",
+      "title": {
+        "zh": "感謝函",
+        "en": "Thank You Letter"
+      },
+      "description": {
+        "zh": "向客戶表達感謝，並提供後續支援資訊。",
+        "en": "Express gratitude to clients and provide follow-up support information."
+      },
+      "content": {
+        "zh": "親愛的{{1}}：\n                            感謝您選擇我們的服務。我們很榮幸能夠在這個特別的時刻陪伴您和{{2}}。\n                            如果您需要任何協助，我們提供以下支援服務：\n                            \n                                {{3}}\n                                {{4}}\n                                {{5}}\n                            \n                            我們隨時在這裡為您提供支持。\n                            祝您平安。",
+        "en": "Dear {{1}},\n                            Thank you for choosing our service. We are honored to accompany you and {{2}} during this special moment.\n                            If you need any assistance, we provide the following support services:\n                            \n                                {{3}}\n                                {{4}}\n                                {{5}}\n                            \n                            We are always here to support you.\n                            Best wishes."
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.287Z",
+      "updatedAt": "2025-06-18T03:21:21.287Z"
+    },
+    {
+      "id": "PS_SUPPORT",
+      "code": "PS_SUPPORT",
+      "category": "ps",
+      "title": {
+        "zh": "提供情感支持資源",
+        "en": ""
+      },
+      "description": {
+        "zh": "用於提供情感支持和輔導資源。",
+        "en": ""
+      },
+      "content": {
+        "zh": "親愛的客戶，我們理解失去寵物帶來的傷痛...",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.287Z",
+      "updatedAt": "2025-06-18T03:21:21.287Z"
+    },
+    {
+      "id": "PS_MEMPROD",
+      "code": "PS_MEMPROD",
+      "category": "ps",
+      "title": {
+        "zh": "跟進紀念品需求",
+        "en": ""
+      },
+      "description": {
+        "zh": "用於跟進客戶對紀念品的需求。",
+        "en": ""
+      },
+      "content": {
+        "zh": "親愛的客戶，我們提供多種紀念品選擇...",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.287Z",
+      "updatedAt": "2025-06-18T03:21:21.287Z"
+    },
+    {
+      "id": "PS_FEEDBACK",
+      "code": "PS_FEEDBACK",
+      "category": "ps",
+      "title": {
+        "zh": "處理服務反饋",
+        "en": ""
+      },
+      "description": {
+        "zh": "用於處理客戶的服務反饋。",
+        "en": ""
+      },
+      "content": {
+        "zh": "感謝您提供的寶貴反饋，我們會認真考慮...",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.287Z",
+      "updatedAt": "2025-06-18T03:21:21.287Z"
+    },
+    {
+      "id": "PS_SHARE",
+      "code": "PS_SHARE",
+      "category": "ps",
+      "title": {
+        "zh": "邀請分享體驗",
+        "en": ""
+      },
+      "description": {
+        "zh": "用於邀請客戶分享服務體驗。",
+        "en": ""
+      },
+      "content": {
+        "zh": "如果您願意分享您的體驗，將幫助其他有需要的寵物主人...",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.287Z",
+      "updatedAt": "2025-06-18T03:21:21.287Z"
+    },
+    {
+      "id": "PS_ADDSRV",
+      "code": "PS_ADDSRV",
+      "category": "ps",
+      "title": {
+        "zh": "提供後續服務建議",
+        "en": ""
+      },
+      "description": {
+        "zh": "用於提供後續服務建議。",
+        "en": ""
+      },
+      "content": {
+        "zh": "我們還有其他服務可能對您有幫助...",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.287Z",
+      "updatedAt": "2025-06-18T03:21:21.287Z"
+    },
+    {
+      "id": "PS_ASHDEL",
+      "code": "PS_ASHDEL",
+      "category": "ps",
+      "title": {
+        "zh": "確認骨灰交付",
+        "en": ""
+      },
+      "description": {
+        "zh": "用於確認骨灰交付安排。",
+        "en": ""
+      },
+      "content": {
+        "zh": "關於骨灰交付的安排，我們已經準備就緒...",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.287Z",
+      "updatedAt": "2025-06-18T03:21:21.287Z"
+    },
+    {
+      "id": "PS_COMPLAINT",
+      "code": "PS_COMPLAINT",
+      "category": "ps",
+      "title": {
+        "zh": "回應投訴或問題",
+        "en": ""
+      },
+      "description": {
+        "zh": "用於回應客戶的投訴或問題。",
+        "en": ""
+      },
+      "content": {
+        "zh": "我們非常重視您的反饋，會立即處理...",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.287Z",
+      "updatedAt": "2025-06-18T03:21:21.287Z"
+    },
+    {
+      "id": "PS_COMMUNITY",
+      "code": "PS_COMMUNITY",
+      "category": "ps",
+      "title": {
+        "zh": "邀請加入支持社群",
+        "en": ""
+      },
+      "description": {
+        "zh": "用於邀請客戶加入支持社群。",
+        "en": ""
+      },
+      "content": {
+        "zh": "我們有一個溫暖的支持社群，歡迎您加入...",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.287Z",
+      "updatedAt": "2025-06-18T03:21:21.287Z"
+    },
+    {
+      "id": "PS_EVENTINV",
+      "code": "PS_EVENTINV",
+      "category": "ps",
+      "title": {
+        "zh": "紀念活動邀請",
+        "en": ""
+      },
+      "description": {
+        "zh": "用於邀請客戶參加紀念活動。",
+        "en": ""
+      },
+      "content": {
+        "zh": "我們即將舉辦一場特別的紀念活動...",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.288Z",
+      "updatedAt": "2025-06-18T03:21:21.288Z"
+    },
+    {
+      "id": "PS_ANNIV",
+      "code": "PS_ANNIV",
+      "category": "ps",
+      "title": {
+        "zh": "客戶周年紀念致敬",
+        "en": ""
+      },
+      "description": {
+        "zh": "用於紀念客戶的周年紀念。",
+        "en": ""
+      },
+      "content": {
+        "zh": "在這個特別的日子，我們與您一起紀念...",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.288Z",
+      "updatedAt": "2025-06-18T03:21:21.288Z"
+    },
+    {
+      "id": "PS_QUALITY",
+      "code": "PS_QUALITY",
+      "category": "ps",
+      "title": {
+        "zh": "服務質量保證檢查",
+        "en": ""
+      },
+      "description": {
+        "zh": "用於進行服務質量保證檢查。",
+        "en": ""
+      },
+      "content": {
+        "zh": "我們定期進行服務質量檢查，確保提供最佳服務...",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.288Z",
+      "updatedAt": "2025-06-18T03:21:21.288Z"
+    },
+    {
+      "id": "PS_REFER",
+      "code": "PS_REFER",
+      "category": "ps",
+      "title": {
+        "zh": "介紹轉介計劃",
+        "en": ""
+      },
+      "description": {
+        "zh": "用於介紹轉介計劃。",
+        "en": ""
+      },
+      "content": {
+        "zh": "我們有一個特別的轉介計劃，歡迎您參與...",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.288Z",
+      "updatedAt": "2025-06-18T03:21:21.288Z"
+    },
+    {
+      "id": "PS_COUNSEL",
+      "code": "PS_COUNSEL",
+      "category": "ps",
+      "title": {
+        "zh": "服務後輔導提議",
+        "en": ""
+      },
+      "description": {
+        "zh": "用於提供服務後的輔導提議。",
+        "en": ""
+      },
+      "content": {
+        "zh": "我們提供專業的輔導服務，幫助您度過這個時期...",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.288Z",
+      "updatedAt": "2025-06-18T03:21:21.288Z"
+    },
+    {
+      "id": "PS_PRODSAT",
+      "code": "PS_PRODSAT",
+      "category": "ps",
+      "title": {
+        "zh": "紀念品滿意度檢查",
+        "en": ""
+      },
+      "description": {
+        "zh": "用於檢查客戶對紀念品的滿意度。",
+        "en": ""
+      },
+      "content": {
+        "zh": "我們希望了解您對紀念品的滿意度...",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.288Z",
+      "updatedAt": "2025-06-18T03:21:21.288Z"
+    },
+    {
+      "id": "PS_TESTIMONIAL",
+      "code": "PS_TESTIMONIAL",
+      "category": "ps",
+      "title": {
+        "zh": "客戶見證請求",
+        "en": ""
+      },
+      "description": {
+        "zh": "用於請求客戶提供見證。",
+        "en": ""
+      },
+      "content": {
+        "zh": "如果您願意分享您的體驗，將幫助其他有需要的寵物主人...",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.288Z",
+      "updatedAt": "2025-06-18T03:21:21.288Z"
+    },
+    {
+      "id": "PS_FOLLOWCALL",
+      "code": "PS_FOLLOWCALL",
+      "category": "ps",
+      "title": {
+        "zh": "服務跟進電話安排",
+        "en": ""
+      },
+      "description": {
+        "zh": "用於安排服務跟進電話。",
+        "en": ""
+      },
+      "content": {
+        "zh": "我們希望安排一個跟進電話，了解您的情況...",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.288Z",
+      "updatedAt": "2025-06-18T03:21:21.288Z"
+    },
+    {
+      "id": "PS_COMMEVENT",
+      "code": "PS_COMMEVENT",
+      "category": "ps",
+      "title": {
+        "zh": "社群活動後續聯繫",
+        "en": ""
+      },
+      "description": {
+        "zh": "用於社群活動的後續聯繫。",
+        "en": ""
+      },
+      "content": {
+        "zh": "感謝您參加我們的社群活動，希望您有所收穫...",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.288Z",
+      "updatedAt": "2025-06-18T03:21:21.288Z"
+    },
+    {
+      "id": "PS_LONGSUPP",
+      "code": "PS_LONGSUPP",
+      "category": "ps",
+      "title": {
+        "zh": "長期支持提議",
+        "en": ""
+      },
+      "description": {
+        "zh": "用於提供長期支持提議。",
+        "en": ""
+      },
+      "content": {
+        "zh": "我們提供長期的支持服務，幫助您度過這個時期...",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.288Z",
+      "updatedAt": "2025-06-18T03:21:21.288Z"
+    },
+    {
+      "id": "PP_WELCOME",
+      "code": "PP_WELCOME",
+      "category": "pp",
+      "title": {
+        "zh": "歡迎訊息",
+        "en": "Welcome Message"
+      },
+      "description": {
+        "zh": "向新客戶發送歡迎訊息，介紹公司服務和特色。",
+        "en": "Send welcome messages to new clients, introducing company services and features."
+      },
+      "content": {
+        "zh": "親愛的{{1}}：\n                            歡迎您選擇{{2}}的服務！\n                            我們提供以下服務：\n                            \n                                {{3}}\n                                {{4}}\n                                {{5}}\n                            \n                            我們的特色：\n                            \n                                {{6}}\n                                {{7}}\n                                {{8}}\n                            \n                            如有任何問題，歡迎隨時聯絡我們。",
+        "en": "Dear {{1}},\n                            Welcome to {{2}}'s services!\n                            We provide the following services:\n                            \n                                {{3}}\n                                {{4}}\n                                {{5}}\n                            \n                            Our features:\n                            \n                                {{6}}\n                                {{7}}\n                                {{8}}\n                            \n                            Please feel free to contact us if you have any questions."
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.289Z",
+      "updatedAt": "2025-06-18T03:21:21.289Z"
+    },
+    {
+      "id": "PP_INTRO",
+      "code": "PP_INTRO",
+      "category": "pp",
+      "title": {
+        "zh": "服務介紹",
+        "en": ""
+      },
+      "description": {
+        "zh": "用於向客戶介紹我們的寵物善終服務，包括服務內容、特色和優勢。",
+        "en": ""
+      },
+      "content": {
+        "zh": "您好，感謝您對我們的寵物善終服務感興趣。\n                        我們提供以下服務：\n                        \n                            專業的寵物善終服務\n                            個性化的告別儀式\n                            多種紀念品選擇\n                            全程專業人員陪同\n                        \n                        我們理解失去寵物的痛苦，會以最專業和溫暖的方式陪伴您度過這個時刻。",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.289Z",
+      "updatedAt": "2025-06-18T03:21:21.289Z"
+    },
+    {
+      "id": "PP_BOOK",
+      "code": "PP_BOOK",
+      "category": "pp",
+      "title": {
+        "zh": "預約安排",
+        "en": ""
+      },
+      "description": {
+        "zh": "用於安排寵物善終服務的預約時間和地點。",
+        "en": ""
+      },
+      "content": {
+        "zh": "您好，關於寵物善終服務的預約安排：\n                        我們可以為您安排以下時間：\n                        \n                            日期：{{date}}\n                            時間：{{time}}\n                            地點：{{location}}\n                        \n                        請確認這個時間是否適合您？",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.290Z",
+      "updatedAt": "2025-06-18T03:21:21.290Z"
+    },
+    {
+      "id": "PP_PROCESS",
+      "code": "PP_PROCESS",
+      "category": "pp",
+      "title": {
+        "zh": "服務流程說明",
+        "en": ""
+      },
+      "description": {
+        "zh": "用於說明寵物善終服務的具體流程和注意事項。",
+        "en": ""
+      },
+      "content": {
+        "zh": "以下是我們的服務流程：\n                        \n                            預約確認\n                            專業人員上門服務\n                            告別儀式\n                            火化處理\n                            骨灰交付\n                        \n                        整個過程我們都會以最專業和溫暖的方式進行。",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.290Z",
+      "updatedAt": "2025-06-18T03:21:21.290Z"
+    },
+    {
+      "id": "PI_DEPOSIT",
+      "code": "PI_DEPOSIT",
+      "category": "pi",
+      "title": {
+        "zh": "訂金付款通知",
+        "en": "Deposit Payment Notice"
+      },
+      "description": {
+        "zh": "通知客戶訂金付款事宜，包括金額、付款方式和期限。",
+        "en": "Notify clients about deposit payment details, including amount, payment method, and deadline."
+      },
+      "content": {
+        "zh": "親愛的{{1}}：\n                            感謝您選擇我們的服務。以下是訂金付款資訊：\n                            \n                                服務項目：{{5}}\n                                訂金金額：{{6}}\n                                付款方式：{{7}}\n                                付款期限：{{8}}\n                            \n                            完成付款後，我們將立即為您安排服務。如有任何疑問，請隨時聯絡我們。",
+        "en": "Dear {{1}},\n                            Thank you for choosing our service. Here are the deposit payment details:\n                            \n                                Service Item: {{5}}\n                                Deposit Amount: {{6}}\n                                Payment Method: {{7}}\n                                Payment Deadline: {{8}}\n                            \n                            We will arrange the service immediately after receiving your payment. Please contact us if you have any questions."
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.291Z",
+      "updatedAt": "2025-06-18T03:21:21.291Z"
+    },
+    {
+      "id": "PI_BALANCE",
+      "code": "PI_BALANCE",
+      "category": "pi",
+      "title": {
+        "zh": "餘額付款通知",
+        "en": "Balance Payment Notice"
+      },
+      "description": {
+        "zh": "通知客戶支付服務餘額，包含剩餘應付金額和付款期限。",
+        "en": "Notify clients about the remaining balance payment for the service, including the remaining amount to be paid and the payment deadline."
+      },
+      "content": {
+        "zh": "親愛的{{1}}：\n                            感謝您的信任。請於服務完成後支付餘額，金額為...。",
+        "en": "Dear {{1}},\n                            Thank you for trusting us. Please pay the remaining balance after the service is completed. The amount to be paid is..."
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.291Z",
+      "updatedAt": "2025-06-18T03:21:21.291Z"
+    },
+    {
+      "id": "PI_RECEIPT",
+      "code": "PI_RECEIPT",
+      "category": "pi",
+      "title": {
+        "zh": "收據發送通知",
+        "en": "Receipt Sending Notice"
+      },
+      "description": {
+        "zh": "用於通知客戶收據已發送，並提供查看和下載方式。",
+        "en": "Used to notify clients that the receipt has been sent and provide ways to view and download it."
+      },
+      "content": {
+        "zh": "您的付款收據已準備就緒，可透過以下連結查看和下載...。",
+        "en": "Your payment receipt is ready. You can view and download it through the following link..."
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.292Z",
+      "updatedAt": "2025-06-18T03:21:21.292Z"
+    },
+    {
+      "id": "PI_REFUND",
+      "code": "PI_REFUND",
+      "category": "pi",
+      "title": {
+        "zh": "退款處理通知",
+        "en": "Refund Processing Notice"
+      },
+      "description": {
+        "zh": "用於通知客戶退款申請的處理進度和預計到賬時間。",
+        "en": "Used to notify clients about the progress of refund application processing and estimated arrival time."
+      },
+      "content": {
+        "zh": "您的退款申請已處理完成，退款金額將於3-5個工作天內到賬。",
+        "en": "Your refund application has been processed. The refund amount will arrive within 3-5 working days."
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.292Z",
+      "updatedAt": "2025-06-18T03:21:21.292Z"
+    },
+    {
+      "id": "PI_OVERDUE",
+      "code": "PI_OVERDUE",
+      "category": "pi",
+      "title": {
+        "zh": "逾期付款提醒",
+        "en": "Overdue Payment Reminder"
+      },
+      "description": {
+        "zh": "用於提醒客戶已逾期付款，並請求儘快處理。",
+        "en": "Used to remind clients about overdue payment and request prompt processing."
+      },
+      "content": {
+        "zh": "提醒您：服務費用已逾期，請儘快完成付款。如有任何困難，歡迎聯繫我們。",
+        "en": "Reminder: The service fee is overdue. Please complete the payment as soon as possible. If you encounter any difficulties, please contact us."
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.292Z",
+      "updatedAt": "2025-06-18T03:21:21.292Z"
+    },
+    {
+      "id": "PI_METHOD",
+      "code": "PI_METHOD",
+      "category": "pi",
+      "title": {
+        "zh": "付款方式說明",
+        "en": ""
+      },
+      "description": {
+        "zh": "用於說明所有可用的付款方式和詳細步驟。",
+        "en": ""
+      },
+      "content": {
+        "zh": "我們接受以下付款方式：PayMe、轉數快、信用卡等。詳細說明如下...",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.292Z",
+      "updatedAt": "2025-06-18T03:21:21.292Z"
+    },
+    {
+      "id": "PI_CONFIRM",
+      "code": "PI_CONFIRM",
+      "category": "pi",
+      "title": {
+        "zh": "付款確認通知",
+        "en": ""
+      },
+      "description": {
+        "zh": "用於確認已收到客戶的付款，並提供後續安排。",
+        "en": ""
+      },
+      "content": {
+        "zh": "我們已收到您的付款，感謝您的支持。接下來我們將為您安排...",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.292Z",
+      "updatedAt": "2025-06-18T03:21:21.292Z"
+    },
+    {
+      "id": "PI_INVOICE",
+      "code": "PI_INVOICE",
+      "category": "pi",
+      "title": {
+        "zh": "發票開具通知",
+        "en": ""
+      },
+      "description": {
+        "zh": "用於通知客戶發票已開具，並提供查看和下載方式。",
+        "en": ""
+      },
+      "content": {
+        "zh": "您要求的發票已開具完成，可透過以下方式查看和下載...",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.292Z",
+      "updatedAt": "2025-06-18T03:21:21.292Z"
+    },
+    {
+      "id": "PI_INSTALL",
+      "code": "PI_INSTALL",
+      "category": "pi",
+      "title": {
+        "zh": "分期付款安排",
+        "en": ""
+      },
+      "description": {
+        "zh": "用於說明分期付款的具體安排和時間表。",
+        "en": ""
+      },
+      "content": {
+        "zh": "根據您的要求，我們已為您安排以下分期付款計劃...",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.292Z",
+      "updatedAt": "2025-06-18T03:21:21.292Z"
+    },
+    {
+      "id": "PI_PROMO",
+      "code": "PI_PROMO",
+      "category": "pi",
+      "title": {
+        "zh": "優惠折扣通知",
+        "en": ""
+      },
+      "description": {
+        "zh": "用於通知客戶可用的優惠折扣和使用方式。",
+        "en": ""
+      },
+      "content": {
+        "zh": "感謝您選擇我們的服務，我們現提供以下優惠方案...",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.292Z",
+      "updatedAt": "2025-06-18T03:21:21.292Z"
+    },
+    {
+      "id": "CI_INTRO",
+      "code": "CI_INTRO",
+      "category": "ci",
+      "title": {
+        "zh": "公司簡介",
+        "en": "Company Introduction"
+      },
+      "description": {
+        "zh": "介紹公司的歷史、使命和價值觀。",
+        "en": "Introduce the company's history, mission, and values."
+      },
+      "content": {
+        "zh": "{{5}}成立於{{2}}，是一家專業的寵物善終服務公司。\n                            我們的使命是：{{6}}\n                            核心價值觀：{{7}}\n                            服務範圍：{{8}}",
+        "en": "{{5}} was established in {{2}}, is a professional pet end-of-life service company.\n                            Our mission is: {{6}}\n                            Core values: {{7}}\n                            Service scope: {{8}}"
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.293Z",
+      "updatedAt": "2025-06-18T03:21:21.293Z"
+    },
+    {
+      "id": "CI_HOURS",
+      "code": "CI_HOURS",
+      "category": "ci",
+      "title": {
+        "zh": "服務時間",
+        "en": ""
+      },
+      "description": {
+        "zh": "提供公司的服務時間和緊急聯絡方式。",
+        "en": ""
+      },
+      "content": {
+        "zh": "我們的服務時間：\n                        \n                            週一至週五：09:00-18:00\n                            週六：09:00-17:00\n                            週日：10:00-16:00\n                        \n                        緊急服務：24小時專線 {{phone}}\n                        如有緊急情況，請隨時聯繫我們。",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.293Z",
+      "updatedAt": "2025-06-18T03:21:21.293Z"
+    },
+    {
+      "id": "CI_CONTACT",
+      "code": "CI_CONTACT",
+      "category": "ci",
+      "title": {
+        "zh": "聯絡方式",
+        "en": ""
+      },
+      "description": {
+        "zh": "提供公司的聯絡方式和各部門聯絡資訊。",
+        "en": ""
+      },
+      "content": {
+        "zh": "聯絡方式：\n                        \n                            電話：{{phone}}\n                            WhatsApp：{{whatsapp}}\n                            電郵：{{email}}\n                            地址：{{address}}\n                        \n                        我們期待為您服務。",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.293Z",
+      "updatedAt": "2025-06-18T03:21:21.293Z"
+    },
+    {
+      "id": "CI_TEAM",
+      "code": "CI_TEAM",
+      "category": "ci",
+      "title": {
+        "zh": "團隊介紹",
+        "en": ""
+      },
+      "description": {
+        "zh": "介紹公司的專業團隊和服務人員。",
+        "en": ""
+      },
+      "content": {
+        "zh": "我們的專業團隊：\n                        我們擁有一支經驗豐富的專業團隊，包括：\n                        \n                            專業的寵物善終服務師\n                            心理輔導師\n                            禮儀師\n                            客服專員\n                        \n                        每位團隊成員都經過專業培訓，致力於為您提供最貼心的服務。",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.293Z",
+      "updatedAt": "2025-06-18T03:21:21.293Z"
+    },
+    {
+      "id": "CI_VALUES",
+      "code": "CI_VALUES",
+      "category": "ci",
+      "title": {
+        "zh": "服務理念",
+        "en": ""
+      },
+      "description": {
+        "zh": "介紹公司的服務理念和價值觀。",
+        "en": ""
+      },
+      "content": {
+        "zh": "我們的服務理念：\n                        我們相信每個生命都值得被尊重和紀念。我們的使命是：\n                        \n                            提供專業、溫暖的服務\n                            尊重每個家庭的選擇\n                            陪伴您度過困難時刻\n                            創造有意義的告別儀式\n                        \n                        我們承諾以最真誠的態度為您服務。",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.293Z",
+      "updatedAt": "2025-06-18T03:21:21.293Z"
+    },
+    {
+      "id": "LI_PICKUP",
+      "code": "LI_PICKUP",
+      "category": "li",
+      "title": {
+        "zh": "接收安排通知",
+        "en": "Pickup Arrangement Notice"
+      },
+      "description": {
+        "zh": "通知客戶接收安排的詳細信息，包括時間、地點和注意事項。",
+        "en": "Notify clients about pickup arrangement details, including time, location, and important notes."
+      },
+      "content": {
+        "zh": "親愛的{{1}}：\n                            我們已安排接收服務，詳情如下：\n                            \n                                接收日期：{{2}}\n                                接收時間：{{3}}\n                                接收地點：{{4}}\n                                車牌號碼：{{5}}\n                                司機姓名：{{6}}\n                                聯絡電話：{{7}}\n                                特別注意：{{8}}\n                            \n                            如需更改安排，請提前通知我們。",
+        "en": "Dear {{1}},\n                            We have arranged the pickup service. Details are as follows:\n                            \n                                Pickup Date: {{2}}\n                                Pickup Time: {{3}}\n                                Pickup Location: {{4}}\n                                Vehicle Number: {{5}}\n                                Driver Name: {{6}}\n                                Contact Number: {{7}}\n                                Special Notes: {{8}}\n                            \n                            Please notify us in advance if you need to change the arrangement."
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.295Z",
+      "updatedAt": "2025-06-18T03:21:21.295Z"
+    },
+    {
+      "id": "LI_DELIVERY",
+      "code": "LI_DELIVERY",
+      "category": "li",
+      "title": {
+        "zh": "送遞安排通知",
+        "en": ""
+      },
+      "description": {
+        "zh": "通知客戶關於骨灰或紀念品的送遞安排。",
+        "en": ""
+      },
+      "content": {
+        "zh": "親愛的{{1}}，您的寵物骨灰/紀念品將於{{2}}送達。請確保在預定時間有人在家接收。如有任何變更，請立即通知我們。",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.295Z",
+      "updatedAt": "2025-06-18T03:21:21.295Z"
+    },
+    {
+      "id": "LI_TRACK",
+      "code": "LI_TRACK",
+      "category": "li",
+      "title": {
+        "zh": "追蹤狀態更新",
+        "en": ""
+      },
+      "description": {
+        "zh": "提供物流狀態的即時更新信息。",
+        "en": ""
+      },
+      "content": {
+        "zh": "親愛的{{1}}，您的寵物遺體/骨灰目前狀態：{{2}}。預計完成時間：{{3}}。如有任何問題，請隨時聯繫我們。",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.296Z",
+      "updatedAt": "2025-06-18T03:21:21.296Z"
+    },
+    {
+      "id": "LI_DELAY",
+      "code": "LI_DELAY",
+      "category": "li",
+      "title": {
+        "zh": "延誤通知",
+        "en": ""
+      },
+      "description": {
+        "zh": "通知客戶關於物流延誤的情況和新的安排。",
+        "en": ""
+      },
+      "content": {
+        "zh": "親愛的{{1}}，很抱歉通知您，由於{{2}}，原定於{{3}}的服務將延遲。新的安排時間為{{4}}。我們深表歉意，並會盡快處理。",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.296Z",
+      "updatedAt": "2025-06-18T03:21:21.296Z"
+    },
+    {
+      "id": "LI_COMPLETE",
+      "code": "LI_COMPLETE",
+      "category": "li",
+      "title": {
+        "zh": "完成通知",
+        "en": ""
+      },
+      "description": {
+        "zh": "通知客戶物流服務已完成。",
+        "en": ""
+      },
+      "content": {
+        "zh": "親愛的{{1}}，您的寵物遺體/骨灰已安全送達。感謝您的信任，如有任何問題，請隨時聯繫我們。",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.296Z",
+      "updatedAt": "2025-06-18T03:21:21.296Z"
+    },
+    {
+      "id": "LI_RESCHEDULE",
+      "code": "LI_RESCHEDULE",
+      "category": "li",
+      "title": {
+        "zh": "重新安排通知",
+        "en": ""
+      },
+      "description": {
+        "zh": "通知客戶關於物流時間的重新安排。",
+        "en": ""
+      },
+      "content": {
+        "zh": "親愛的{{1}}，根據您的要求，我們已將服務時間重新安排為{{2}}。請確認這個時間是否合適。如有任何變更，請立即通知我們。",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.296Z",
+      "updatedAt": "2025-06-18T03:21:21.296Z"
+    },
+    {
+      "id": "LI_SPECIAL",
+      "code": "LI_SPECIAL",
+      "category": "li",
+      "title": {
+        "zh": "特殊要求處理",
+        "en": ""
+      },
+      "description": {
+        "zh": "處理客戶的特殊物流要求。",
+        "en": ""
+      },
+      "content": {
+        "zh": "親愛的{{1}}，我們已收到您的特殊要求：{{2}}。我們會特別注意並按照您的要求處理。如有任何問題，請隨時聯繫我們。",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.296Z",
+      "updatedAt": "2025-06-18T03:21:21.296Z"
+    },
+    {
+      "id": "LI_ROUTE",
+      "code": "LI_ROUTE",
+      "category": "li",
+      "title": {
+        "zh": "路線安排通知",
+        "en": ""
+      },
+      "description": {
+        "zh": "通知客戶關於物流路線的具體安排。",
+        "en": ""
+      },
+      "content": {
+        "zh": "親愛的{{1}}，我們已規劃好最佳路線，預計到達時間為{{2}}。路線詳情：{{3}}。如有任何變更，請立即通知我們。",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.296Z",
+      "updatedAt": "2025-06-18T03:21:21.296Z"
+    },
+    {
+      "id": "LI_STATUS",
+      "code": "LI_STATUS",
+      "category": "li",
+      "title": {
+        "zh": "狀態查詢回覆",
+        "en": ""
+      },
+      "description": {
+        "zh": "回覆客戶關於物流狀態的查詢。",
+        "en": ""
+      },
+      "content": {
+        "zh": "親愛的{{1}}，關於您的查詢，目前狀態如下：{{2}}。預計完成時間：{{3}}。如有任何問題，請隨時聯繫我們。",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.296Z",
+      "updatedAt": "2025-06-18T03:21:21.296Z"
+    },
+    {
+      "id": "OI_FAQ",
+      "code": "OI_FAQ",
+      "category": "oi",
+      "title": {
+        "zh": "常見問題解答",
+        "en": ""
+      },
+      "description": {
+        "zh": "解答客戶常見疑問，提供即時協助。",
+        "en": ""
+      },
+      "content": {
+        "zh": "常見問題解答：\n                        Q: 善終服務流程是怎樣？\n                        A: 我們的服務流程包括：預約確認 → 專業人員上門 → 告別儀式 → 火化處理 → 骨灰交付\n                        Q: 服務時間如何安排？\n                        A: 我們提供24小時緊急服務，一般服務時間為週一至週日 09:00-18:00",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.298Z",
+      "updatedAt": "2025-06-18T03:21:21.298Z"
+    },
+    {
+      "id": "OI_TERMS",
+      "code": "OI_TERMS",
+      "category": "oi",
+      "title": {
+        "zh": "服務條款",
+        "en": ""
+      },
+      "description": {
+        "zh": "說明服務條款內容，保障雙方權益。",
+        "en": ""
+      },
+      "content": {
+        "zh": "服務條款：\n                        請參閱我們的服務條款，包括：\n                        \n                            服務範圍和標準\n                            收費標準和付款方式\n                            取消和退款政策\n                            責任限制條款\n                        \n                        詳細條款請查看我們的官方網站。",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.298Z",
+      "updatedAt": "2025-06-18T03:21:21.298Z"
+    },
+    {
+      "id": "OI_PRIVACY",
+      "code": "OI_PRIVACY",
+      "category": "oi",
+      "title": {
+        "zh": "私隱政策",
+        "en": ""
+      },
+      "description": {
+        "zh": "說明個人資料收集及保護政策。",
+        "en": ""
+      },
+      "content": {
+        "zh": "私隱政策：\n                        我們如何保障您的個人資料？\n                        \n                            嚴格遵守個人資料保護條例\n                            僅收集必要的個人資料\n                            不會向第三方披露您的資料\n                            提供資料查詢和更正服務\n                        \n                        您的隱私安全是我們的首要考慮。",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.298Z",
+      "updatedAt": "2025-06-18T03:21:21.298Z"
+    },
+    {
+      "id": "OI_FEEDBACK",
+      "code": "OI_FEEDBACK",
+      "category": "oi",
+      "title": {
+        "zh": "意見反饋",
+        "en": ""
+      },
+      "description": {
+        "zh": "收集及回應客戶意見，持續優化服務。",
+        "en": ""
+      },
+      "content": {
+        "zh": "意見反饋：\n                        歡迎提供您的寶貴意見，幫助我們持續改進服務質量。\n                        您可以通過以下方式提供反饋：\n                        \n                            WhatsApp 訊息\n                            電話：{{phone}}\n                            電郵：{{email}}\n                        \n                        我們會認真處理每一份反饋。",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.298Z",
+      "updatedAt": "2025-06-18T03:21:21.298Z"
+    },
+    {
+      "id": "OI_NEWS",
+      "code": "OI_NEWS",
+      "category": "oi",
+      "title": {
+        "zh": "最新消息",
+        "en": ""
+      },
+      "description": {
+        "zh": "發布公司及服務的最新動態。",
+        "en": ""
+      },
+      "content": {
+        "zh": "最新消息：\n                        {{date}} - 全新服務即將推出\n                        我們很高興地宣布，全新的寵物紀念服務即將推出，包括：\n                        \n                            個性化紀念相冊\n                            3D 紀念雕像\n                            線上追思平台\n                        \n                        敬請期待更多詳情。",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.298Z",
+      "updatedAt": "2025-06-18T03:21:21.298Z"
+    },
+    {
+      "id": "OI_HOLIDAY",
+      "code": "OI_HOLIDAY",
+      "category": "oi",
+      "title": {
+        "zh": "假期安排",
+        "en": ""
+      },
+      "description": {
+        "zh": "通知假期期間的服務安排及聯絡方式。",
+        "en": ""
+      },
+      "content": {
+        "zh": "假期安排通知：\n                        {{holiday_name}} 假期服務時間\n                        假期期間：{{start_date}} 至 {{end_date}}\n                        服務安排：\n                        \n                            緊急服務：24小時專線 {{emergency_phone}}\n                            一般查詢：{{normal_hours}}\n                            預約服務：暫停\n                        \n                        祝您假期愉快。",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.298Z",
+      "updatedAt": "2025-06-18T03:21:21.298Z"
+    },
+    {
+      "id": "OI_WEATHER",
+      "code": "OI_WEATHER",
+      "category": "oi",
+      "title": {
+        "zh": "天氣相關通知",
+        "en": ""
+      },
+      "description": {
+        "zh": "惡劣天氣下的服務調整與安全提示。",
+        "en": ""
+      },
+      "content": {
+        "zh": "天氣相關通知：\n                        {{weather_type}} 期間服務安排\n                        由於 {{weather_condition}}，我們的服務安排如下：\n                        \n                            緊急服務：維持正常\n                            一般預約：可能延遲\n                            安全提醒：請注意安全\n                        \n                        如有緊急情況，請聯繫：{{emergency_contact}}",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.298Z",
+      "updatedAt": "2025-06-18T03:21:21.298Z"
+    },
+    {
+      "id": "OI_MAINTAIN",
+      "code": "OI_MAINTAIN",
+      "category": "oi",
+      "title": {
+        "zh": "系統維護通知",
+        "en": "System Maintenance Notice"
+      },
+      "description": {
+        "zh": "通知客戶系統維護時間和影響範圍。",
+        "en": "Notify clients about system maintenance time and affected areas."
+      },
+      "content": {
+        "zh": "親愛的客戶：\n                            我們將於{{1}}進行系統維護，詳情如下：\n                            \n                                維護時間：{{2}}\n                                影響範圍：{{3}}\n                                預計完成：{{4}}\n                            \n                            維護期間可能影響部分服務，造成不便敬請見諒。\n                            如有緊急事項，請聯絡：{{5}}",
+        "en": "Dear Client,\n                            We will conduct system maintenance on {{1}}. Details are as follows:\n                            \n                                Maintenance Time: {{2}}\n                                Affected Areas: {{3}}\n                                Expected Completion: {{4}}\n                            \n                            Some services may be affected during maintenance. We apologize for any inconvenience.\n                            For emergencies, please contact: {{5}}"
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.298Z",
+      "updatedAt": "2025-06-18T03:21:21.298Z"
+    },
+    {
+      "id": "OI_UPDATE",
+      "code": "OI_UPDATE",
+      "category": "oi",
+      "title": {
+        "zh": "服務更新通知",
+        "en": ""
+      },
+      "description": {
+        "zh": "服務內容、流程或條款的更新說明。",
+        "en": ""
+      },
+      "content": {
+        "zh": "服務更新通知：\n                        預約流程優化通知\n                        為了提供更好的服務體驗，我們已優化預約流程：\n                        \n                            新增線上預約系統\n                            簡化預約確認流程\n                            增加預約提醒服務\n                        \n                        新流程將於 {{effective_date}} 開始實施。",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.299Z",
+      "updatedAt": "2025-06-18T03:21:21.299Z"
+    },
+    {
+      "id": "OI_SOCIAL",
+      "code": "OI_SOCIAL",
+      "category": "oi",
+      "title": {
+        "zh": "社交媒體資訊",
+        "en": ""
+      },
+      "description": {
+        "zh": "推廣社交媒體帳號，邀請客戶關注與互動。",
+        "en": ""
+      },
+      "content": {
+        "zh": "社交媒體資訊：\n                        歡迎關注我們的社交媒體，獲取最新資訊：\n                        \n                            Facebook：{{facebook_page}}\n                            Instagram：{{instagram_account}}\n                            YouTube：{{youtube_channel}}\n                        \n                        我們會定期分享：\n                        \n                            服務資訊和更新\n                            客戶故事分享\n                            寵物關懷貼士",
+        "en": ""
+      },
+      "status": "active",
+      "createdAt": "2025-06-18T03:21:21.299Z",
+      "updatedAt": "2025-06-18T03:21:21.299Z"
+    }
+  ],
+  "categories": {
+    "ic": {
+      "code": "ic",
+      "name": "初始聯繫",
+      "templates": [
+        {
+          "id": "IC_RESP",
+          "code": "IC_RESP",
+          "category": "ic",
+          "title": {
+            "zh": "回應初步查詢",
+            "en": "Response to Initial Inquiry"
+          },
+          "description": {
+            "zh": "回應客戶通過電話、電郵或WhatsApp發送的初步查詢，提供服務資訊。",
+            "en": "Respond to initial inquiries from customers via phone, email, or WhatsApp, providing service information."
+          },
+          "content": {
+            "zh": "您好{{1}}，感謝您的查詢。我們提供專業的寵物善終服務，包括：\n                        \n                                {{2}}\n                                {{3}}\n                                {{4}}\n                                {{5}}\n                        \n                        請問您需要了解哪方面的服務詳情？",
+            "en": "Hello {{1}}, thank you for your inquiry. We provide professional pet memorial services, including:\n                            \n                                {{2}}\n                                {{3}}\n                                {{4}}\n                                {{5}}\n                            \n                            Which service details would you like to know more about?"
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.267Z",
+          "updatedAt": "2025-06-18T03:21:21.267Z"
+        },
+        {
+          "id": "IC_COND",
+          "code": "IC_COND",
+          "category": "ic",
+          "title": {
+            "zh": "主動慰問新客戶",
+            "en": "Condolences to New Clients"
+          },
+          "description": {
+            "zh": "主動聯繫剛失去寵物的客戶，表達同情並介紹服務。",
+            "en": "Proactively reach out to clients who have lost their pets, express condolences and introduce services."
+          },
+          "content": {
+            "zh": "親愛的{{1}}，\n                            得知您的寵物{{2}}離世，我們深感遺憾。在這個艱難的時刻，我們希望能為您提供專業的寵物善終服務。\n                        我們提供：\n                        \n                                {{3}}\n                                {{4}}\n                                {{5}}\n                        \n                            如需協助，請隨時聯絡我們。",
+            "en": "Dear {{1}},\n                            We are deeply sorry to hear about the loss of your pet {{2}}. During this difficult time, we would like to offer our professional pet memorial services.\n                            We provide:\n                            \n                                {{3}}\n                                {{4}}\n                                {{5}}\n                            \n                            Please contact us if you need assistance."
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.268Z",
+          "updatedAt": "2025-06-18T03:21:21.268Z"
+        },
+        {
+          "id": "IC_SRVINTRO",
+          "code": "IC_SRVINTRO",
+          "category": "ic",
+          "title": {
+            "zh": "介紹服務概覽",
+            "en": "Service Overview Introduction"
+          },
+          "description": {
+            "zh": "向新客戶概述寵物善終服務，如火化、紀念儀式等。",
+            "en": "Provide new clients with an overview of pet memorial services, such as cremation and memorial ceremonies."
+          },
+          "content": {
+            "zh": "我們的寵物善終服務包括：\n                        \n                                {{1}}\n                                {{2}}\n                                {{3}}\n                                {{4}}\n                                {{5}}\n                        \n                        我們致力於為您提供最貼心的服務。",
+            "en": "Our pet memorial services include:\n                            \n                                {{1}}\n                                {{2}}\n                                {{3}}\n                                {{4}}\n                                {{5}}\n                            \n                            We are committed to providing you with the most caring service."
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.268Z",
+          "updatedAt": "2025-06-18T03:21:21.268Z"
+        },
+        {
+          "id": "IC_CONSULT",
+          "code": "IC_CONSULT",
+          "category": "ic",
+          "title": {
+            "zh": "安排初步諮詢",
+            "en": ""
+          },
+          "description": {
+            "zh": "安排與客戶的電話或面對面諮詢，討論需求。",
+            "en": ""
+          },
+          "content": {
+            "zh": "您好，\n                        感謝您對我們服務的關注。我們可以安排一個諮詢時間，詳細討論您的需求。\n                        您可以選擇：\n                        \n                            電話諮詢（約30分鐘）\n                            現場諮詢（約1小時）\n                            視訊諮詢（約45分鐘）",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.269Z",
+          "updatedAt": "2025-06-18T03:21:21.269Z"
+        },
+        {
+          "id": "IC_EMERG",
+          "code": "IC_EMERG",
+          "category": "ic",
+          "title": {
+            "zh": "提供緊急服務指引",
+            "en": ""
+          },
+          "description": {
+            "zh": "為需要緊急遺體處理的客戶提供快速指引。",
+            "en": ""
+          },
+          "content": {
+            "zh": "緊急服務指引：\n                        \n                            請將遺體放置在陰涼處\n                            用乾淨的毛巾包裹\n                            避免直接接觸\n                            立即聯繫我們：\n                        \n                        我們提供24小時緊急服務。",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.269Z",
+          "updatedAt": "2025-06-18T03:21:21.269Z"
+        },
+        {
+          "id": "IC_WEBSUB",
+          "code": "IC_WEBSUB",
+          "category": "ic",
+          "title": {
+            "zh": "回應網站表單提交",
+            "en": ""
+          },
+          "description": {
+            "zh": "回應客戶通過網站表單提交的查詢，確認收到信息並提供後續步驟。",
+            "en": ""
+          },
+          "content": {
+            "zh": "感謝您透過我們的網站提交表單。我們已收到您的訊息，並將盡快與您聯繫。\n                        為了更好地服務您，請確認以下信息：\n                        \n                            您的聯繫方式是否正確\n                            您希望我們在什麼時間聯繫您\n                            您是否需要緊急服務",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.269Z",
+          "updatedAt": "2025-06-18T03:21:21.269Z"
+        },
+        {
+          "id": "IC_REFER",
+          "code": "IC_REFER",
+          "category": "ic",
+          "title": {
+            "zh": "處理轉介客戶",
+            "en": ""
+          },
+          "description": {
+            "zh": "處理來自合作夥伴或現有客戶的轉介，提供專業服務介紹和後續安排。",
+            "en": ""
+          },
+          "content": {
+            "zh": "您好，我們收到了來自[轉介來源]的轉介，了解到您可能需要我們的服務。\n                        我們提供專業的寵物善終服務，包括：\n                        \n                            個別火化服務\n                            紀念儀式安排\n                            骨灰處理與紀念品\n                            悲傷輔導支持",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.269Z",
+          "updatedAt": "2025-06-18T03:21:21.269Z"
+        },
+        {
+          "id": "IC_MULTILANG",
+          "code": "IC_MULTILANG",
+          "category": "ic",
+          "title": {
+            "zh": "提供多語言支持",
+            "en": ""
+          },
+          "description": {
+            "zh": "提供多語言服務支持，包括繁體中文、英文、日文和韓文，確保所有客戶都能獲得最佳服務體驗。",
+            "en": ""
+          },
+          "content": {
+            "zh": "您好，我們提供多語言服務支持。\n                        您可以選擇以下語言進行溝通：\n                        \n                            繁體中文\n                            English\n                            日本語\n                            한국어",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.269Z",
+          "updatedAt": "2025-06-18T03:21:21.269Z"
+        },
+        {
+          "id": "IC_INFOSESS",
+          "code": "IC_INFOSESS",
+          "category": "ic",
+          "title": {
+            "zh": "邀請參加線上說明會",
+            "en": ""
+          },
+          "description": {
+            "zh": "邀請客戶參加線上說明會，詳細介紹服務流程、費用和常見問題解答。",
+            "en": ""
+          },
+          "content": {
+            "zh": "誠邀您參加我們的線上說明會\n                        主題：寵物善終服務說明會\n                        時間：[日期] [時間]\n                        說明會內容：\n                        \n                            專業服務流程介紹\n                            常見問題解答\n                            服務費用說明\n                            現場問答環節",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.269Z",
+          "updatedAt": "2025-06-18T03:21:21.269Z"
+        },
+        {
+          "id": "IC_STORIES",
+          "code": "IC_STORIES",
+          "category": "ic",
+          "title": {
+            "zh": "分享客戶故事與見證",
+            "en": ""
+          },
+          "description": {
+            "zh": "分享其他客戶的經驗和見證，幫助新客戶了解服務流程和效果，建立信任感。",
+            "en": ""
+          },
+          "content": {
+            "zh": "親愛的客戶，\n                        我們想與您分享一些其他客戶的故事，希望能為您帶來一些安慰和力量...",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.270Z",
+          "updatedAt": "2025-06-18T03:21:21.270Z"
+        },
+        {
+          "id": "IC_SOCIAL",
+          "code": "IC_SOCIAL",
+          "category": "ic",
+          "title": {
+            "zh": "回應社交媒體查詢",
+            "en": ""
+          },
+          "description": {
+            "zh": "回應來自社交媒體平台的客戶查詢，提供服務介紹和聯繫方式。",
+            "en": ""
+          },
+          "content": {
+            "zh": "您好！感謝您在社交媒體上關注我們。\n                        我們是專業的寵物善終服務團隊，為您提供以下服務：\n                        \n                            專業的寵物遺體處理\n                            溫馨的告別儀式\n                            個性化紀念品製作\n                            情感支持與輔導",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.270Z",
+          "updatedAt": "2025-06-18T03:21:21.270Z"
+        },
+        {
+          "id": "IC_NEEDS",
+          "code": "IC_NEEDS",
+          "category": "ic",
+          "title": {
+            "zh": "服務前需求評估",
+            "en": ""
+          },
+          "description": {
+            "zh": "收集客戶的服務需求，包括寵物資訊、服務類型和特殊要求，以便提供最適合的服務方案。",
+            "en": ""
+          },
+          "content": {
+            "zh": "親愛的客戶，\n                        為了更好地為您提供服務，請協助我們完成以下需求評估：\n                        \n                            寵物基本資訊\n                            服務需求\n                            特殊要求",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.270Z",
+          "updatedAt": "2025-06-18T03:21:21.270Z"
+        },
+        {
+          "id": "IC_COMMUNITY",
+          "code": "IC_COMMUNITY",
+          "category": "ic",
+          "title": {
+            "zh": "社區推廣聯繫",
+            "en": ""
+          },
+          "description": {
+            "zh": "與社區建立合作關係，提供寵物善終服務講座、紀念活動支援和情感支持小組等服務。",
+            "en": ""
+          },
+          "content": {
+            "zh": "親愛的社區夥伴，\n                        我們是專業的寵物善終服務團隊，致力於為社區提供溫馨、專業的寵物告別服務。我們希望與您建立合作關係，共同為社區居民提供更好的服務。\n                        我們可以為您的社區提供：\n                        \n                            免費的寵物善終服務講座\n                            社區寵物紀念活動支援\n                            寵物主人情感支持小組\n                            社區寵物關懷計劃",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.270Z",
+          "updatedAt": "2025-06-18T03:21:21.270Z"
+        },
+        {
+          "id": "IC_SUPPORTGRP",
+          "code": "IC_SUPPORTGRP",
+          "category": "ic",
+          "title": {
+            "zh": "邀請加入寵物喪失支持小組",
+            "en": ""
+          },
+          "description": {
+            "zh": "邀請客戶加入支持小組，提供專業心理輔導和互助交流活動，幫助度過失去寵物的艱難時期。",
+            "en": ""
+          },
+          "content": {
+            "zh": "親愛的客戶，\n                        我們理解失去寵物帶來的痛苦和悲傷。為了幫助您度過這個艱難時期，我們誠邀您加入我們的寵物喪失支持小組。\n                        支持小組活動內容：\n                        \n                            每週線上分享會\n                            專業心理輔導\n                            互助交流活動",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.270Z",
+          "updatedAt": "2025-06-18T03:21:21.270Z"
+        },
+        {
+          "id": "IC_VET",
+          "code": "IC_VET",
+          "category": "ic",
+          "title": {
+            "zh": "跟進獸醫合作夥伴轉介",
+            "en": ""
+          },
+          "description": {
+            "zh": "與獸醫合作夥伴建立良好的轉介關係，確保客戶獲得及時且專業的善終服務。",
+            "en": ""
+          },
+          "content": {
+            "zh": "親愛的獸醫夥伴，\n                        感謝您將客戶轉介給我們。我們已收到轉介信息，並將立即跟進處理。\n                        為了提供更好的服務，請確認以下信息：\n                        \n                            寵物基本資料\n                            客戶聯繫方式\n                            特殊服務需求",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.270Z",
+          "updatedAt": "2025-06-18T03:21:21.270Z"
+        },
+        {
+          "id": "IC_COUNSEL",
+          "code": "IC_COUNSEL",
+          "category": "ic",
+          "title": {
+            "zh": "提供初步悲傷輔導",
+            "en": ""
+          },
+          "description": {
+            "zh": "為失去寵物的客戶提供專業的心理支持和輔導，幫助他們度過悲傷期。",
+            "en": ""
+          },
+          "content": {
+            "zh": "親愛的客戶，\n                        我們理解失去寵物帶來的痛苦和悲傷。在這個艱難的時刻，我們希望為您提供一些支持：\n                        悲傷是正常的：\n                        \n                            允許自己感受悲傷\n                            不要壓抑情緒\n                            給自己時間療癒",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.271Z",
+          "updatedAt": "2025-06-18T03:21:21.271Z"
+        },
+        {
+          "id": "IC_BROCHURE",
+          "code": "IC_BROCHURE",
+          "category": "ic",
+          "title": {
+            "zh": "回應服務手冊請求",
+            "en": ""
+          },
+          "description": {
+            "zh": "回應客戶對服務手冊的請求，提供多種獲取方式，確保客戶能夠全面了解我們的服務。",
+            "en": ""
+          },
+          "content": {
+            "zh": "親愛的客戶，\n                        感謝您對我們的服務手冊感興趣。我們已收到您的請求，並將立即為您安排：\n                        服務手冊包含以下內容：\n                        \n                            完整的服務項目說明\n                            服務流程介紹\n                            價格方案詳情\n                            常見問題解答",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.271Z",
+          "updatedAt": "2025-06-18T03:21:21.271Z"
+        },
+        {
+          "id": "IC_WELCOME",
+          "code": "IC_WELCOME",
+          "category": "ic",
+          "title": {
+            "zh": "歡迎首次客戶",
+            "en": ""
+          },
+          "description": {
+            "zh": "以溫馨、專業的態度歡迎首次接觸的客戶，介紹我們的服務承諾和支持方式。",
+            "en": ""
+          },
+          "content": {
+            "zh": "親愛的客戶，\n                        歡迎您選擇我們的寵物善終服務。我們深知失去寵物帶來的痛苦，我們將以專業、溫馨的態度陪伴您度過這個艱難時刻。\n                        我們的服務承諾：\n                        \n                            24小時專業服務\n                            全程溫馨陪伴\n                            個性化紀念方案\n                            專業心理支持",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.271Z",
+          "updatedAt": "2025-06-18T03:21:21.271Z"
+        },
+        {
+          "id": "IC_EVENT",
+          "code": "IC_EVENT",
+          "category": "ic",
+          "title": {
+            "zh": "基於事件的聯繫",
+            "en": ""
+          },
+          "description": {
+            "zh": "在客戶參與活動後進行跟進，了解體驗並提供後續服務。",
+            "en": ""
+          },
+          "content": {
+            "zh": "親愛的客戶，\n                        感謝您參加我們的活動。希望您能分享您的體驗和感受。\n                        我們提供以下後續服務：\n                        \n                            一對一諮詢\n                            紀念品定制\n                            支持小組活動\n                        \n                        期待您的回饋。",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.271Z",
+          "updatedAt": "2025-06-18T03:21:21.271Z"
+        },
+        {
+          "id": "IC_FAQ",
+          "code": "IC_FAQ",
+          "category": "ic",
+          "title": {
+            "zh": "解答常見問題",
+            "en": ""
+          },
+          "description": {
+            "zh": "提供常見問題的標準回答，幫助客戶快速了解服務細節。",
+            "en": ""
+          },
+          "content": {
+            "zh": "親愛的客戶，\n                        感謝您的提問。以下是關於我們服務的常見問題解答：\n                        \n                            服務流程相關問題\n                            價格相關問題\n                            紀念服務相關問題\n                        \n                        如果您有其他問題，請隨時聯繫我們。",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.271Z",
+          "updatedAt": "2025-06-18T03:21:21.271Z"
+        }
+      ]
+    },
+    "ac": {
+      "code": "ac",
+      "name": "預約確認",
+      "templates": [
+        {
+          "id": "AC_PICKUP",
+          "code": "AC_PICKUP",
+          "category": "ac",
+          "title": {
+            "zh": "遺體接收預約確認",
+            "en": "Body Reception Appointment Confirmation"
+          },
+          "description": {
+            "zh": "確認客戶的遺體接收預約，提供詳細的時間和地點信息。",
+            "en": "Confirm the client's body reception appointment, providing detailed time and location information."
+          },
+          "content": {
+            "zh": "親愛的客戶，\n                        我們已確認您的遺體接收預約：\n                        \n                                預約時間：{{2}} {{3}}\n                                接收地點：{{4}}\n                                聯繫電話：{{7}}\n                        \n                        請確保在預約時間前做好準備。如有任何變更，請提前通知我們。",
+            "en": "Dear client,\n                            We have confirmed your body reception appointment:\n                            \n                                Appointment Time: {{2}} {{3}}\n                                Reception Location: {{4}}\n                                Contact Number: {{7}}\n                            \n                            Please ensure you are prepared before the appointment time. If there are any changes, please notify us in advance."
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.278Z",
+          "updatedAt": "2025-06-18T03:21:21.278Z"
+        },
+        {
+          "id": "AC_CEREMONY",
+          "code": "AC_CEREMONY",
+          "category": "ac",
+          "title": {
+            "zh": "紀念儀式預約確認",
+            "en": ""
+          },
+          "description": {
+            "zh": "確認客戶的紀念儀式預約，提供儀式流程和注意事項。",
+            "en": ""
+          },
+          "content": {
+            "zh": "親愛的客戶，\n                        我們已確認您的紀念儀式預約：\n                        \n                            儀式時間：[日期] [時間]\n                            儀式地點：[地址]\n                            預計時長：約1小時\n                        \n                        儀式流程：\n                        \n                            歡迎致辭\n                            追思分享\n                            告別儀式\n                            紀念品贈送",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.279Z",
+          "updatedAt": "2025-06-18T03:21:21.279Z"
+        },
+        {
+          "id": "AC_CREMATE",
+          "code": "AC_CREMATE",
+          "category": "ac",
+          "title": {
+            "zh": "火化服務預約確認",
+            "en": ""
+          },
+          "description": {
+            "zh": "確認客戶的火化服務預約，提供服務流程和注意事項。",
+            "en": ""
+          },
+          "content": {
+            "zh": "親愛的客戶，\n                        我們已確認您的火化服務預約：\n                        \n                            預約時間：[日期] [時間]\n                            服務地點：[地址]\n                            服務類型：[個別/團體]火化\n                        \n                        服務流程：\n                        \n                            遺體接收\n                            身份確認\n                            火化服務\n                            骨灰收集",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.281Z",
+          "updatedAt": "2025-06-18T03:21:21.281Z"
+        },
+        {
+          "id": "AC_VISIT",
+          "code": "AC_VISIT",
+          "category": "ac",
+          "title": {
+            "zh": "現場拜訪預約確認",
+            "en": ""
+          },
+          "description": {
+            "zh": "確認客戶的現場拜訪預約，提供拜訪流程和準備事項。",
+            "en": ""
+          },
+          "content": {
+            "zh": "親愛的客戶，\n                        我們已確認您的現場拜訪預約：\n                        \n                            拜訪時間：[日期] [時間]\n                            拜訪地點：[地址]\n                            預計時長：約1小時\n                        \n                        拜訪內容：\n                        \n                            場地參觀\n                            服務介紹\n                            需求討論\n                            方案建議",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.281Z",
+          "updatedAt": "2025-06-18T03:21:21.281Z"
+        },
+        {
+          "id": "AC_MEETING",
+          "code": "AC_MEETING",
+          "category": "ac",
+          "title": {
+            "zh": "諮詢會議預約確認",
+            "en": ""
+          },
+          "description": {
+            "zh": "確認客戶的諮詢會議預約，提供會議流程和準備事項。",
+            "en": ""
+          },
+          "content": {
+            "zh": "親愛的客戶，\n                        我們已確認您的諮詢會議預約：\n                        \n                            會議時間：[日期] [時間]\n                            會議地點：[地址]\n                            會議時長：約45分鐘\n                        \n                        會議內容：\n                        \n                            需求評估\n                            服務介紹\n                            方案討論\n                            問題解答",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.281Z",
+          "updatedAt": "2025-06-18T03:21:21.281Z"
+        },
+        {
+          "id": "AC_SPECIAL",
+          "code": "AC_SPECIAL",
+          "category": "ac",
+          "title": {
+            "zh": "特殊要求調整確認",
+            "en": ""
+          },
+          "description": {
+            "zh": "確認客戶的特殊服務要求，提供調整後的服務方案。",
+            "en": ""
+          },
+          "content": {
+            "zh": "親愛的客戶，\n                        我們已收到您的特殊要求，並已進行相應調整：\n                        \n                            原始預約：[日期] [時間]\n                            調整項目：[具體調整內容]\n                            調整原因：[原因說明]\n                        \n                        調整後的服務方案：\n                        \n                            [調整項目1]\n                            [調整項目2]\n                            [調整項目3]",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.281Z",
+          "updatedAt": "2025-06-18T03:21:21.281Z"
+        },
+        {
+          "id": "AC_TIMECHG",
+          "code": "AC_TIMECHG",
+          "category": "ac",
+          "title": {
+            "zh": "預約時間變更通知",
+            "en": ""
+          },
+          "description": {
+            "zh": "通知客戶預約時間的變更，提供新的時間安排。",
+            "en": ""
+          },
+          "content": {
+            "zh": "親愛的客戶，\n                        關於您的預約時間變更通知：\n                        \n                            原預約時間：[原日期] [原時間]\n                            新預約時間：[新日期] [新時間]\n                            變更原因：[原因說明]\n                        \n                        請確認新的預約時間是否合適。如需調整，請盡快與我們聯繫。",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.281Z",
+          "updatedAt": "2025-06-18T03:21:21.281Z"
+        },
+        {
+          "id": "AC_CANCEL",
+          "code": "AC_CANCEL",
+          "category": "ac",
+          "title": {
+            "zh": "預約取消確認",
+            "en": ""
+          },
+          "description": {
+            "zh": "確認客戶的預約取消請求，提供後續處理方案。",
+            "en": ""
+          },
+          "content": {
+            "zh": "親愛的客戶，\n                        我們已收到您的預約取消請求：\n                        \n                            原預約時間：[日期] [時間]\n                            取消原因：[原因說明]\n                            取消確認時間：[時間]\n                        \n                        取消政策說明：\n                        \n                            24小時前取消：全額退款\n                            12-24小時內取消：收取50%費用\n                            12小時內取消：收取全額費用",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.281Z",
+          "updatedAt": "2025-06-18T03:21:21.281Z"
+        },
+        {
+          "id": "AC_MULTIPARTY",
+          "code": "AC_MULTIPARTY",
+          "category": "ac",
+          "title": {
+            "zh": "多人參與預約確認",
+            "en": ""
+          },
+          "description": {
+            "zh": "確認多人參與的預約，提供參與者名單和注意事項。",
+            "en": ""
+          },
+          "content": {
+            "zh": "親愛的客戶，\n                        我們已確認您的多人參與預約：\n                        \n                            預約時間：[日期] [時間]\n                            預約地點：[地址]\n                            參與人數：[人數]\n                        \n                        參與者名單：\n                        \n                            [參與者1]\n                            [參與者2]\n                            [參與者3]\n                        \n                        注意事項：\n                        \n                            請提前15分鐘到達\n                            請攜帶身份證明文件\n                            如有變更請提前通知",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.282Z",
+          "updatedAt": "2025-06-18T03:21:21.282Z"
+        },
+        {
+          "id": "AC_TRANS",
+          "code": "AC_TRANS",
+          "category": "ac",
+          "title": {
+            "zh": "交通安排確認",
+            "en": ""
+          },
+          "description": {
+            "zh": "確認客戶的交通安排，提供接送服務詳情。",
+            "en": ""
+          },
+          "content": {
+            "zh": "親愛的客戶，\n                        我們已確認您的交通安排：\n                        \n                            接送時間：[日期] [時間]\n                            接送地點：[地址]\n                            車型：[車型說明]\n                        \n                        交通安排詳情：\n                        \n                            司機聯繫方式：[電話號碼]\n                            車牌號碼：[車牌號]\n                            預計行程時間：[時間]",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.282Z",
+          "updatedAt": "2025-06-18T03:21:21.282Z"
+        },
+        {
+          "id": "AC_VIRTCONSULT",
+          "code": "AC_VIRTCONSULT",
+          "category": "ac",
+          "title": {
+            "zh": "虛擬諮詢預約確認",
+            "en": ""
+          },
+          "description": {
+            "zh": "確認客戶的線上虛擬諮詢預約，提供會議連結和準備事項。",
+            "en": ""
+          },
+          "content": {
+            "zh": "親愛的客戶，\n                        我們已確認您的虛擬諮詢預約：\n                        \n                            預約時間：[日期] [時間]\n                            會議平台：[平台名稱]\n                            會議時長：約45分鐘\n                        \n                        會議資訊：\n                        \n                            會議連結：[連結]\n                            會議ID：[ID]\n                            密碼：[密碼]\n                        \n                        準備事項：\n                        \n                            請提前測試設備\n                            確保網絡穩定\n                            準備相關問題",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.282Z",
+          "updatedAt": "2025-06-18T03:21:21.282Z"
+        },
+        {
+          "id": "AC_PRODDEL",
+          "code": "AC_PRODDEL",
+          "category": "ac",
+          "title": {
+            "zh": "紀念品交付安排確認",
+            "en": ""
+          },
+          "description": {
+            "zh": "確認客戶的紀念品交付安排，提供交付詳情和注意事項。",
+            "en": ""
+          },
+          "content": {
+            "zh": "親愛的客戶，\n                        我們已確認您的紀念品交付安排：\n                        \n                            交付時間：[日期] [時間]\n                            交付地點：[地址]\n                            交付方式：[方式說明]\n                        \n                        交付物品：\n                        \n                            [物品1]\n                            [物品2]\n                            [物品3]\n                        \n                        注意事項：\n                        \n                            請攜帶身份證明文件\n                            請確認物品完整性\n                            請簽收確認",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.282Z",
+          "updatedAt": "2025-06-18T03:21:21.282Z"
+        },
+        {
+          "id": "AC_REMIND",
+          "code": "AC_REMIND",
+          "category": "ac",
+          "title": {
+            "zh": "預約前提醒",
+            "en": ""
+          },
+          "description": {
+            "zh": "在預約時間前提醒客戶，提供準備事項和注意事項。",
+            "en": ""
+          },
+          "content": {
+            "zh": "親愛的客戶，\n                        提醒您即將到來的預約：\n                        \n                            預約時間：[日期] [時間]\n                            預約地點：[地址]\n                            預約項目：[項目說明]\n                        \n                        準備事項：\n                        \n                            請提前15分鐘到達\n                            請攜帶必要文件\n                            請確認聯繫方式\n                        \n                        如有任何變更，請盡快與我們聯繫。",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.282Z",
+          "updatedAt": "2025-06-18T03:21:21.282Z"
+        },
+        {
+          "id": "AC_WEATHER",
+          "code": "AC_WEATHER",
+          "category": "ac",
+          "title": {
+            "zh": "天氣相關預約更新",
+            "en": ""
+          },
+          "description": {
+            "zh": "因天氣原因更新預約安排，提供替代方案和注意事項。",
+            "en": ""
+          },
+          "content": {
+            "zh": "親愛的客戶，\n                        由於天氣原因，我們需要更新您的預約安排：\n                        \n                            原預約時間：[日期] [時間]\n                            天氣狀況：[天氣說明]\n                            影響程度：[影響說明]\n                        \n                        更新安排：\n                        \n                            新預約時間：[新日期] [新時間]\n                            替代方案：[方案說明]\n                            注意事項：[注意事項]",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.282Z",
+          "updatedAt": "2025-06-18T03:21:21.282Z"
+        },
+        {
+          "id": "AC_GROUPCER",
+          "code": "AC_GROUPCER",
+          "category": "ac",
+          "title": {
+            "zh": "團體儀式協調確認",
+            "en": ""
+          },
+          "description": {
+            "zh": "確認團體儀式的協調安排，提供儀式流程和參與者信息。",
+            "en": ""
+          },
+          "content": {
+            "zh": "親愛的客戶，\n                        我們已確認您的團體儀式安排：\n                        \n                            儀式時間：[日期] [時間]\n                            儀式地點：[地址]\n                            參與人數：[人數]\n                        \n                        儀式流程：\n                        \n                            歡迎致辭\n                            追思分享\n                            團體儀式\n                            紀念活動\n                        \n                        注意事項：\n                        \n                            請提前30分鐘到達\n                            請遵守儀式秩序\n                            請保持安靜肅穆",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.283Z",
+          "updatedAt": "2025-06-18T03:21:21.283Z"
+        },
+        {
+          "id": "AC_SAFETY",
+          "code": "AC_SAFETY",
+          "category": "ac",
+          "title": {
+            "zh": "家訪安全確認",
+            "en": ""
+          },
+          "description": {
+            "zh": "確認家訪服務的安全安排，提供安全措施和注意事項。",
+            "en": ""
+          },
+          "content": {
+            "zh": "親愛的客戶，\n                        關於您的家訪服務安全確認：\n                        \n                            訪問時間：[日期] [時間]\n                            訪問地點：[地址]\n                            服務人員：[姓名]\n                        \n                        安全措施：\n                        \n                            工作人員身份確認\n                            安全防護裝備\n                            緊急聯繫方式\n                        \n                        注意事項：\n                        \n                            請確認工作人員身份\n                            請保持環境通風\n                            請準備必要防護用品",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.283Z",
+          "updatedAt": "2025-06-18T03:21:21.283Z"
+        },
+        {
+          "id": "AC_PAYCONF",
+          "code": "AC_PAYCONF",
+          "category": "ac",
+          "title": {
+            "zh": "預約付款確認",
+            "en": ""
+          },
+          "description": {
+            "zh": "確認客戶的預約付款，提供付款詳情和收據信息。",
+            "en": ""
+          },
+          "content": {
+            "zh": "親愛的客戶，\n                        我們已確認收到您的付款：\n                        \n                            付款金額：[金額]\n                            付款時間：[時間]\n                            付款方式：[方式]\n                        \n                        付款詳情：\n                        \n                            服務項目：[項目]\n                            預約時間：[時間]\n                            收據編號：[編號]\n                        \n                        感謝您的信任，我們將為您提供優質的服務。",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.283Z",
+          "updatedAt": "2025-06-18T03:21:21.283Z"
+        },
+        {
+          "id": "AC_RESCHED",
+          "code": "AC_RESCHED",
+          "category": "ac",
+          "title": {
+            "zh": "預約重新安排提議",
+            "en": ""
+          },
+          "description": {
+            "zh": "提議重新安排預約時間，提供新的時間選項。",
+            "en": ""
+          },
+          "content": {
+            "zh": "親愛的客戶，\n                        關於您的預約重新安排提議：\n                        \n                            原預約時間：[日期] [時間]\n                            重新安排原因：[原因]\n                            建議新時間：\n                        \n                        可選時間：\n                        \n                            [日期1] [時間1]\n                            [日期2] [時間2]\n                            [日期3] [時間3]\n                        \n                        請選擇適合您的時間，或提供其他時間選項。",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.283Z",
+          "updatedAt": "2025-06-18T03:21:21.283Z"
+        },
+        {
+          "id": "AC_DOCSUB",
+          "code": "AC_DOCSUB",
+          "category": "ac",
+          "title": {
+            "zh": "客戶文件提交確認",
+            "en": ""
+          },
+          "description": {
+            "zh": "確認客戶提交的文件，提供文件處理進度。",
+            "en": ""
+          },
+          "content": {
+            "zh": "親愛的客戶，\n                        我們已收到您提交的文件：\n                        \n                            提交時間：[時間]\n                            文件類型：[類型]\n                            文件數量：[數量]\n                        \n                        文件清單：\n                        \n                            [文件1]\n                            [文件2]\n                            [文件3]\n                        \n                        處理進度：\n                        \n                            接收確認：已完成\n                            文件審核：進行中\n                            後續處理：待處理",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.283Z",
+          "updatedAt": "2025-06-18T03:21:21.283Z"
+        },
+        {
+          "id": "AC_POSTPONE",
+          "code": "AC_POSTPONE",
+          "category": "ac",
+          "title": {
+            "zh": "預約延期通知",
+            "en": ""
+          },
+          "description": {
+            "zh": "通知客戶預約延期，提供新的時間安排和補償方案。",
+            "en": ""
+          },
+          "content": {
+            "zh": "親愛的客戶，\n                        關於您的預約延期通知：\n                        \n                            原預約時間：[日期] [時間]\n                            延期原因：[原因]\n                            新預約時間：[新日期] [新時間]\n                        \n                        補償方案：\n                        \n                            [補償項目1]\n                            [補償項目2]\n                            [補償項目3]\n                        \n                        我們為造成的不便深表歉意，感謝您的理解。",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.283Z",
+          "updatedAt": "2025-06-18T03:21:21.283Z"
+        }
+      ]
+    },
+    "ps": {
+      "code": "ps",
+      "name": "服務後跟進",
+      "templates": [
+        {
+          "id": "PS_SURVEY",
+          "code": "PS_SURVEY",
+          "category": "ps",
+          "title": {
+            "zh": "服務滿意度調查",
+            "en": ""
+          },
+          "description": {
+            "zh": "用於收集客戶對服務的滿意度反饋，幫助我們持續改進服務質量。",
+            "en": ""
+          },
+          "content": {
+            "zh": "您好，感謝您選擇我們的服務。我們希望了解您對服務的滿意度，以便我們能夠持續改進。\n                        請花一點時間回答以下問題：\n                        \n                            您對整體服務的滿意度如何？\n                            您對工作人員的專業程度評價如何？\n                            您對服務流程的順暢度評價如何？\n                            您是否願意向親友推薦我們的服務？\n                        \n                        您的反饋對我們非常重要，感謝您的寶貴意見。",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.287Z",
+          "updatedAt": "2025-06-18T03:21:21.287Z"
+        },
+        {
+          "id": "PS_THANKS",
+          "code": "PS_THANKS",
+          "category": "ps",
+          "title": {
+            "zh": "感謝函",
+            "en": "Thank You Letter"
+          },
+          "description": {
+            "zh": "向客戶表達感謝，並提供後續支援資訊。",
+            "en": "Express gratitude to clients and provide follow-up support information."
+          },
+          "content": {
+            "zh": "親愛的{{1}}：\n                            感謝您選擇我們的服務。我們很榮幸能夠在這個特別的時刻陪伴您和{{2}}。\n                            如果您需要任何協助，我們提供以下支援服務：\n                            \n                                {{3}}\n                                {{4}}\n                                {{5}}\n                            \n                            我們隨時在這裡為您提供支持。\n                            祝您平安。",
+            "en": "Dear {{1}},\n                            Thank you for choosing our service. We are honored to accompany you and {{2}} during this special moment.\n                            If you need any assistance, we provide the following support services:\n                            \n                                {{3}}\n                                {{4}}\n                                {{5}}\n                            \n                            We are always here to support you.\n                            Best wishes."
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.287Z",
+          "updatedAt": "2025-06-18T03:21:21.287Z"
+        },
+        {
+          "id": "PS_SUPPORT",
+          "code": "PS_SUPPORT",
+          "category": "ps",
+          "title": {
+            "zh": "提供情感支持資源",
+            "en": ""
+          },
+          "description": {
+            "zh": "用於提供情感支持和輔導資源。",
+            "en": ""
+          },
+          "content": {
+            "zh": "親愛的客戶，我們理解失去寵物帶來的傷痛...",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.287Z",
+          "updatedAt": "2025-06-18T03:21:21.287Z"
+        },
+        {
+          "id": "PS_MEMPROD",
+          "code": "PS_MEMPROD",
+          "category": "ps",
+          "title": {
+            "zh": "跟進紀念品需求",
+            "en": ""
+          },
+          "description": {
+            "zh": "用於跟進客戶對紀念品的需求。",
+            "en": ""
+          },
+          "content": {
+            "zh": "親愛的客戶，我們提供多種紀念品選擇...",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.287Z",
+          "updatedAt": "2025-06-18T03:21:21.287Z"
+        },
+        {
+          "id": "PS_FEEDBACK",
+          "code": "PS_FEEDBACK",
+          "category": "ps",
+          "title": {
+            "zh": "處理服務反饋",
+            "en": ""
+          },
+          "description": {
+            "zh": "用於處理客戶的服務反饋。",
+            "en": ""
+          },
+          "content": {
+            "zh": "感謝您提供的寶貴反饋，我們會認真考慮...",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.287Z",
+          "updatedAt": "2025-06-18T03:21:21.287Z"
+        },
+        {
+          "id": "PS_SHARE",
+          "code": "PS_SHARE",
+          "category": "ps",
+          "title": {
+            "zh": "邀請分享體驗",
+            "en": ""
+          },
+          "description": {
+            "zh": "用於邀請客戶分享服務體驗。",
+            "en": ""
+          },
+          "content": {
+            "zh": "如果您願意分享您的體驗，將幫助其他有需要的寵物主人...",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.287Z",
+          "updatedAt": "2025-06-18T03:21:21.287Z"
+        },
+        {
+          "id": "PS_ADDSRV",
+          "code": "PS_ADDSRV",
+          "category": "ps",
+          "title": {
+            "zh": "提供後續服務建議",
+            "en": ""
+          },
+          "description": {
+            "zh": "用於提供後續服務建議。",
+            "en": ""
+          },
+          "content": {
+            "zh": "我們還有其他服務可能對您有幫助...",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.287Z",
+          "updatedAt": "2025-06-18T03:21:21.287Z"
+        },
+        {
+          "id": "PS_ASHDEL",
+          "code": "PS_ASHDEL",
+          "category": "ps",
+          "title": {
+            "zh": "確認骨灰交付",
+            "en": ""
+          },
+          "description": {
+            "zh": "用於確認骨灰交付安排。",
+            "en": ""
+          },
+          "content": {
+            "zh": "關於骨灰交付的安排，我們已經準備就緒...",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.287Z",
+          "updatedAt": "2025-06-18T03:21:21.287Z"
+        },
+        {
+          "id": "PS_COMPLAINT",
+          "code": "PS_COMPLAINT",
+          "category": "ps",
+          "title": {
+            "zh": "回應投訴或問題",
+            "en": ""
+          },
+          "description": {
+            "zh": "用於回應客戶的投訴或問題。",
+            "en": ""
+          },
+          "content": {
+            "zh": "我們非常重視您的反饋，會立即處理...",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.287Z",
+          "updatedAt": "2025-06-18T03:21:21.287Z"
+        },
+        {
+          "id": "PS_COMMUNITY",
+          "code": "PS_COMMUNITY",
+          "category": "ps",
+          "title": {
+            "zh": "邀請加入支持社群",
+            "en": ""
+          },
+          "description": {
+            "zh": "用於邀請客戶加入支持社群。",
+            "en": ""
+          },
+          "content": {
+            "zh": "我們有一個溫暖的支持社群，歡迎您加入...",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.287Z",
+          "updatedAt": "2025-06-18T03:21:21.287Z"
+        },
+        {
+          "id": "PS_EVENTINV",
+          "code": "PS_EVENTINV",
+          "category": "ps",
+          "title": {
+            "zh": "紀念活動邀請",
+            "en": ""
+          },
+          "description": {
+            "zh": "用於邀請客戶參加紀念活動。",
+            "en": ""
+          },
+          "content": {
+            "zh": "我們即將舉辦一場特別的紀念活動...",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.288Z",
+          "updatedAt": "2025-06-18T03:21:21.288Z"
+        },
+        {
+          "id": "PS_ANNIV",
+          "code": "PS_ANNIV",
+          "category": "ps",
+          "title": {
+            "zh": "客戶周年紀念致敬",
+            "en": ""
+          },
+          "description": {
+            "zh": "用於紀念客戶的周年紀念。",
+            "en": ""
+          },
+          "content": {
+            "zh": "在這個特別的日子，我們與您一起紀念...",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.288Z",
+          "updatedAt": "2025-06-18T03:21:21.288Z"
+        },
+        {
+          "id": "PS_QUALITY",
+          "code": "PS_QUALITY",
+          "category": "ps",
+          "title": {
+            "zh": "服務質量保證檢查",
+            "en": ""
+          },
+          "description": {
+            "zh": "用於進行服務質量保證檢查。",
+            "en": ""
+          },
+          "content": {
+            "zh": "我們定期進行服務質量檢查，確保提供最佳服務...",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.288Z",
+          "updatedAt": "2025-06-18T03:21:21.288Z"
+        },
+        {
+          "id": "PS_REFER",
+          "code": "PS_REFER",
+          "category": "ps",
+          "title": {
+            "zh": "介紹轉介計劃",
+            "en": ""
+          },
+          "description": {
+            "zh": "用於介紹轉介計劃。",
+            "en": ""
+          },
+          "content": {
+            "zh": "我們有一個特別的轉介計劃，歡迎您參與...",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.288Z",
+          "updatedAt": "2025-06-18T03:21:21.288Z"
+        },
+        {
+          "id": "PS_COUNSEL",
+          "code": "PS_COUNSEL",
+          "category": "ps",
+          "title": {
+            "zh": "服務後輔導提議",
+            "en": ""
+          },
+          "description": {
+            "zh": "用於提供服務後的輔導提議。",
+            "en": ""
+          },
+          "content": {
+            "zh": "我們提供專業的輔導服務，幫助您度過這個時期...",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.288Z",
+          "updatedAt": "2025-06-18T03:21:21.288Z"
+        },
+        {
+          "id": "PS_PRODSAT",
+          "code": "PS_PRODSAT",
+          "category": "ps",
+          "title": {
+            "zh": "紀念品滿意度檢查",
+            "en": ""
+          },
+          "description": {
+            "zh": "用於檢查客戶對紀念品的滿意度。",
+            "en": ""
+          },
+          "content": {
+            "zh": "我們希望了解您對紀念品的滿意度...",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.288Z",
+          "updatedAt": "2025-06-18T03:21:21.288Z"
+        },
+        {
+          "id": "PS_TESTIMONIAL",
+          "code": "PS_TESTIMONIAL",
+          "category": "ps",
+          "title": {
+            "zh": "客戶見證請求",
+            "en": ""
+          },
+          "description": {
+            "zh": "用於請求客戶提供見證。",
+            "en": ""
+          },
+          "content": {
+            "zh": "如果您願意分享您的體驗，將幫助其他有需要的寵物主人...",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.288Z",
+          "updatedAt": "2025-06-18T03:21:21.288Z"
+        },
+        {
+          "id": "PS_FOLLOWCALL",
+          "code": "PS_FOLLOWCALL",
+          "category": "ps",
+          "title": {
+            "zh": "服務跟進電話安排",
+            "en": ""
+          },
+          "description": {
+            "zh": "用於安排服務跟進電話。",
+            "en": ""
+          },
+          "content": {
+            "zh": "我們希望安排一個跟進電話，了解您的情況...",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.288Z",
+          "updatedAt": "2025-06-18T03:21:21.288Z"
+        },
+        {
+          "id": "PS_COMMEVENT",
+          "code": "PS_COMMEVENT",
+          "category": "ps",
+          "title": {
+            "zh": "社群活動後續聯繫",
+            "en": ""
+          },
+          "description": {
+            "zh": "用於社群活動的後續聯繫。",
+            "en": ""
+          },
+          "content": {
+            "zh": "感謝您參加我們的社群活動，希望您有所收穫...",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.288Z",
+          "updatedAt": "2025-06-18T03:21:21.288Z"
+        },
+        {
+          "id": "PS_LONGSUPP",
+          "code": "PS_LONGSUPP",
+          "category": "ps",
+          "title": {
+            "zh": "長期支持提議",
+            "en": ""
+          },
+          "description": {
+            "zh": "用於提供長期支持提議。",
+            "en": ""
+          },
+          "content": {
+            "zh": "我們提供長期的支持服務，幫助您度過這個時期...",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.288Z",
+          "updatedAt": "2025-06-18T03:21:21.288Z"
+        }
+      ]
+    },
+    "pp": {
+      "code": "pp",
+      "name": "產品及服務推廣",
+      "templates": [
+        {
+          "id": "PP_WELCOME",
+          "code": "PP_WELCOME",
+          "category": "pp",
+          "title": {
+            "zh": "歡迎訊息",
+            "en": "Welcome Message"
+          },
+          "description": {
+            "zh": "向新客戶發送歡迎訊息，介紹公司服務和特色。",
+            "en": "Send welcome messages to new clients, introducing company services and features."
+          },
+          "content": {
+            "zh": "親愛的{{1}}：\n                            歡迎您選擇{{2}}的服務！\n                            我們提供以下服務：\n                            \n                                {{3}}\n                                {{4}}\n                                {{5}}\n                            \n                            我們的特色：\n                            \n                                {{6}}\n                                {{7}}\n                                {{8}}\n                            \n                            如有任何問題，歡迎隨時聯絡我們。",
+            "en": "Dear {{1}},\n                            Welcome to {{2}}'s services!\n                            We provide the following services:\n                            \n                                {{3}}\n                                {{4}}\n                                {{5}}\n                            \n                            Our features:\n                            \n                                {{6}}\n                                {{7}}\n                                {{8}}\n                            \n                            Please feel free to contact us if you have any questions."
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.289Z",
+          "updatedAt": "2025-06-18T03:21:21.289Z"
+        },
+        {
+          "id": "PP_INTRO",
+          "code": "PP_INTRO",
+          "category": "pp",
+          "title": {
+            "zh": "服務介紹",
+            "en": ""
+          },
+          "description": {
+            "zh": "用於向客戶介紹我們的寵物善終服務，包括服務內容、特色和優勢。",
+            "en": ""
+          },
+          "content": {
+            "zh": "您好，感謝您對我們的寵物善終服務感興趣。\n                        我們提供以下服務：\n                        \n                            專業的寵物善終服務\n                            個性化的告別儀式\n                            多種紀念品選擇\n                            全程專業人員陪同\n                        \n                        我們理解失去寵物的痛苦，會以最專業和溫暖的方式陪伴您度過這個時刻。",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.289Z",
+          "updatedAt": "2025-06-18T03:21:21.289Z"
+        },
+        {
+          "id": "PP_BOOK",
+          "code": "PP_BOOK",
+          "category": "pp",
+          "title": {
+            "zh": "預約安排",
+            "en": ""
+          },
+          "description": {
+            "zh": "用於安排寵物善終服務的預約時間和地點。",
+            "en": ""
+          },
+          "content": {
+            "zh": "您好，關於寵物善終服務的預約安排：\n                        我們可以為您安排以下時間：\n                        \n                            日期：{{date}}\n                            時間：{{time}}\n                            地點：{{location}}\n                        \n                        請確認這個時間是否適合您？",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.290Z",
+          "updatedAt": "2025-06-18T03:21:21.290Z"
+        },
+        {
+          "id": "PP_PROCESS",
+          "code": "PP_PROCESS",
+          "category": "pp",
+          "title": {
+            "zh": "服務流程說明",
+            "en": ""
+          },
+          "description": {
+            "zh": "用於說明寵物善終服務的具體流程和注意事項。",
+            "en": ""
+          },
+          "content": {
+            "zh": "以下是我們的服務流程：\n                        \n                            預約確認\n                            專業人員上門服務\n                            告別儀式\n                            火化處理\n                            骨灰交付\n                        \n                        整個過程我們都會以最專業和溫暖的方式進行。",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.290Z",
+          "updatedAt": "2025-06-18T03:21:21.290Z"
+        }
+      ]
+    },
+    "pi": {
+      "code": "pi",
+      "name": "付款信息",
+      "templates": [
+        {
+          "id": "PI_DEPOSIT",
+          "code": "PI_DEPOSIT",
+          "category": "pi",
+          "title": {
+            "zh": "訂金付款通知",
+            "en": "Deposit Payment Notice"
+          },
+          "description": {
+            "zh": "通知客戶訂金付款事宜，包括金額、付款方式和期限。",
+            "en": "Notify clients about deposit payment details, including amount, payment method, and deadline."
+          },
+          "content": {
+            "zh": "親愛的{{1}}：\n                            感謝您選擇我們的服務。以下是訂金付款資訊：\n                            \n                                服務項目：{{5}}\n                                訂金金額：{{6}}\n                                付款方式：{{7}}\n                                付款期限：{{8}}\n                            \n                            完成付款後，我們將立即為您安排服務。如有任何疑問，請隨時聯絡我們。",
+            "en": "Dear {{1}},\n                            Thank you for choosing our service. Here are the deposit payment details:\n                            \n                                Service Item: {{5}}\n                                Deposit Amount: {{6}}\n                                Payment Method: {{7}}\n                                Payment Deadline: {{8}}\n                            \n                            We will arrange the service immediately after receiving your payment. Please contact us if you have any questions."
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.291Z",
+          "updatedAt": "2025-06-18T03:21:21.291Z"
+        },
+        {
+          "id": "PI_BALANCE",
+          "code": "PI_BALANCE",
+          "category": "pi",
+          "title": {
+            "zh": "餘額付款通知",
+            "en": "Balance Payment Notice"
+          },
+          "description": {
+            "zh": "通知客戶支付服務餘額，包含剩餘應付金額和付款期限。",
+            "en": "Notify clients about the remaining balance payment for the service, including the remaining amount to be paid and the payment deadline."
+          },
+          "content": {
+            "zh": "親愛的{{1}}：\n                            感謝您的信任。請於服務完成後支付餘額，金額為...。",
+            "en": "Dear {{1}},\n                            Thank you for trusting us. Please pay the remaining balance after the service is completed. The amount to be paid is..."
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.291Z",
+          "updatedAt": "2025-06-18T03:21:21.291Z"
+        },
+        {
+          "id": "PI_RECEIPT",
+          "code": "PI_RECEIPT",
+          "category": "pi",
+          "title": {
+            "zh": "收據發送通知",
+            "en": "Receipt Sending Notice"
+          },
+          "description": {
+            "zh": "用於通知客戶收據已發送，並提供查看和下載方式。",
+            "en": "Used to notify clients that the receipt has been sent and provide ways to view and download it."
+          },
+          "content": {
+            "zh": "您的付款收據已準備就緒，可透過以下連結查看和下載...。",
+            "en": "Your payment receipt is ready. You can view and download it through the following link..."
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.292Z",
+          "updatedAt": "2025-06-18T03:21:21.292Z"
+        },
+        {
+          "id": "PI_REFUND",
+          "code": "PI_REFUND",
+          "category": "pi",
+          "title": {
+            "zh": "退款處理通知",
+            "en": "Refund Processing Notice"
+          },
+          "description": {
+            "zh": "用於通知客戶退款申請的處理進度和預計到賬時間。",
+            "en": "Used to notify clients about the progress of refund application processing and estimated arrival time."
+          },
+          "content": {
+            "zh": "您的退款申請已處理完成，退款金額將於3-5個工作天內到賬。",
+            "en": "Your refund application has been processed. The refund amount will arrive within 3-5 working days."
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.292Z",
+          "updatedAt": "2025-06-18T03:21:21.292Z"
+        },
+        {
+          "id": "PI_OVERDUE",
+          "code": "PI_OVERDUE",
+          "category": "pi",
+          "title": {
+            "zh": "逾期付款提醒",
+            "en": "Overdue Payment Reminder"
+          },
+          "description": {
+            "zh": "用於提醒客戶已逾期付款，並請求儘快處理。",
+            "en": "Used to remind clients about overdue payment and request prompt processing."
+          },
+          "content": {
+            "zh": "提醒您：服務費用已逾期，請儘快完成付款。如有任何困難，歡迎聯繫我們。",
+            "en": "Reminder: The service fee is overdue. Please complete the payment as soon as possible. If you encounter any difficulties, please contact us."
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.292Z",
+          "updatedAt": "2025-06-18T03:21:21.292Z"
+        },
+        {
+          "id": "PI_METHOD",
+          "code": "PI_METHOD",
+          "category": "pi",
+          "title": {
+            "zh": "付款方式說明",
+            "en": ""
+          },
+          "description": {
+            "zh": "用於說明所有可用的付款方式和詳細步驟。",
+            "en": ""
+          },
+          "content": {
+            "zh": "我們接受以下付款方式：PayMe、轉數快、信用卡等。詳細說明如下...",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.292Z",
+          "updatedAt": "2025-06-18T03:21:21.292Z"
+        },
+        {
+          "id": "PI_CONFIRM",
+          "code": "PI_CONFIRM",
+          "category": "pi",
+          "title": {
+            "zh": "付款確認通知",
+            "en": ""
+          },
+          "description": {
+            "zh": "用於確認已收到客戶的付款，並提供後續安排。",
+            "en": ""
+          },
+          "content": {
+            "zh": "我們已收到您的付款，感謝您的支持。接下來我們將為您安排...",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.292Z",
+          "updatedAt": "2025-06-18T03:21:21.292Z"
+        },
+        {
+          "id": "PI_INVOICE",
+          "code": "PI_INVOICE",
+          "category": "pi",
+          "title": {
+            "zh": "發票開具通知",
+            "en": ""
+          },
+          "description": {
+            "zh": "用於通知客戶發票已開具，並提供查看和下載方式。",
+            "en": ""
+          },
+          "content": {
+            "zh": "您要求的發票已開具完成，可透過以下方式查看和下載...",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.292Z",
+          "updatedAt": "2025-06-18T03:21:21.292Z"
+        },
+        {
+          "id": "PI_INSTALL",
+          "code": "PI_INSTALL",
+          "category": "pi",
+          "title": {
+            "zh": "分期付款安排",
+            "en": ""
+          },
+          "description": {
+            "zh": "用於說明分期付款的具體安排和時間表。",
+            "en": ""
+          },
+          "content": {
+            "zh": "根據您的要求，我們已為您安排以下分期付款計劃...",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.292Z",
+          "updatedAt": "2025-06-18T03:21:21.292Z"
+        },
+        {
+          "id": "PI_PROMO",
+          "code": "PI_PROMO",
+          "category": "pi",
+          "title": {
+            "zh": "優惠折扣通知",
+            "en": ""
+          },
+          "description": {
+            "zh": "用於通知客戶可用的優惠折扣和使用方式。",
+            "en": ""
+          },
+          "content": {
+            "zh": "感謝您選擇我們的服務，我們現提供以下優惠方案...",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.292Z",
+          "updatedAt": "2025-06-18T03:21:21.292Z"
+        }
+      ]
+    },
+    "ci": {
+      "code": "ci",
+      "name": "公司資料",
+      "templates": [
+        {
+          "id": "CI_INTRO",
+          "code": "CI_INTRO",
+          "category": "ci",
+          "title": {
+            "zh": "公司簡介",
+            "en": "Company Introduction"
+          },
+          "description": {
+            "zh": "介紹公司的歷史、使命和價值觀。",
+            "en": "Introduce the company's history, mission, and values."
+          },
+          "content": {
+            "zh": "{{5}}成立於{{2}}，是一家專業的寵物善終服務公司。\n                            我們的使命是：{{6}}\n                            核心價值觀：{{7}}\n                            服務範圍：{{8}}",
+            "en": "{{5}} was established in {{2}}, is a professional pet end-of-life service company.\n                            Our mission is: {{6}}\n                            Core values: {{7}}\n                            Service scope: {{8}}"
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.293Z",
+          "updatedAt": "2025-06-18T03:21:21.293Z"
+        },
+        {
+          "id": "CI_HOURS",
+          "code": "CI_HOURS",
+          "category": "ci",
+          "title": {
+            "zh": "服務時間",
+            "en": ""
+          },
+          "description": {
+            "zh": "提供公司的服務時間和緊急聯絡方式。",
+            "en": ""
+          },
+          "content": {
+            "zh": "我們的服務時間：\n                        \n                            週一至週五：09:00-18:00\n                            週六：09:00-17:00\n                            週日：10:00-16:00\n                        \n                        緊急服務：24小時專線 {{phone}}\n                        如有緊急情況，請隨時聯繫我們。",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.293Z",
+          "updatedAt": "2025-06-18T03:21:21.293Z"
+        },
+        {
+          "id": "CI_CONTACT",
+          "code": "CI_CONTACT",
+          "category": "ci",
+          "title": {
+            "zh": "聯絡方式",
+            "en": ""
+          },
+          "description": {
+            "zh": "提供公司的聯絡方式和各部門聯絡資訊。",
+            "en": ""
+          },
+          "content": {
+            "zh": "聯絡方式：\n                        \n                            電話：{{phone}}\n                            WhatsApp：{{whatsapp}}\n                            電郵：{{email}}\n                            地址：{{address}}\n                        \n                        我們期待為您服務。",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.293Z",
+          "updatedAt": "2025-06-18T03:21:21.293Z"
+        },
+        {
+          "id": "CI_TEAM",
+          "code": "CI_TEAM",
+          "category": "ci",
+          "title": {
+            "zh": "團隊介紹",
+            "en": ""
+          },
+          "description": {
+            "zh": "介紹公司的專業團隊和服務人員。",
+            "en": ""
+          },
+          "content": {
+            "zh": "我們的專業團隊：\n                        我們擁有一支經驗豐富的專業團隊，包括：\n                        \n                            專業的寵物善終服務師\n                            心理輔導師\n                            禮儀師\n                            客服專員\n                        \n                        每位團隊成員都經過專業培訓，致力於為您提供最貼心的服務。",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.293Z",
+          "updatedAt": "2025-06-18T03:21:21.293Z"
+        },
+        {
+          "id": "CI_VALUES",
+          "code": "CI_VALUES",
+          "category": "ci",
+          "title": {
+            "zh": "服務理念",
+            "en": ""
+          },
+          "description": {
+            "zh": "介紹公司的服務理念和價值觀。",
+            "en": ""
+          },
+          "content": {
+            "zh": "我們的服務理念：\n                        我們相信每個生命都值得被尊重和紀念。我們的使命是：\n                        \n                            提供專業、溫暖的服務\n                            尊重每個家庭的選擇\n                            陪伴您度過困難時刻\n                            創造有意義的告別儀式\n                        \n                        我們承諾以最真誠的態度為您服務。",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.293Z",
+          "updatedAt": "2025-06-18T03:21:21.293Z"
+        }
+      ]
+    },
+    "li": {
+      "code": "li",
+      "name": "物流信息",
+      "templates": [
+        {
+          "id": "LI_PICKUP",
+          "code": "LI_PICKUP",
+          "category": "li",
+          "title": {
+            "zh": "接收安排通知",
+            "en": "Pickup Arrangement Notice"
+          },
+          "description": {
+            "zh": "通知客戶接收安排的詳細信息，包括時間、地點和注意事項。",
+            "en": "Notify clients about pickup arrangement details, including time, location, and important notes."
+          },
+          "content": {
+            "zh": "親愛的{{1}}：\n                            我們已安排接收服務，詳情如下：\n                            \n                                接收日期：{{2}}\n                                接收時間：{{3}}\n                                接收地點：{{4}}\n                                車牌號碼：{{5}}\n                                司機姓名：{{6}}\n                                聯絡電話：{{7}}\n                                特別注意：{{8}}\n                            \n                            如需更改安排，請提前通知我們。",
+            "en": "Dear {{1}},\n                            We have arranged the pickup service. Details are as follows:\n                            \n                                Pickup Date: {{2}}\n                                Pickup Time: {{3}}\n                                Pickup Location: {{4}}\n                                Vehicle Number: {{5}}\n                                Driver Name: {{6}}\n                                Contact Number: {{7}}\n                                Special Notes: {{8}}\n                            \n                            Please notify us in advance if you need to change the arrangement."
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.295Z",
+          "updatedAt": "2025-06-18T03:21:21.295Z"
+        },
+        {
+          "id": "LI_DELIVERY",
+          "code": "LI_DELIVERY",
+          "category": "li",
+          "title": {
+            "zh": "送遞安排通知",
+            "en": ""
+          },
+          "description": {
+            "zh": "通知客戶關於骨灰或紀念品的送遞安排。",
+            "en": ""
+          },
+          "content": {
+            "zh": "親愛的{{1}}，您的寵物骨灰/紀念品將於{{2}}送達。請確保在預定時間有人在家接收。如有任何變更，請立即通知我們。",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.295Z",
+          "updatedAt": "2025-06-18T03:21:21.295Z"
+        },
+        {
+          "id": "LI_TRACK",
+          "code": "LI_TRACK",
+          "category": "li",
+          "title": {
+            "zh": "追蹤狀態更新",
+            "en": ""
+          },
+          "description": {
+            "zh": "提供物流狀態的即時更新信息。",
+            "en": ""
+          },
+          "content": {
+            "zh": "親愛的{{1}}，您的寵物遺體/骨灰目前狀態：{{2}}。預計完成時間：{{3}}。如有任何問題，請隨時聯繫我們。",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.296Z",
+          "updatedAt": "2025-06-18T03:21:21.296Z"
+        },
+        {
+          "id": "LI_DELAY",
+          "code": "LI_DELAY",
+          "category": "li",
+          "title": {
+            "zh": "延誤通知",
+            "en": ""
+          },
+          "description": {
+            "zh": "通知客戶關於物流延誤的情況和新的安排。",
+            "en": ""
+          },
+          "content": {
+            "zh": "親愛的{{1}}，很抱歉通知您，由於{{2}}，原定於{{3}}的服務將延遲。新的安排時間為{{4}}。我們深表歉意，並會盡快處理。",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.296Z",
+          "updatedAt": "2025-06-18T03:21:21.296Z"
+        },
+        {
+          "id": "LI_COMPLETE",
+          "code": "LI_COMPLETE",
+          "category": "li",
+          "title": {
+            "zh": "完成通知",
+            "en": ""
+          },
+          "description": {
+            "zh": "通知客戶物流服務已完成。",
+            "en": ""
+          },
+          "content": {
+            "zh": "親愛的{{1}}，您的寵物遺體/骨灰已安全送達。感謝您的信任，如有任何問題，請隨時聯繫我們。",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.296Z",
+          "updatedAt": "2025-06-18T03:21:21.296Z"
+        },
+        {
+          "id": "LI_RESCHEDULE",
+          "code": "LI_RESCHEDULE",
+          "category": "li",
+          "title": {
+            "zh": "重新安排通知",
+            "en": ""
+          },
+          "description": {
+            "zh": "通知客戶關於物流時間的重新安排。",
+            "en": ""
+          },
+          "content": {
+            "zh": "親愛的{{1}}，根據您的要求，我們已將服務時間重新安排為{{2}}。請確認這個時間是否合適。如有任何變更，請立即通知我們。",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.296Z",
+          "updatedAt": "2025-06-18T03:21:21.296Z"
+        },
+        {
+          "id": "LI_SPECIAL",
+          "code": "LI_SPECIAL",
+          "category": "li",
+          "title": {
+            "zh": "特殊要求處理",
+            "en": ""
+          },
+          "description": {
+            "zh": "處理客戶的特殊物流要求。",
+            "en": ""
+          },
+          "content": {
+            "zh": "親愛的{{1}}，我們已收到您的特殊要求：{{2}}。我們會特別注意並按照您的要求處理。如有任何問題，請隨時聯繫我們。",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.296Z",
+          "updatedAt": "2025-06-18T03:21:21.296Z"
+        },
+        {
+          "id": "LI_ROUTE",
+          "code": "LI_ROUTE",
+          "category": "li",
+          "title": {
+            "zh": "路線安排通知",
+            "en": ""
+          },
+          "description": {
+            "zh": "通知客戶關於物流路線的具體安排。",
+            "en": ""
+          },
+          "content": {
+            "zh": "親愛的{{1}}，我們已規劃好最佳路線，預計到達時間為{{2}}。路線詳情：{{3}}。如有任何變更，請立即通知我們。",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.296Z",
+          "updatedAt": "2025-06-18T03:21:21.296Z"
+        },
+        {
+          "id": "LI_STATUS",
+          "code": "LI_STATUS",
+          "category": "li",
+          "title": {
+            "zh": "狀態查詢回覆",
+            "en": ""
+          },
+          "description": {
+            "zh": "回覆客戶關於物流狀態的查詢。",
+            "en": ""
+          },
+          "content": {
+            "zh": "親愛的{{1}}，關於您的查詢，目前狀態如下：{{2}}。預計完成時間：{{3}}。如有任何問題，請隨時聯繫我們。",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.296Z",
+          "updatedAt": "2025-06-18T03:21:21.296Z"
+        }
+      ]
+    },
+    "oi": {
+      "code": "oi",
+      "name": "其他信息",
+      "templates": [
+        {
+          "id": "OI_FAQ",
+          "code": "OI_FAQ",
+          "category": "oi",
+          "title": {
+            "zh": "常見問題解答",
+            "en": ""
+          },
+          "description": {
+            "zh": "解答客戶常見疑問，提供即時協助。",
+            "en": ""
+          },
+          "content": {
+            "zh": "常見問題解答：\n                        Q: 善終服務流程是怎樣？\n                        A: 我們的服務流程包括：預約確認 → 專業人員上門 → 告別儀式 → 火化處理 → 骨灰交付\n                        Q: 服務時間如何安排？\n                        A: 我們提供24小時緊急服務，一般服務時間為週一至週日 09:00-18:00",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.298Z",
+          "updatedAt": "2025-06-18T03:21:21.298Z"
+        },
+        {
+          "id": "OI_TERMS",
+          "code": "OI_TERMS",
+          "category": "oi",
+          "title": {
+            "zh": "服務條款",
+            "en": ""
+          },
+          "description": {
+            "zh": "說明服務條款內容，保障雙方權益。",
+            "en": ""
+          },
+          "content": {
+            "zh": "服務條款：\n                        請參閱我們的服務條款，包括：\n                        \n                            服務範圍和標準\n                            收費標準和付款方式\n                            取消和退款政策\n                            責任限制條款\n                        \n                        詳細條款請查看我們的官方網站。",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.298Z",
+          "updatedAt": "2025-06-18T03:21:21.298Z"
+        },
+        {
+          "id": "OI_PRIVACY",
+          "code": "OI_PRIVACY",
+          "category": "oi",
+          "title": {
+            "zh": "私隱政策",
+            "en": ""
+          },
+          "description": {
+            "zh": "說明個人資料收集及保護政策。",
+            "en": ""
+          },
+          "content": {
+            "zh": "私隱政策：\n                        我們如何保障您的個人資料？\n                        \n                            嚴格遵守個人資料保護條例\n                            僅收集必要的個人資料\n                            不會向第三方披露您的資料\n                            提供資料查詢和更正服務\n                        \n                        您的隱私安全是我們的首要考慮。",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.298Z",
+          "updatedAt": "2025-06-18T03:21:21.298Z"
+        },
+        {
+          "id": "OI_FEEDBACK",
+          "code": "OI_FEEDBACK",
+          "category": "oi",
+          "title": {
+            "zh": "意見反饋",
+            "en": ""
+          },
+          "description": {
+            "zh": "收集及回應客戶意見，持續優化服務。",
+            "en": ""
+          },
+          "content": {
+            "zh": "意見反饋：\n                        歡迎提供您的寶貴意見，幫助我們持續改進服務質量。\n                        您可以通過以下方式提供反饋：\n                        \n                            WhatsApp 訊息\n                            電話：{{phone}}\n                            電郵：{{email}}\n                        \n                        我們會認真處理每一份反饋。",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.298Z",
+          "updatedAt": "2025-06-18T03:21:21.298Z"
+        },
+        {
+          "id": "OI_NEWS",
+          "code": "OI_NEWS",
+          "category": "oi",
+          "title": {
+            "zh": "最新消息",
+            "en": ""
+          },
+          "description": {
+            "zh": "發布公司及服務的最新動態。",
+            "en": ""
+          },
+          "content": {
+            "zh": "最新消息：\n                        {{date}} - 全新服務即將推出\n                        我們很高興地宣布，全新的寵物紀念服務即將推出，包括：\n                        \n                            個性化紀念相冊\n                            3D 紀念雕像\n                            線上追思平台\n                        \n                        敬請期待更多詳情。",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.298Z",
+          "updatedAt": "2025-06-18T03:21:21.298Z"
+        },
+        {
+          "id": "OI_HOLIDAY",
+          "code": "OI_HOLIDAY",
+          "category": "oi",
+          "title": {
+            "zh": "假期安排",
+            "en": ""
+          },
+          "description": {
+            "zh": "通知假期期間的服務安排及聯絡方式。",
+            "en": ""
+          },
+          "content": {
+            "zh": "假期安排通知：\n                        {{holiday_name}} 假期服務時間\n                        假期期間：{{start_date}} 至 {{end_date}}\n                        服務安排：\n                        \n                            緊急服務：24小時專線 {{emergency_phone}}\n                            一般查詢：{{normal_hours}}\n                            預約服務：暫停\n                        \n                        祝您假期愉快。",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.298Z",
+          "updatedAt": "2025-06-18T03:21:21.298Z"
+        },
+        {
+          "id": "OI_WEATHER",
+          "code": "OI_WEATHER",
+          "category": "oi",
+          "title": {
+            "zh": "天氣相關通知",
+            "en": ""
+          },
+          "description": {
+            "zh": "惡劣天氣下的服務調整與安全提示。",
+            "en": ""
+          },
+          "content": {
+            "zh": "天氣相關通知：\n                        {{weather_type}} 期間服務安排\n                        由於 {{weather_condition}}，我們的服務安排如下：\n                        \n                            緊急服務：維持正常\n                            一般預約：可能延遲\n                            安全提醒：請注意安全\n                        \n                        如有緊急情況，請聯繫：{{emergency_contact}}",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.298Z",
+          "updatedAt": "2025-06-18T03:21:21.298Z"
+        },
+        {
+          "id": "OI_MAINTAIN",
+          "code": "OI_MAINTAIN",
+          "category": "oi",
+          "title": {
+            "zh": "系統維護通知",
+            "en": "System Maintenance Notice"
+          },
+          "description": {
+            "zh": "通知客戶系統維護時間和影響範圍。",
+            "en": "Notify clients about system maintenance time and affected areas."
+          },
+          "content": {
+            "zh": "親愛的客戶：\n                            我們將於{{1}}進行系統維護，詳情如下：\n                            \n                                維護時間：{{2}}\n                                影響範圍：{{3}}\n                                預計完成：{{4}}\n                            \n                            維護期間可能影響部分服務，造成不便敬請見諒。\n                            如有緊急事項，請聯絡：{{5}}",
+            "en": "Dear Client,\n                            We will conduct system maintenance on {{1}}. Details are as follows:\n                            \n                                Maintenance Time: {{2}}\n                                Affected Areas: {{3}}\n                                Expected Completion: {{4}}\n                            \n                            Some services may be affected during maintenance. We apologize for any inconvenience.\n                            For emergencies, please contact: {{5}}"
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.298Z",
+          "updatedAt": "2025-06-18T03:21:21.298Z"
+        },
+        {
+          "id": "OI_UPDATE",
+          "code": "OI_UPDATE",
+          "category": "oi",
+          "title": {
+            "zh": "服務更新通知",
+            "en": ""
+          },
+          "description": {
+            "zh": "服務內容、流程或條款的更新說明。",
+            "en": ""
+          },
+          "content": {
+            "zh": "服務更新通知：\n                        預約流程優化通知\n                        為了提供更好的服務體驗，我們已優化預約流程：\n                        \n                            新增線上預約系統\n                            簡化預約確認流程\n                            增加預約提醒服務\n                        \n                        新流程將於 {{effective_date}} 開始實施。",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.299Z",
+          "updatedAt": "2025-06-18T03:21:21.299Z"
+        },
+        {
+          "id": "OI_SOCIAL",
+          "code": "OI_SOCIAL",
+          "category": "oi",
+          "title": {
+            "zh": "社交媒體資訊",
+            "en": ""
+          },
+          "description": {
+            "zh": "推廣社交媒體帳號，邀請客戶關注與互動。",
+            "en": ""
+          },
+          "content": {
+            "zh": "社交媒體資訊：\n                        歡迎關注我們的社交媒體，獲取最新資訊：\n                        \n                            Facebook：{{facebook_page}}\n                            Instagram：{{instagram_account}}\n                            YouTube：{{youtube_channel}}\n                        \n                        我們會定期分享：\n                        \n                            服務資訊和更新\n                            客戶故事分享\n                            寵物關懷貼士",
+            "en": ""
+          },
+          "status": "active",
+          "createdAt": "2025-06-18T03:21:21.299Z",
+          "updatedAt": "2025-06-18T03:21:21.299Z"
+        }
+      ]
+    }
+  }
+}

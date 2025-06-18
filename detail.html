@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>模板詳情 - 寵物善終服務</title>
+    <meta name="description" content="查看模板詳細信息和內容" />
+
+    <!-- 樣式文件 -->
+    <link rel="stylesheet" href="css/main.css" />
+
+    <!-- 圖標字體 -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- 頁面頭部 -->
+    <header class="header">
+      <div class="container">
+        <div class="header-content">
+          <a href="index.html" class="logo">
+            <i class="fas fa-heart"></i>
+            寵物善終服務
+          </a>
+          <nav class="nav">
+            <a href="index.html" class="nav-link">
+              <i class="fas fa-home"></i>
+              返回首頁
+            </a>
+            <a href="docs/development.html" class="nav-link">
+              <i class="fas fa-book"></i>
+              文檔
+            </a>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <!-- 主要內容 -->
+    <main class="main">
+      <div class="container">
+        <!-- 模板詳情內容 -->
+        <div id="template-detail" class="template-detail">
+          <!-- 加載中狀態 -->
+          <div class="loading-state">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>正在加載模板詳情...</p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- 頁面底部 -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h3>關於系統</h3>
+            <p>專業的寵物善終服務 WhatsApp 訊息模板管理系統。</p>
+          </div>
+          <div class="footer-section">
+            <h3>快速連結</h3>
+            <ul>
+              <li><a href="index.html">返回首頁</a></li>
+              <li><a href="docs/development.html">開發文檔</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2025 寵物善終服務. 保留所有權利.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- 快捷鍵提示 -->
+    <div class="shortcut-hint">
+      快捷鍵：<kbd>Alt</kbd> + <kbd>Z</kbd> 切換中文 | <kbd>Alt</kbd> +
+      <kbd>E</kbd> 切換英文
+    </div>
+
+    <!-- 通知容器 -->
+    <div id="notification" class="notification"></div>
+
+    <!-- JavaScript 文件 -->
+    <script src="js/utils/helpers.js"></script>
+    <script src="js/components/TemplateDetail.js"></script>
+
+    <!-- 初始化腳本 -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        console.log("🚀 模板詳情頁面初始化開始");
+
+        // 獲取模板ID
+        const urlParams = new URLSearchParams(window.location.search);
+        const templateId = urlParams.get("id");
+
+        if (templateId) {
+          // 初始化模板詳情組件
+          window.templateDetail = new TemplateDetail(templateId);
+        } else {
+          // 顯示錯誤信息
+          document.getElementById("template-detail").innerHTML = `
+                    <div class="error-state">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h3>模板ID缺失</h3>
+                        <p>請從首頁選擇一個模板查看詳情。</p>
+                        <a href="index.html" class="btn btn-primary">
+                            <i class="fas fa-home"></i>
+                            返回首頁
+                        </a>
+                    </div>
+                `;
+        }
+
+        console.log("✅ 模板詳情頁面初始化完成");
+      });
+    </script>
+  </body>
+</html>

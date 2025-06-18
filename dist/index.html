@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>寵物善終服務 - WhatsApp 訊息模板管理系統</title>
+    <meta
+      name="description"
+      content="專業的寵物善終服務 WhatsApp 訊息模板管理系統，提供雙語支援和響應式設計"
+    />
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAABILAAASCwAAAAAAAAAAAAD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AGVlZf9lZWX/ZWVl/2VlZf9lZWX/ZWVl/2VlZf9lZWX/ZWVl/2VlZf////8A////AP///wD///8A////AP///wBlZWX/ZWVl/2VlZf9lZWX/ZWVl/2VlZf9lZWX/ZWVl/2VlZf9lZWX/////AP///wD///8A////AP///wD///8AZWVl/2VlZf9lZWX/ZWVl/2VlZf9lZWX/ZWVl/2VlZf9lZWX/ZWVl/////wD///8A////AP///wD///8A////AGVlZf9lZWX/ZWVl/2VlZf9lZWX/ZWVl/2VlZf9lZWX/ZWVl/2VlZf////8A////AP///wD///8A////AP///wBlZWX/ZWVl/2VlZf9lZWX/ZWVl/2VlZf9lZWX/ZWVl/2VlZf9lZWX/////AP///wD///8A////AP///wD///8AZWVl/2VlZf9lZWX/ZWVl/2VlZf9lZWX/ZWVl/2VlZf9lZWX/ZWVl/////wD///8A////AP///wD///8A////AGVlZf9lZWX/ZWVl/2VlZf9lZWX/ZWVl/2VlZf9lZWX/ZWVl/2VlZf////8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wA=">
+
+    <!-- 樣式文件 -->
+    <link rel="stylesheet" href="css/main.css" />
+
+    <!-- 圖標字體 -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- 預載入關鍵資源 -->
+    <link
+      rel="preload"
+      href="data/templates/template-data.json"
+      as="fetch"
+      crossorigin
+    />
+  </head>
+  <body>
+    <!-- 頁面頭部 -->
+    <header class="header">
+      <div class="container">
+        <div class="header-content">
+          <a href="index.html" class="logo">
+            <i class="fas fa-heart"></i>
+            寵物善終服務
+          </a>
+          <nav class="nav">
+            <a href="index.html" class="nav-link active">
+              <i class="fas fa-home"></i>
+              首頁
+            </a>
+            <a href="docs/development.html" class="nav-link">
+              <i class="fas fa-book"></i>
+              文檔
+            </a>
+            <a href="docs/migration.html" class="nav-link">
+              <i class="fas fa-arrow-right"></i>
+              遷移指南
+            </a>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <!-- 主要內容 -->
+    <main class="main">
+      <div class="container">
+        <!-- 頁面標題 -->
+        <div class="page-header">
+          <h1 class="page-title">
+            <i class="fas fa-comments"></i>
+            WhatsApp 訊息模板管理系統
+          </h1>
+          <p class="page-description">
+            專業的寵物善終服務訊息模板，支援雙語顯示和智能搜索功能
+          </p>
+        </div>
+
+        <!-- 過濾器區域 -->
+        <div class="filters">
+          <div class="filters-header">
+            <h2 class="filters-title">
+              <i class="fas fa-filter"></i>
+              篩選模板
+            </h2>
+            <div class="filters-stats">
+              <span class="stats-text"
+                >共 <span id="total-count">0</span> 個模板</span
+              >
+            </div>
+          </div>
+
+          <div class="filters-content">
+            <!-- 搜索框 -->
+            <div class="filter-group">
+              <label for="search-input" class="filter-label">
+                <i class="fas fa-search"></i>
+                搜索模板
+              </label>
+              <input
+                type="text"
+                id="search-input"
+                class="search-input"
+                placeholder="輸入關鍵字搜索模板..."
+                autocomplete="off"
+              />
+            </div>
+
+            <!-- 分類過濾 -->
+            <div class="filter-group">
+              <label class="filter-label">
+                <i class="fas fa-tags"></i>
+                服務分類
+              </label>
+              <div class="filter-buttons">
+                <button class="filter-btn active" data-category="all">
+                  全部
+                </button>
+                <button class="filter-btn" data-category="ic">初步諮詢</button>
+                <button class="filter-btn" data-category="ac">安排服務</button>
+                <button class="filter-btn" data-category="ps">後續服務</button>
+                <button class="filter-btn" data-category="pp">產品推廣</button>
+                <button class="filter-btn" data-category="pi">付款相關</button>
+                <button class="filter-btn" data-category="ci">公司介紹</button>
+                <button class="filter-btn" data-category="li">物流追蹤</button>
+                <button class="filter-btn" data-category="oi">其他資訊</button>
+              </div>
+            </div>
+
+            <!-- 語言切換 -->
+            <div class="filter-group">
+              <label class="filter-label">
+                <i class="fas fa-globe"></i>
+                顯示語言
+              </label>
+              <div class="filter-buttons">
+                <button class="filter-btn active" data-language="zh">
+                  <i class="fas fa-flag"></i>
+                  繁體中文
+                </button>
+                <button class="filter-btn" data-language="en">
+                  <i class="fas fa-flag"></i>
+                  English
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 模板列表 -->
+        <div class="templates-section">
+          <div class="templates-header">
+            <h2 class="templates-title">
+              <i class="fas fa-list"></i>
+              模板列表
+            </h2>
+            <div class="templates-actions">
+              <button
+                class="btn btn-secondary"
+                onclick="templateManager.exportTemplates()"
+              >
+                <i class="fas fa-download"></i>
+                匯出數據
+              </button>
+              <button
+                class="btn btn-primary"
+                onclick="templateManager.showTemplateCreator()"
+              >
+                <i class="fas fa-plus"></i>
+                新增模板
+              </button>
+            </div>
+          </div>
+
+          <!-- 模板網格 -->
+          <div id="templates-container" class="templates-grid">
+            <!-- 模板卡片將由 JavaScript 動態生成 -->
+            <div class="loading">
+              <i class="fas fa-spinner fa-spin"></i>
+              <p>正在加載模板...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- 頁面底部 -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h3>關於系統</h3>
+            <p>
+              專業的寵物善終服務 WhatsApp
+              訊息模板管理系統，提供完整的客戶服務解決方案。
+            </p>
+          </div>
+          <div class="footer-section">
+            <h3>功能特色</h3>
+            <ul>
+              <li>雙語支援 (繁體中文/英文)</li>
+              <li>智能搜索和過濾</li>
+              <li>響應式設計</li>
+              <li>模組化架構</li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h3>快速連結</h3>
+            <ul>
+              <li><a href="docs/development.html">開發文檔</a></li>
+              <li><a href="docs/migration.html">遷移指南</a></li>
+              <li><a href="docs/template-creation.html">模板創建</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2025 寵物善終服務. 保留所有權利.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- JavaScript 文件 -->
+    <script src="js/components/TemplateManager.js"></script>
+    <script src="js/utils/helpers.js"></script>
+    <script src="js/components/SearchManager.js"></script>
+
+    <!-- 初始化腳本 -->
+    <script>
+      // 頁面加載完成後的初始化
+      document.addEventListener("DOMContentLoaded", function () {
+        console.log("🚀 新系統頁面初始化開始");
+
+        // 更新統計信息
+        if (window.templateManager) {
+          const updateStats = () => {
+            const totalCount = document.getElementById("total-count");
+            if (totalCount && window.templateManager.templates) {
+              totalCount.textContent = window.templateManager.templates.length;
+            }
+          };
+
+          // 延遲更新統計，確保數據已加載
+          setTimeout(updateStats, 1000);
+        }
+
+        console.log("✅ 新系統頁面初始化完成");
+      });
+
+      // 初始化搜索管理器
+      window.searchManager = new SearchManager();
+    </script>
+  </body>
+</html>
