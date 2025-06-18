@@ -2,14 +2,16 @@
 /**
  * Redis configuration
  */
-define('WP_REDIS_HOST', '127.0.0.1');
-define('WP_REDIS_PORT', 6379);
-define('WP_REDIS_DATABASE', 0);
+define('WP_REDIS_CONFIG', [
+    'host'     => '127.0.0.1',
+    'port'     => 6379,
+    'database' => 0,
+    'prefix'   => 'wati_',
+]);
 define('WP_REDIS_TIMEOUT', 1);
 define('WP_REDIS_READ_TIMEOUT', 1);
 define('WP_REDIS_RETRY_INTERVAL', 100);
 define('WP_REDIS_RETRIES', 3);
-define('WP_REDIS_PREFIX', 'wati_');
 define('WP_REDIS_MAXTTL', 86400);
 define('WP_REDIS_SELECTIVE_FLUSH', true);
 define('WP_REDIS_CLIENT', 'phpredis');
