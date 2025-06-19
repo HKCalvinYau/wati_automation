@@ -25,7 +25,7 @@ class ApprovalManager {
    */
   async loadApprovals() {
     try {
-      const response = await fetch("../data/templates/approval-data.json");
+      const response = await fetch("/data/templates/approval-data.json");
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -151,7 +151,7 @@ class ApprovalManager {
   async saveApprovals() {
     try {
       const approvalsArray = Array.from(this.approvals.values());
-      const response = await fetch("../data/templates/approval-data.json", {
+      const response = await fetch("/data/templates/approval-data.json", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

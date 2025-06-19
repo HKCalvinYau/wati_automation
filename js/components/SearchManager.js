@@ -106,7 +106,7 @@ class SearchManager {
    */
   async searchTemplates(query) {
     try {
-      const response = await fetch("../data/templates/template-data.json");
+      const response = await fetch("/data/templates/template-data.json");
       const data = await response.json();
 
       return data.templates.filter((template) => {

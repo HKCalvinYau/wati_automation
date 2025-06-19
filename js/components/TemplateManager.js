@@ -32,7 +32,7 @@ class TemplateManager {
    */
   async loadTemplates() {
     try {
-      const response = await fetch("../data/templates/template-data.json");
+      const response = await fetch("/data/templates/template-data.json");
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
