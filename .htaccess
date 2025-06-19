@@ -1,11 +1,12 @@
+# 優先顯示自定義首頁
+DirectoryIndex index.html index.php
+
 # BEGIN WordPress
 <IfModule mod_rewrite.c>
 RewriteEngine On
 RewriteBase /
 
-# 優先顯示自定義首頁
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
+# 如果請求根目錄，直接顯示 index.html
 RewriteRule ^$ /index.html [L]
 
 # WordPress 路由規則
