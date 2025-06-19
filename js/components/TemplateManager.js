@@ -473,13 +473,12 @@ class TemplateManager {
   /**
    * 創建新模板
    */
-  createTemplate() {
+  async createTemplate() {
     const form = document.getElementById("template-form");
     if (!form) return;
 
     const formData = new FormData(form);
     const templateData = {
-      id: formData.get("code"),
       code: formData.get("code"),
       category: formData.get("category"),
       title: {
@@ -495,8 +494,6 @@ class TemplateManager {
         en: formData.get("content_en") || formData.get("content_zh"),
       },
       status: formData.get("status") || "active",
-      created_at: new Date().toISOString(),
-      updated_at: new Date().toISOString(),
     };
 
     // 驗證必填欄位
@@ -510,20 +507,52 @@ class TemplateManager {
       return;
     }
 
-    // 檢查模板代碼是否已存在
-    if (this.templates.find((t) => t.id === templateData.id)) {
-      this.showError("模板代碼已存在，請使用不同的代碼");
-      return;
+    try {
+      // 顯示載入狀態
+      const saveButton = document.querySelector('.modal-footer .btn-primary');
+      const originalText = saveButton.innerHTML;
+      saveButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 保存中...';
+      saveButton.disabled = true;
+
+      // 發送 API 請求
+      const response = await fetch('api/save-template.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(templateData)
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || '保存失敗');
+      }
+
+      if (result.success) {
+        // 重新載入模板數據
+        await this.loadTemplates();
+        this.applyFilters();
+
+        // 關閉模態框
+        document.querySelector(".modal-overlay")?.remove();
+
+        this.showSuccess("模板創建成功！");
+      } else {
+        throw new Error(result.message || '保存失敗');
+      }
+
+    } catch (error) {
+      console.error('保存模板失敗:', error);
+      this.showError(error.message || '保存失敗，請重試');
+    } finally {
+      // 恢復按鈕狀態
+      const saveButton = document.querySelector('.modal-footer .btn-primary');
+      if (saveButton) {
+        saveButton.innerHTML = '<i class="fas fa-save"></i> 儲存模板';
+        saveButton.disabled = false;
+      }
     }
-
-    // 添加到模板列表
-    this.templates.push(templateData);
-    this.applyFilters();
-
-    // 關閉模態框
-    document.querySelector(".modal-overlay")?.remove();
-
-    this.showSuccess("模板創建成功！");
   }
 
   /**
