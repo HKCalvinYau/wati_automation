@@ -83,6 +83,12 @@
         </div>
 
         <div class="test-section">
+            <h3>🐘 PHP 環境檢查</h3>
+            <button onclick="checkPHPEnvironment()">檢查 PHP 環境</button>
+            <div id="php-env-result"></div>
+        </div>
+
+        <div class="test-section">
             <h3>🌐 伺服器環境檢查</h3>
             <button onclick="checkServerEnvironment()">檢查伺服器環境</button>
             <div id="server-env-result"></div>
@@ -131,6 +137,64 @@
             document.querySelectorAll('.result').forEach(el => el.remove());
             logContent = '';
             document.getElementById('debug-log').textContent = '';
+        }
+
+        async function checkPHPEnvironment() {
+            log('開始檢查 PHP 環境...');
+            
+            try {
+                const response = await fetch('/php-version-check.php');
+                if (response.ok) {
+                    const phpInfo = await response.json();
+                    
+                    let result = `✅ PHP 版本: ${phpInfo.php_version}\n`;
+                    result += `✅ PHP 版本 ID: ${phpInfo.php_version_id}\n`;
+                    result += `✅ 伺服器軟體: ${phpInfo.server_software}\n`;
+                    result += `✅ 文檔根目錄: ${phpInfo.document_root}\n\n`;
+                    
+                    // 檢查檔案權限
+                    result += `📁 檔案權限檢查:\n`;
+                    for (const [file, perm] of Object.entries(phpInfo.file_permissions)) {
+                        const status = perm.exists ? (perm.writable ? '✅' : '⚠️') : '❌';
+                        result += `${status} ${file}: ${perm.exists ? `${perm.permissions} (${perm.readable ? 'R' : '-'}${perm.writable ? 'W' : '-'})` : '不存在'}\n`;
+                    }
+                    
+                    // 檢查擴展
+                    result += `\n🔧 PHP 擴展:\n`;
+                    for (const [ext, loaded] of Object.entries(phpInfo.extensions)) {
+                        result += `${loaded ? '✅' : '❌'} ${ext}\n`;
+                    }
+                    
+                    // 檢查函數
+                    result += `\n⚙️ PHP 函數:\n`;
+                    for (const [func, exists] of Object.entries(phpInfo.functions)) {
+                        result += `${exists ? '✅' : '❌'} ${func}\n`;
+                    }
+                    
+                    // 檢查寫入測試
+                    result += `\n💾 檔案寫入測試: ${phpInfo.write_test.success ? '✅ 成功' : '❌ 失敗'}`;
+                    if (!phpInfo.write_test.success) {
+                        result += `\n錯誤: ${phpInfo.write_test.error}`;
+                    }
+                    
+                    showResult('php-env-result', result, 'success');
+                    log(`PHP 版本: ${phpInfo.php_version}`);
+                    
+                    // 檢查版本兼容性
+                    if (phpInfo.php_version_id < 70400) {
+                        showResult('php-env-result', '⚠️ PHP 版本較舊，建議使用 PHP 7.4 或更高版本', 'warning');
+                        log('PHP 版本較舊', 'warning');
+                    }
+                    
+                } else {
+                    showResult('php-env-result', `❌ PHP 環境檢查失敗\n狀態: ${response.status}`, 'error');
+                    log(`PHP 環境檢查失敗，狀態: ${response.status}`, 'error');
+                }
+
+            } catch (error) {
+                showResult('php-env-result', `❌ PHP 環境檢查失敗: ${error.message}`, 'error');
+                log(`PHP 環境檢查失敗: ${error.message}`, 'error');
+            }
         }
 
         async function checkServerEnvironment() {
@@ -333,6 +397,9 @@
         async function runAllTests() {
             log('開始執行完整診斷...');
             clearResults();
+            
+            await checkPHPEnvironment();
+            await new Promise(resolve => setTimeout(resolve, 1000));
             
             await checkServerEnvironment();
             await new Promise(resolve => setTimeout(resolve, 1000));
