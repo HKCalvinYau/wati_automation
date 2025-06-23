@@ -64,3 +64,53 @@ wp-content/wp-cache-config.php
 *.pem
 *.key
 *.crt
+
+# Logs
+logs/
+*.log
+
+# PIDs
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage
+coverage/
+.nyc_output/
+
+# Out
+out/
+
+# NPM
+.npm
+
+# ESLint cache
+.eslintcache
+
+# Node repl history
+.node_repl_history
+
+# WordPress specific
+wp-content/cache/
+wp-content/uploads/
+wp-content/backup-db/
+wp-content/backups/
+wp-content/blogs.dir/
+wp-content/upgrade/
+wp-content/uploads/
+wp-content/mu-plugins/
+wp-content/wp-cache-config.php
+
+# Database dumps
+*.sql
+*.sql.gz
+
+# Test results
+test-results/
+
+# Local test data
+local-test-data/
+
+# Debug output
+debug-output/

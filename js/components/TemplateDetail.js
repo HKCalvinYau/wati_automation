@@ -45,21 +45,43 @@ class TemplateDetail {
    */
   async loadTemplate() {
     try {
-      const response = await fetch("/data/templates/template-data.json");
+      // 嘗試從 API 載入資料
+      const response = await fetch("/api/get-templates.php");
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      const data = await response.json();
-      this.template = data.templates.find((t) => t.id === this.templateId);
-
-      if (!this.template) {
-        throw new Error(`模板 ${this.templateId} 不存在`);
+      const result = await response.json();
+      
+      if (result.success) {
+        this.template = result.data.templates.find((t) => t.id === this.templateId);
+        if (!this.template) {
+          throw new Error(`模板 ${this.templateId} 不存在`);
+        }
+        console.log(`📚 成功從 API 載入模板: ${this.templateId}`);
+      } else {
+        throw new Error(result.message || 'API 返回錯誤');
       }
-
-      console.log(`📚 成功加載模板: ${this.templateId}`);
     } catch (error) {
-      console.error("❌ 加載模板數據失敗:", error);
-      throw error;
+      console.warn("⚠️ API 載入失敗，嘗試從靜態檔案載入:", error);
+      
+      // 備用方案：從靜態檔案載入
+      try {
+        const response = await fetch("/data/templates/template-data.json");
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        this.template = data.templates.find((t) => t.id === this.templateId);
+
+        if (!this.template) {
+          throw new Error(`模板 ${this.templateId} 不存在`);
+        }
+
+        console.log(`📚 成功從靜態檔案載入模板: ${this.templateId}`);
+      } catch (fallbackError) {
+        console.error("❌ 所有載入方式都失敗:", fallbackError);
+        throw new Error("無法載入模板資料，請檢查網路連接或聯繫管理員");
+      }
     }
   }
 
@@ -498,7 +520,7 @@ class TemplateDetail {
       }
       
       // 發送 API 請求
-      const response = await fetch('api/save-template.php', {
+      const response = await fetch('/api/save-template.php', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -34,28 +34,28 @@
 
 ```
 wati_automation/
-├── api/                     # API 端點
+├── api/                     # PHP API 端點
 │   ├── save-template.php    # 模板保存 API
-│   └── get-templates.php    # 模板獲取 API
-├── css/                    # 樣式檔案
-│   └── main.css           # 主要樣式檔案
-├── js/                    # JavaScript 檔案
-│   ├── components/        # 元件模組
-│   ├── core/             # 核心功能
-│   ├── data/             # 數據處理
-│   └── utils/            # 工具函數
+│   ├── get-templates.php    # 模板獲取 API
+│   └── php-version-check.php # PHP 環境檢查
+├── js/                     # JavaScript 模組
+│   ├── components/         # 前端組件
+│   │   ├── TemplateManager.js    # 模板管理
+│   │   ├── TemplateDetail.js     # 模板詳情
+│   │   ├── SearchManager.js      # 搜索功能
+│   │   └── ApprovalManager.js    # 審核管理
+│   ├── core/              # 核心功能
+│   ├── utils/             # 工具函數
+│   └── data/              # 數據處理
 ├── data/                  # 數據檔案
-│   ├── templates/        # 模板數據
-│   └── logs/             # 操作日誌
+│   ├── templates/         # 模板數據
+│   └── logs/              # 操作日誌
+├── css/                   # 樣式檔案
 ├── docs/                  # 文檔
-├── wp-admin/             # WordPress 管理後台
-├── wp-content/           # WordPress 內容目錄
-├── wp-includes/          # WordPress 核心檔案
-├── index.html            # 自定義首頁
-├── index.php             # WordPress 入口檔案
-├── wp-config.php         # WordPress 配置檔案
-├── fixbug.md             # Bug 修復記錄
-└── .htaccess             # Apache 重寫規則
+├── local-test-server.js   # 本地開發伺服器
+├── cloudways-debug.html   # Cloudways 診斷工具
+├── debug-save-issue.html  # 本地診斷工具
+└── package.json           # 專案配置
 ```
 
 ## 功能模組
@@ -195,20 +195,119 @@ wati_automation/
 
 3. 啟動開發伺服器：
    ```bash
+   npm start
+   # 或
    npm run dev
    ```
 
-### 生產環境部署
-1. 推送到 GitHub：
-   ```bash
-   git add .
-   git commit -m "更新描述"
-   git push origin main
-   ```
+4. 訪問應用程式：
+   - 主頁面: http://localhost:3000
+   - 診斷工具: http://localhost:3000/debug-save-issue.html
+   - Cloudways 診斷: http://localhost:3000/cloudways-debug.html
 
-2. Cloudways 自動部署：
-   - 專案已配置 Git 部署
-   - 推送後自動更新生產環境
+### 生產環境部署 (Cloudways)
+
+#### 方法一：Git 部署（推薦）
+```bash
+# 添加 Cloudways 遠端倉庫
+git remote add cloudways git@git.cloudways.com:ywmzzfkesa.git
+
+# 推送代碼
+git push cloudways main
+```
+
+#### 方法二：手動部署
+1. 使用 Cloudways File Manager 上傳檔案
+2. 或使用 SFTP 工具連接伺服器
+3. 確保檔案權限正確設置
+
+#### 部署後檢查
+1. 訪問 `https://your-domain.com/cloudways-debug.html`
+2. 執行完整診斷測試
+3. 檢查 API 端點是否正常工作
+4. 測試模板保存功能
+
+### 開發工具
+
+#### 診斷工具
+- **本地診斷**: `debug-save-issue.html` - 測試本地開發環境
+- **Cloudways 診斷**: `cloudways-debug.html` - 測試生產環境
+- **PHP 版本檢查**: `php-version-check.php` - 檢查 PHP 環境
+
+#### 測試腳本
+```bash
+# 測試 API 端點
+npm run test:api
+
+# 驗證模板資料
+npm run validate
+
+# 格式化代碼
+npm run format
+
+# 檢查代碼品質
+npm run lint
+```
+
+### 故障排除
+
+#### 常見問題
+1. **保存功能無法工作**
+   - 檢查 API 端點是否可訪問
+   - 確認檔案權限設置
+   - 查看瀏覽器控制台錯誤
+
+2. **PHP 版本問題**
+   - 建議使用 PHP 8.1 或 8.2
+   - 最低要求 PHP 7.4
+
+3. **檔案權限問題**
+   - `data/templates/` 目錄需要寫入權限
+   - `data/logs/` 目錄需要寫入權限
+
+#### 日誌檔案
+- 模板操作日誌: `data/logs/template-updates.log`
+- PHP 錯誤日誌: 檢查伺服器錯誤日誌
+- 瀏覽器控制台: 查看 JavaScript 錯誤
+
+### 環境要求
+
+#### 本地開發
+- Node.js >= 14.0.0
+- npm >= 6.0.0
+
+#### 生產環境
+- PHP >= 7.4 (推薦 8.1+)
+- Apache/Nginx
+- 支援 JSON 和檔案寫入權限
+
+### 專案結構說明
+
+```
+wati_automation/
+├── api/                     # PHP API 端點
+│   ├── save-template.php    # 模板保存 API
+│   ├── get-templates.php    # 模板獲取 API
+│   └── php-version-check.php # PHP 環境檢查
+├── js/                     # JavaScript 模組
+│   ├── components/         # 前端組件
+│   │   ├── TemplateManager.js    # 模板管理
+│   │   ├── TemplateDetail.js     # 模板詳情
+│   │   ├── SearchManager.js      # 搜索功能
+│   │   └── ApprovalManager.js    # 審核管理
+│   ├── core/              # 核心功能
+│   ├── utils/             # 工具函數
+│   └── data/              # 數據處理
+├── data/                  # 數據檔案
+│   ├── templates/         # 模板數據
+│   └── logs/              # 操作日誌
+├── css/                   # 樣式檔案
+├── docs/                  # 文檔
+├── local-test-server.js   # 本地開發伺服器
+├── cloudways-debug.html   # Cloudways 診斷工具
+├── debug-save-issue.html  # 本地診斷工具
+└── package.json           # 專案配置
+```
 
 ## 配置說明
 
