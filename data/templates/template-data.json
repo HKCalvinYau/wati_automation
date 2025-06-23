@@ -1,8 +1,8 @@
 {
   "metadata": {
-    "totalTemplates": 98,
+    "totalTemplates": 99,
     "categories": {
-      "ic": 20,
+      "ic": 21,
       "ac": 20,
       "ps": 20,
       "pp": 4,
@@ -11,7 +11,7 @@
       "li": 9,
       "oi": 10
     },
-    "lastUpdated": "2025-06-18T03:21:21.253Z",
+    "lastUpdated": "2025-06-23T06:55:04.388Z",
     "version": "2.0.0"
   },
   "templates": [
@@ -1974,6 +1974,26 @@
       "status": "active",
       "createdAt": "2025-06-18T03:21:21.299Z",
       "updatedAt": "2025-06-18T03:21:21.299Z"
+    },
+    {
+      "id": "TEST_001",
+      "code": "TEST_001",
+      "category": "ic",
+      "title": {
+        "zh": "測試模板",
+        "en": "Test Template"
+      },
+      "description": {
+        "zh": "測試描述",
+        "en": "Test Description"
+      },
+      "content": {
+        "zh": "測試內容",
+        "en": "Test Content"
+      },
+      "status": "active",
+      "updatedAt": "2025-06-23T06:55:04.388Z",
+      "createdAt": "2025-06-23T06:55:04.388Z"
     }
   ],
   "categories": {
