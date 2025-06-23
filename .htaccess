@@ -6,6 +6,9 @@ DirectoryIndex index.html index.php
 RewriteEngine On
 RewriteBase /
 
+# 處理 favicon.ico 請求
+RewriteRule ^favicon\.ico$ - [L]
+
 # 如果請求根目錄，直接顯示 index.html
 RewriteRule ^$ /index.html [L]
 
