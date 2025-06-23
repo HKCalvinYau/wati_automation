@@ -10,6 +10,7 @@
 - 🎨 **現代化 UI**: 美觀且易用的使用者介面
 - 📊 **數據管理**: 完整的模板管理和匯出功能
 - 🔧 **模組化架構**: 易於維護和擴展的程式碼結構
+- 💾 **持久化保存**: 真正的資料持久化，支援編輯後保存
 
 ## 技術架構
 
@@ -33,6 +34,9 @@
 
 ```
 wati_automation/
+├── api/                     # API 端點
+│   ├── save-template.php    # 模板保存 API
+│   └── get-templates.php    # 模板獲取 API
 ├── css/                    # 樣式檔案
 │   └── main.css           # 主要樣式檔案
 ├── js/                    # JavaScript 檔案
@@ -41,7 +45,8 @@ wati_automation/
 │   ├── data/             # 數據處理
 │   └── utils/            # 工具函數
 ├── data/                  # 數據檔案
-│   └── templates/        # 模板數據
+│   ├── templates/        # 模板數據
+│   └── logs/             # 操作日誌
 ├── docs/                  # 文檔
 ├── wp-admin/             # WordPress 管理後台
 ├── wp-content/           # WordPress 內容目錄
@@ -49,6 +54,7 @@ wati_automation/
 ├── index.html            # 自定義首頁
 ├── index.php             # WordPress 入口檔案
 ├── wp-config.php         # WordPress 配置檔案
+├── fixbug.md             # Bug 修復記錄
 └── .htaccess             # Apache 重寫規則
 ```
 
@@ -59,6 +65,7 @@ wati_automation/
 - 模板搜索和過濾
 - 模板新增和編輯
 - 模板匯出功能
+- **持久化保存**: 編輯後資料真正保存到伺服器
 
 ### 2. 搜索管理 (SearchManager)
 - 即時搜索
@@ -79,6 +86,98 @@ wati_automation/
 - 模板審核流程
 - 審核狀態追蹤
 - 審核歷史記錄
+
+## API 文檔
+
+### 保存模板 API
+**端點**: `POST /api/save-template.php`
+
+**功能**: 保存或更新模板資料
+
+**請求格式**:
+```json
+{
+  "id": "模板ID",
+  "code": "模板代碼",
+  "category": "分類",
+  "title": {
+    "zh": "繁體中文標題",
+    "en": "English Title"
+  },
+  "description": {
+    "zh": "繁體中文描述",
+    "en": "English Description"
+  },
+  "content": {
+    "zh": "繁體中文內容",
+    "en": "English Content"
+  },
+  "status": "active|draft|inactive"
+}
+```
+
+**響應格式**:
+```json
+{
+  "success": true,
+  "message": "模板保存成功",
+  "data": {
+    "templateId": "模板ID",
+    "totalTemplates": 98,
+    "lastUpdated": "2025-01-27T10:30:00Z"
+  }
+}
+```
+
+### 獲取模板 API
+**端點**: `GET /api/get-templates.php`
+
+**功能**: 獲取模板列表，支援過濾和搜索
+
+**查詢參數**:
+- `category`: 分類過濾
+- `status`: 狀態過濾
+- `search`: 搜索關鍵字
+- `limit`: 分頁限制
+- `offset`: 分頁偏移
+
+**響應格式**:
+```json
+{
+  "success": true,
+  "data": {
+    "metadata": {
+      "totalTemplates": 98,
+      "categories": {
+        "ic": 20,
+        "ac": 20
+      },
+      "lastUpdated": "2025-01-27T10:30:00Z"
+    },
+    "templates": [...]
+  }
+}
+```
+
+## 資料保存機制
+
+### 問題解決
+- **問題**: 編輯模板後重新整理頁面，更新會消失
+- **原因**: 原系統只使用 localStorage，沒有同步到伺服器
+- **解決方案**: 實現真正的持久化保存
+
+### 新的保存流程
+1. **編輯模板** → 前端驗證
+2. **發送 API 請求** → 後端處理
+3. **保存到檔案** → 持久化存儲
+4. **創建備份** → 資料安全
+5. **記錄日誌** → 操作追蹤
+6. **更新前端** → 即時反饋
+
+### 備用機制
+- API 失敗時自動回退到靜態檔案載入
+- 本地 localStorage 作為臨時緩存
+- 完整的錯誤處理和用戶提示
 
 ## 部署說明
 
@@ -124,7 +223,21 @@ wati_automation/
 - WordPress 作為後端 API
 - 靜態檔案快取優化
 
+### API 配置
+- **檔案權限**: 確保 `data/templates/` 目錄可寫
+- **日誌目錄**: 自動創建 `data/logs/` 目錄
+- **備份機制**: 自動備份到 `.backup.json` 檔案
+
 ## 更新日誌
+
+### v2.1.0 (2025-01-27)
+- ✅ **重大修復**: 實現真正的資料持久化保存
+- ✅ 創建 PHP API 端點處理資料保存
+- ✅ 更新前端保存邏輯使用 API
+- ✅ 添加資料備份和日誌記錄
+- ✅ 實現錯誤處理和用戶回饋
+- ✅ 添加重新載入功能
+- ✅ 更新文檔和 API 說明
 
 ### v2.0.0 (2024-06-19)
 - ✅ 整合 WordPress 核心檔案
@@ -159,4 +272,4 @@ wati_automation/
 
 ---
 
-**注意**: 本系統專為寵物善終服務設計，包含專業的客戶服務模板和雙語支援功能。
+**注意**: 本系統專為寵物善終服務設計，包含專業的客戶服務模板和雙語支援功能。現在支援真正的資料持久化保存，編輯後不會再丟失資料。

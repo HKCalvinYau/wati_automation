@@ -439,38 +439,40 @@ class TemplateDetail {
   /**
    * 保存模板
    */
-  saveTemplate() {
-    // 取得所有模板（用於驗證代碼唯一性）
-    let allTemplates = [];
-    if (window.utils && window.utils.storage) {
-      allTemplates = window.utils.storage.get("templates", []);
-    }
+  async saveTemplate() {
     // 獲取編輯的值
     const newCode = document.getElementById("edit-code").value.trim();
     const newStatus = document.getElementById("edit-status").value;
     const validStatus = ["active", "draft", "inactive"];
+    
     // 驗證：代碼不可為空
     if (!newCode) {
       this.showError("模板代碼不可為空");
       return;
     }
-    // 驗證：代碼唯一（允許本身）
-    if (
-      allTemplates.some((t) => t.id !== this.templateId && t.code === newCode)
-    ) {
-      this.showError("模板代碼已存在，請使用其他代碼");
-      return;
-    }
+    
     // 驗證：狀態合法
     if (!validStatus.includes(newStatus)) {
       this.showError("狀態不正確");
       return;
     }
-    // 更新模板資料
+    
+    // 檢查代碼唯一性（允許本身）
+    if (window.templateManager && window.templateManager.templates) {
+      const existingTemplate = window.templateManager.templates.find(
+        (t) => t.id !== this.templateId && t.code === newCode
+      );
+      if (existingTemplate) {
+        this.showError("模板代碼已存在，請使用其他代碼");
+        return;
+      }
+    }
+    
+    // 準備更新的模板資料
     const updatedTemplate = {
-      ...this.template,
       id: newCode,
       code: newCode,
+      category: this.template.category,
       status: newStatus,
       title: {
         zh: document.getElementById("edit-title-zh").value,
@@ -484,23 +486,72 @@ class TemplateDetail {
         zh: document.getElementById("edit-content-zh").value,
         en: document.getElementById("edit-content-en").value,
       },
-      updatedAt: new Date().toISOString(),
     };
-    // 保存到本地存儲
-    if (window.utils && window.utils.storage) {
-      const templates = window.utils.storage.get("templates", []);
-      const index = templates.findIndex((t) => t.id === this.templateId);
-      if (index !== -1) {
-        templates[index] = updatedTemplate;
-        window.utils.storage.set("templates", templates);
+    
+    try {
+      // 顯示載入狀態
+      const saveButton = document.querySelector('.modal-footer .btn-primary');
+      if (saveButton) {
+        const originalText = saveButton.innerHTML;
+        saveButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 保存中...';
+        saveButton.disabled = true;
+      }
+      
+      // 發送 API 請求
+      const response = await fetch('api/save-template.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedTemplate)
+      });
+      
+      const result = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(result.message || '保存失敗');
+      }
+      
+      if (result.success) {
+        // 更新本地資料
+        this.template = {
+          ...this.template,
+          ...updatedTemplate,
+          updatedAt: new Date().toISOString(),
+        };
+        this.templateId = newCode; // 若代碼有變更，更新當前ID
+        
+        // 重新載入模板管理器的資料
+        if (window.templateManager) {
+          await window.templateManager.reloadTemplates();
+        }
+        
+        // 重新渲染詳情頁面
+        this.renderTemplateDetail();
+        this.setupEventListeners();
+        
+        // 關閉編輯模態框
+        const editModal = document.querySelector(".modal-overlay");
+        if (editModal) {
+          editModal.remove();
+        }
+        
+        this.showSuccess("模板已成功保存");
+      } else {
+        throw new Error(result.message || '保存失敗');
+      }
+      
+    } catch (error) {
+      console.error('保存模板失敗:', error);
+      this.showError(error.message || '保存失敗，請重試');
+    } finally {
+      // 恢復按鈕狀態
+      const saveButton = document.querySelector('.modal-footer .btn-primary');
+      if (saveButton) {
+        saveButton.innerHTML = '<i class="fas fa-save"></i> 保存模板';
+        saveButton.disabled = false;
       }
     }
-    this.template = updatedTemplate;
-    this.templateId = newCode; // 若代碼有變更，更新當前ID
-    this.renderTemplateDetail();
-    this.setupEventListeners();
-    document.querySelector(".modal-overlay").remove();
-    this.showSuccess("模板已保存");
   }
 
   /**

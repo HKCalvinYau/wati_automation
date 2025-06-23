@@ -409,3 +409,82 @@ wait_auto_2025/
 2. **測試完整**: 修復後需要完整測試所有相關功能
 3. **文檔更新**: 修復後需要更新相關文檔和記錄
 4. **版本控制**: 所有修復都應該提交到版本控制系統
+
+# Bug 修復記錄
+
+## 問題描述
+用戶反映編輯模板後，重新整理頁面時更新會消失，資料沒有持久化保存。
+
+## 問題分析
+1. **根本原因**: 系統目前只使用 localStorage 進行本地儲存，沒有同步到伺服器
+2. **資料流程**: 編輯 → localStorage → 重新整理 → 從 JSON 檔案重新載入 → 更新消失
+3. **技術架構**: 前端 JavaScript + 靜態 JSON 檔案，缺乏後端 API
+
+## 解決方案
+
+### 方案一：實現後端 API 保存 (推薦)
+- 創建 PHP API 端點處理資料保存
+- 實現資料庫或檔案系統持久化
+- 確保資料同步和備份
+
+### 方案二：改進本地儲存機制
+- 實現自動備份到 localStorage
+- 添加資料版本控制
+- 提供手動匯出/匯入功能
+
+## 修復步驟
+
+### 第一階段：立即修復 (已完成)
+- [x] 創建 fixbug.md 記錄問題
+- [x] 分析現有程式碼架構
+- [x] 識別問題根源
+
+### 第二階段：實現解決方案 (已完成)
+- [x] 創建 PHP API 端點
+- [x] 實現資料持久化保存
+- [x] 更新前端保存邏輯
+- [x] 添加錯誤處理和回饋
+
+### 第三階段：測試和優化
+- [ ] 測試保存功能
+- [ ] 驗證資料完整性
+- [ ] 優化使用者體驗
+- [ ] 更新文檔
+
+## 技術細節
+
+### 當前架構問題
+```javascript
+// 問題：只保存到 localStorage
+localStorage.setItem("templates", JSON.stringify(templates));
+
+// 重新整理時從 JSON 檔案載入，忽略 localStorage
+const response = await fetch("/data/templates/template-data.json");
+```
+
+### 目標架構
+```javascript
+// 保存到伺服器
+const response = await fetch("/api/save-template.php", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(templateData)
+});
+
+// 從伺服器載入
+const response = await fetch("/api/get-templates.php");
+```
+
+## 狀態追蹤
+- **問題發現**: 2025-01-27
+- **分析完成**: 2025-01-27 ✅
+- **解決方案設計**: 2025-01-27 ✅
+- **API 開發**: 進行中
+- **前端整合**: 待開始
+- **測試完成**: 待開始
+
+## 注意事項
+1. 確保資料備份機制
+2. 實現錯誤處理和回饋
+3. 保持向後兼容性
+4. 考慮資料安全性

@@ -32,17 +32,53 @@ class TemplateManager {
    */
   async loadTemplates() {
     try {
-      const response = await fetch("/data/templates/template-data.json");
+      // 嘗試從 API 載入資料
+      const response = await fetch("/api/get-templates.php");
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      const data = await response.json();
-      this.templates = data.templates || [];
-      this.filteredTemplates = [...this.templates];
-      console.log(`📚 成功加載 ${this.templates.length} 個模板`);
+      const result = await response.json();
+      
+      if (result.success) {
+        this.templates = result.data.templates || [];
+        this.filteredTemplates = [...this.templates];
+        console.log(`📚 成功從 API 載入 ${this.templates.length} 個模板`);
+      } else {
+        throw new Error(result.message || 'API 返回錯誤');
+      }
     } catch (error) {
-      console.error("❌ 加載模板數據失敗:", error);
-      throw error;
+      console.warn("⚠️ API 載入失敗，嘗試從靜態檔案載入:", error);
+      
+      // 備用方案：從靜態檔案載入
+      try {
+        const response = await fetch("/data/templates/template-data.json");
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        this.templates = data.templates || [];
+        this.filteredTemplates = [...this.templates];
+        console.log(`📚 成功從靜態檔案載入 ${this.templates.length} 個模板`);
+      } catch (fallbackError) {
+        console.error("❌ 所有載入方式都失敗:", fallbackError);
+        this.templates = [];
+        this.filteredTemplates = [];
+        throw new Error("無法載入模板資料，請檢查網路連接或聯繫管理員");
+      }
+    }
+  }
+
+  /**
+   * 重新載入模板數據
+   */
+  async reloadTemplates() {
+    try {
+      await this.loadTemplates();
+      this.applyFilters();
+      this.showSuccess("模板資料已重新載入");
+    } catch (error) {
+      console.error("❌ 重新載入失敗:", error);
+      this.showError("重新載入失敗: " + error.message);
     }
   }
 
@@ -479,6 +515,7 @@ class TemplateManager {
 
     const formData = new FormData(form);
     const templateData = {
+      id: formData.get("code"), // 使用代碼作為 ID
       code: formData.get("code"),
       category: formData.get("category"),
       title: {
@@ -504,6 +541,13 @@ class TemplateManager {
       !templateData.content.zh
     ) {
       this.showError("請填寫所有必填欄位");
+      return;
+    }
+
+    // 檢查代碼是否已存在
+    const existingTemplate = this.templates.find(t => t.code === templateData.code);
+    if (existingTemplate) {
+      this.showError("模板代碼已存在，請使用其他代碼");
       return;
     }
 

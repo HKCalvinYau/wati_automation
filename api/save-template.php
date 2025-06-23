@@ -1,14 +1,14 @@
 <?php
 /**
  * 模板保存 API
- * 處理模板的保存、更新和刪除操作
+ * 處理模板資料的保存和更新
  */
 
-// 設定 CORS 標頭
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
-header('Access-Control-Allow-Headers: Content-Type, Authorization');
+// 設置響應頭
 header('Content-Type: application/json; charset=utf-8');
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type');
 
 // 處理 OPTIONS 請求
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
@@ -16,232 +16,165 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit();
 }
 
-// 設定錯誤報告
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-// 設定時區
-date_default_timezone_set('Asia/Hong_Kong');
-
-/**
- * 獲取模板數據檔案路徑
- */
-function getTemplateDataPath() {
-    return __DIR__ . '/../data/templates/template-data.json';
+// 只允許 POST 請求
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    http_response_code(405);
+    echo json_encode([
+        'success' => false,
+        'message' => '只允許 POST 請求'
+    ]);
+    exit();
 }
 
-/**
- * 讀取模板數據
- */
-function readTemplateData() {
-    $filePath = getTemplateDataPath();
-    
-    if (!file_exists($filePath)) {
-        return ['templates' => []];
-    }
-    
-    $content = file_get_contents($filePath);
-    if ($content === false) {
-        throw new Exception('無法讀取模板數據檔案');
-    }
-    
-    $data = json_decode($content, true);
-    if (json_last_error() !== JSON_ERROR_NONE) {
-        throw new Exception('模板數據檔案格式錯誤');
-    }
-    
-    return $data;
-}
+// 獲取 POST 資料
+$input = file_get_contents('php://input');
+$data = json_decode($input, true);
 
-/**
- * 保存模板數據
- */
-function saveTemplateData($data) {
-    $filePath = getTemplateDataPath();
-    $dir = dirname($filePath);
-    
-    // 確保目錄存在
-    if (!is_dir($dir)) {
-        if (!mkdir($dir, 0755, true)) {
-            throw new Exception('無法創建目錄');
-        }
-    }
-    
-    // 格式化 JSON
-    $jsonContent = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
-    if (json_last_error() !== JSON_ERROR_NONE) {
-        throw new Exception('JSON 編碼錯誤');
-    }
-    
-    // 寫入檔案
-    if (file_put_contents($filePath, $jsonContent) === false) {
-        throw new Exception('無法寫入模板數據檔案');
-    }
-    
-    return true;
-}
-
-/**
- * 驗證模板數據
- */
-function validateTemplate($template) {
-    $required = ['id', 'code', 'category', 'title', 'content'];
-    
-    foreach ($required as $field) {
-        if (!isset($template[$field]) || empty($template[$field])) {
-            throw new Exception("缺少必填欄位: {$field}");
-        }
-    }
-    
-    // 驗證標題和內容結構
-    if (!isset($template['title']['zh']) || empty($template['title']['zh'])) {
-        throw new Exception('缺少繁體中文標題');
-    }
-    
-    if (!isset($template['content']['zh']) || empty($template['content']['zh'])) {
-        throw new Exception('缺少繁體中文內容');
-    }
-    
-    return true;
-}
-
-/**
- * 生成唯一 ID
- */
-function generateUniqueId($code, $existingTemplates) {
-    $baseId = $code;
-    $id = $baseId;
-    $counter = 1;
-    
-    while (array_filter($existingTemplates, function($t) use ($id) { return $t['id'] === $id; })) {
-        $id = $baseId . '_' . $counter;
-        $counter++;
-    }
-    
-    return $id;
-}
-
-// 處理請求
-try {
-    $method = $_SERVER['REQUEST_METHOD'];
-    
-    switch ($method) {
-        case 'POST':
-            // 創建新模板
-            $input = json_decode(file_get_contents('php://input'), true);
-            
-            if (!$input) {
-                throw new Exception('無效的請求數據');
-            }
-            
-            // 讀取現有數據
-            $data = readTemplateData();
-            
-            // 驗證模板數據
-            validateTemplate($input);
-            
-            // 生成唯一 ID
-            $input['id'] = generateUniqueId($input['code'], $data['templates']);
-            
-            // 添加時間戳
-            $input['created_at'] = date('c');
-            $input['updated_at'] = date('c');
-            
-            // 添加到模板列表
-            $data['templates'][] = $input;
-            
-            // 保存數據
-            saveTemplateData($data);
-            
-            echo json_encode([
-                'success' => true,
-                'message' => '模板保存成功',
-                'template' => $input
-            ], JSON_UNESCAPED_UNICODE);
-            break;
-            
-        case 'PUT':
-            // 更新模板
-            $input = json_decode(file_get_contents('php://input'), true);
-            
-            if (!$input || !isset($input['id'])) {
-                throw new Exception('缺少模板 ID');
-            }
-            
-            // 讀取現有數據
-            $data = readTemplateData();
-            
-            // 查找並更新模板
-            $found = false;
-            foreach ($data['templates'] as &$template) {
-                if ($template['id'] === $input['id']) {
-                    $input['updated_at'] = date('c');
-                    $template = array_merge($template, $input);
-                    $found = true;
-                    break;
-                }
-            }
-            
-            if (!$found) {
-                throw new Exception('模板不存在');
-            }
-            
-            // 保存數據
-            saveTemplateData($data);
-            
-            echo json_encode([
-                'success' => true,
-                'message' => '模板更新成功',
-                'template' => $input
-            ], JSON_UNESCAPED_UNICODE);
-            break;
-            
-        case 'DELETE':
-            // 刪除模板
-            $templateId = $_GET['id'] ?? null;
-            
-            if (!$templateId) {
-                throw new Exception('缺少模板 ID');
-            }
-            
-            // 讀取現有數據
-            $data = readTemplateData();
-            
-            // 查找並刪除模板
-            $found = false;
-            $data['templates'] = array_filter($data['templates'], function($template) use ($templateId, &$found) {
-                if ($template['id'] === $templateId) {
-                    $found = true;
-                    return false;
-                }
-                return true;
-            });
-            
-            if (!$found) {
-                throw new Exception('模板不存在');
-            }
-            
-            // 重新索引陣列
-            $data['templates'] = array_values($data['templates']);
-            
-            // 保存數據
-            saveTemplateData($data);
-            
-            echo json_encode([
-                'success' => true,
-                'message' => '模板刪除成功'
-            ], JSON_UNESCAPED_UNICODE);
-            break;
-            
-        default:
-            throw new Exception('不支援的請求方法');
-    }
-    
-} catch (Exception $e) {
+// 驗證資料
+if (!$data) {
     http_response_code(400);
     echo json_encode([
         'success' => false,
-        'message' => $e->getMessage()
-    ], JSON_UNESCAPED_UNICODE);
+        'message' => '無效的 JSON 資料'
+    ]);
+    exit();
+}
+
+// 驗證必要欄位
+$requiredFields = ['id', 'code', 'category', 'title', 'description', 'content', 'status'];
+foreach ($requiredFields as $field) {
+    if (!isset($data[$field])) {
+        http_response_code(400);
+        echo json_encode([
+            'success' => false,
+            'message' => "缺少必要欄位: {$field}"
+        ]);
+        exit();
+    }
+}
+
+try {
+    // 讀取現有資料
+    $templateFile = '../data/templates/template-data.json';
+    $backupFile = '../data/templates/template-data.backup.json';
+    
+    // 創建備份
+    if (file_exists($templateFile)) {
+        copy($templateFile, $backupFile);
+    }
+    
+    // 讀取現有模板資料
+    $existingData = [];
+    if (file_exists($templateFile)) {
+        $existingContent = file_get_contents($templateFile);
+        $existingData = json_decode($existingContent, true);
+        if (!$existingData) {
+            throw new Exception('無法解析現有模板資料');
+        }
+    } else {
+        // 如果檔案不存在，創建基本結構
+        $existingData = [
+            'metadata' => [
+                'totalTemplates' => 0,
+                'categories' => [],
+                'lastUpdated' => date('c'),
+                'version' => '2.0.0'
+            ],
+            'templates' => []
+        ];
+    }
+    
+    // 更新或新增模板
+    $templateIndex = -1;
+    foreach ($existingData['templates'] as $index => $template) {
+        if ($template['id'] === $data['id']) {
+            $templateIndex = $index;
+            break;
+        }
+    }
+    
+    // 準備模板資料
+    $templateData = [
+        'id' => $data['id'],
+        'code' => $data['code'],
+        'category' => $data['category'],
+        'title' => $data['title'],
+        'description' => $data['description'],
+        'content' => $data['content'],
+        'status' => $data['status'],
+        'updatedAt' => date('c')
+    ];
+    
+    // 如果是新模板，添加創建時間
+    if ($templateIndex === -1) {
+        $templateData['createdAt'] = date('c');
+        $existingData['templates'][] = $templateData;
+    } else {
+        // 保留原始創建時間
+        $templateData['createdAt'] = $existingData['templates'][$templateIndex]['createdAt'];
+        $existingData['templates'][$templateIndex] = $templateData;
+    }
+    
+    // 更新元資料
+    $existingData['metadata']['totalTemplates'] = count($existingData['templates']);
+    $existingData['metadata']['lastUpdated'] = date('c');
+    
+    // 重新計算分類統計
+    $categoryCounts = [];
+    foreach ($existingData['templates'] as $template) {
+        $category = $template['category'];
+        $categoryCounts[$category] = ($categoryCounts[$category] ?? 0) + 1;
+    }
+    $existingData['metadata']['categories'] = $categoryCounts;
+    
+    // 保存到檔案
+    $jsonContent = json_encode($existingData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+    if ($jsonContent === false) {
+        throw new Exception('JSON 編碼失敗');
+    }
+    
+    // 確保目錄存在
+    $dir = dirname($templateFile);
+    if (!is_dir($dir)) {
+        mkdir($dir, 0755, true);
+    }
+    
+    // 寫入檔案
+    if (file_put_contents($templateFile, $jsonContent) === false) {
+        throw new Exception('無法寫入模板檔案');
+    }
+    
+    // 記錄操作日誌
+    $logFile = '../data/logs/template-updates.log';
+    $logDir = dirname($logFile);
+    if (!is_dir($logDir)) {
+        mkdir($logDir, 0755, true);
+    }
+    
+    $logEntry = date('Y-m-d H:i:s') . " - " . 
+                ($templateIndex === -1 ? '新增' : '更新') . " 模板: " . 
+                $data['id'] . " (" . $data['code'] . ")\n";
+    file_put_contents($logFile, $logEntry, FILE_APPEND | LOCK_EX);
+    
+    // 返回成功響應
+    echo json_encode([
+        'success' => true,
+        'message' => ($templateIndex === -1 ? '模板新增成功' : '模板更新成功'),
+        'data' => [
+            'templateId' => $data['id'],
+            'totalTemplates' => $existingData['metadata']['totalTemplates'],
+            'lastUpdated' => $existingData['metadata']['lastUpdated']
+        ]
+    ]);
+    
+} catch (Exception $e) {
+    // 記錄錯誤
+    error_log("模板保存錯誤: " . $e->getMessage());
+    
+    http_response_code(500);
+    echo json_encode([
+        'success' => false,
+        'message' => '保存失敗: ' . $e->getMessage()
+    ]);
 }
 ?> 
