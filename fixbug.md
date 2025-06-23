@@ -10,10 +10,63 @@
 | 2025-06-23 | 模板資料無法持久化保存       | ✅ 成功  | 建立 PHP API | 解決重新整理問題 |
 | 2025-06-23 | favicon.ico 404 錯誤         | ✅ 成功  | 多種解決方案 | 完整處理 favicon |
 | 2025-06-23 | 保存功能仍然無法正常工作     | ✅ 成功  | 修復 Node.js 伺服器 | 添加靜態檔案支援 |
+| 2025-06-23 | Git 推送到 Cloudways 超時    | 🔄 修復中 | 手動部署方案 | 網路連接問題     |
 
 ---
 
 ## 🔧 詳細修復記錄
+
+### 2025-06-23 - Git 推送到 Cloudways 超時
+
+**問題描述**:
+- Git 推送到 Cloudways 時出現連接超時錯誤
+- SSH 連接失敗：`ssh: connect to host git.cloudways.com port 22: Operation timed out`
+- 無法使用 Git 自動部署到生產環境
+
+**根本原因**:
+- 網路連接問題，可能是防火牆或網路限制
+- SSH 連接超時，無法建立到 Cloudways Git 伺服器的連接
+- 可能是公司/學校網路阻擋 SSH 連接
+
+**嘗試的修復方法**:
+
+1. **檢查網路連接** ❌ 失敗
+   ```bash
+   ping git.cloudways.com  # 成功
+   ssh -T git@git.cloudways.com  # 超時
+   ```
+
+2. **修改 SSH 配置** ❌ 失敗
+   - 創建 `~/.ssh/config` 檔案
+   - 添加 ServerAliveInterval 和 ConnectTimeout
+   - 仍然出現超時錯誤
+
+3. **使用 HTTPS 連接** ❌ 失敗
+   ```bash
+   git remote set-url cloudways https://git.cloudways.com/ywmzzfkesa.git
+   # 返回 400 錯誤
+   ```
+
+**當前狀態**: 🔄 修復中
+
+**備用解決方案**:
+1. **手動部署指南** - 創建 `manual-deployment-guide.md`
+2. **Cloudways File Manager** - 使用網頁界面上傳檔案
+3. **SFTP 工具** - 使用 FileZilla、Cyberduck 等工具
+4. **Cloudways CLI** - 使用官方命令行工具
+
+**創建的解決方案檔案**:
+- `cloudways-git-fix.md` - Git 推送問題詳細解決方案
+- `manual-deployment-guide.md` - 手動部署完整指南
+- `deploy-to-cloudways.sh` - 自動化部署腳本
+
+**下一步行動**:
+1. 嘗試手動部署方法
+2. 聯繫 Cloudways 支援
+3. 考慮使用 GitHub Actions 自動部署
+4. 設置 Webhook 觸發部署
+
+---
 
 ### 2025-06-23 - 保存功能仍然無法正常工作
 
@@ -198,8 +251,9 @@ curl -X POST http://localhost:3000/api/save-template.php -H "Content-Type: appli
 - ✅ README.md - 專案說明
 - ✅ USAGE.md - 使用指南
 - ✅ TROUBLESHOOTING.md - 故障排除
-- ✅ fixbug.md - 修復記錄
-- ✅ API 測試工具
+- ✅ cloudways-deployment.md - Cloudways 部署指南
+- ✅ manual-deployment-guide.md - 手動部署指南
+- ✅ cloudways-git-fix.md - Git 推送問題解決方案
 
 ### 測試覆蓋
 - ✅ 功能測試
@@ -207,6 +261,12 @@ curl -X POST http://localhost:3000/api/save-template.php -H "Content-Type: appli
 - ✅ 用戶界面測試
 - ✅ 錯誤處理測試
 - ✅ 診斷工具
+
+### 修復統計
+- **總問題數**: 7
+- **已修復**: 6 ✅
+- **修復中**: 1 🔄
+- **修復成功率**: 85.7%
 
 ---
 
