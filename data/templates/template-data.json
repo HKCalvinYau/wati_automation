@@ -1,8 +1,8 @@
 {
   "metadata": {
-    "totalTemplates": 99,
+    "totalTemplates": 101,
     "categories": {
-      "ic": 21,
+      "ic": 23,
       "ac": 20,
       "ps": 20,
       "pp": 4,
@@ -11,7 +11,7 @@
       "li": 9,
       "oi": 10
     },
-    "lastUpdated": "2025-06-23T06:55:04.388Z",
+    "lastUpdated": "2025-06-23T09:18:34.611Z",
     "version": "2.0.0"
   },
   "templates": [
@@ -28,12 +28,12 @@
         "en": "Respond to initial inquiries from customers via phone, email, or WhatsApp, providing service information."
       },
       "content": {
-        "zh": "您好{{1}}，感謝您的查詢。我們提供專業的寵物善終服務，包括：\n                        \n                                {{2}}\n                                {{3}}\n                                {{4}}\n                                {{5}}\n                        \n                        請問您需要了解哪方面的服務詳情？",
+        "zh": "您好{{1}}，感dvdasvdavdsa謝您的查詢。我們提供專業的寵物善終服務，包括：\n                        \n                                {{2}}\n                                {{3}}\n                                {{4}}\n                                {{5}}\n                        \n                        請問您需要了解哪方面的服務詳情？",
         "en": "Hello {{1}}, thank you for your inquiry. We provide professional pet memorial services, including:\n                            \n                                {{2}}\n                                {{3}}\n                                {{4}}\n                                {{5}}\n                            \n                            Which service details would you like to know more about?"
       },
       "status": "active",
-      "createdAt": "2025-06-18T03:21:21.267Z",
-      "updatedAt": "2025-06-18T03:21:21.267Z"
+      "updatedAt": "2025-06-23T09:18:34.611Z",
+      "createdAt": "2025-06-18T03:21:21.267Z"
     },
     {
       "id": "IC_COND",
@@ -1994,6 +1994,46 @@
       "status": "active",
       "updatedAt": "2025-06-23T06:55:04.388Z",
       "createdAt": "2025-06-23T06:55:04.388Z"
+    },
+    {
+      "id": "DEBUG_TEST_1750670263282",
+      "code": "DEBUG_TEST_1750670263282",
+      "category": "ic",
+      "title": {
+        "zh": "診斷測試模板",
+        "en": "Debug Test Template"
+      },
+      "description": {
+        "zh": "這是一個診斷測試用的模板",
+        "en": "This is a debug test template"
+      },
+      "content": {
+        "zh": "測試內容 {{1}}",
+        "en": "Test content {{1}}"
+      },
+      "status": "active",
+      "updatedAt": "2025-06-23T09:17:43.287Z",
+      "createdAt": "2025-06-23T09:17:43.287Z"
+    },
+    {
+      "id": "DEBUG_TEST_1750670264467",
+      "code": "DEBUG_TEST_1750670264467",
+      "category": "ic",
+      "title": {
+        "zh": "診斷測試模板",
+        "en": "Debug Test Template"
+      },
+      "description": {
+        "zh": "這是一個診斷測試用的模板",
+        "en": "This is a debug test template"
+      },
+      "content": {
+        "zh": "測試內容 {{1}}",
+        "en": "Test content {{1}}"
+      },
+      "status": "active",
+      "updatedAt": "2025-06-23T09:17:44.471Z",
+      "createdAt": "2025-06-23T09:17:44.471Z"
     }
   ],
   "categories": {
