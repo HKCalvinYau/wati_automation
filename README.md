@@ -20,6 +20,156 @@
 - **錯誤處理**: 完善的錯誤處理和用戶反饋機制
 - **日誌記錄**: 詳細的操作日誌和調試信息
 
+## 🚀 自動化部署
+
+### GitHub Actions 自動化部署
+
+本專案已配置完整的 CI/CD 流程，支援多種部署方式：
+
+#### 1. 簡化部署（推薦）
+```bash
+# 推送到 main 分支即可自動部署
+git push origin main
+```
+
+**自動觸發：**
+- ✅ 代碼測試和驗證
+- ✅ 部署到 GitHub Pages
+- ✅ 可選部署到 Netlify
+
+#### 2. 完整部署
+```bash
+# 包含 Docker 構建和雲端部署
+git tag v1.0.0
+git push origin v1.0.0
+```
+
+**自動觸發：**
+- ✅ 代碼測試和驗證
+- ✅ Docker 映像構建
+- ✅ 推送到 Docker Hub
+- ✅ 部署到雲端平台
+
+### 部署平台
+
+#### GitHub Pages
+- **自動部署**: 推送到 `main` 分支
+- **訪問地址**: `https://your-username.github.io/wati_automation`
+- **配置**: 無需額外設置
+
+#### Netlify（可選）
+- **自動部署**: 推送到 `main` 分支
+- **配置**: 設置環境變數 `NETLIFY_ENABLED=true`
+- **需要設置**: `NETLIFY_AUTH_TOKEN` 和 `NETLIFY_SITE_ID`
+
+#### Vercel（可選）
+- **自動部署**: 推送到 `main` 分支
+- **配置**: 設置 `VERCEL_TOKEN`、`ORG_ID`、`PROJECT_ID`
+
+#### Docker Hub
+- **自動推送**: 推送到 `main` 分支或創建標籤
+- **需要設置**: `DOCKER_USERNAME` 和 `DOCKER_PASSWORD`
+
+### 環境變數設置
+
+在 GitHub 倉庫設置中添加以下 Secrets：
+
+#### 必需變數
+```bash
+# GitHub Pages（自動設置）
+GITHUB_TOKEN
+
+# Docker Hub（可選）
+DOCKER_USERNAME=your-dockerhub-username
+DOCKER_PASSWORD=your-dockerhub-password
+```
+
+#### 可選變數
+```bash
+# Netlify
+NETLIFY_AUTH_TOKEN=your-netlify-token
+NETLIFY_SITE_ID=your-netlify-site-id
+
+# Vercel
+VERCEL_TOKEN=your-vercel-token
+ORG_ID=your-vercel-org-id
+PROJECT_ID=your-vercel-project-id
+
+# 雲端平台
+DIGITALOCEAN_ACCESS_TOKEN=your-digitalocean-token
+```
+
+### 部署工作流程
+
+#### 簡化部署流程
+1. **代碼推送** → 觸發 GitHub Actions
+2. **測試驗證** → PHP 語法檢查、HTML 驗證
+3. **構建部署** → 部署到 GitHub Pages
+4. **通知完成** → 部署狀態通知
+
+#### 完整部署流程
+1. **代碼推送** → 觸發 GitHub Actions
+2. **測試驗證** → 全面測試和驗證
+3. **Docker 構建** → 構建和測試 Docker 映像
+4. **推送到 Hub** → 推送映像到 Docker Hub
+5. **雲端部署** → 部署到雲端平台
+6. **健康檢查** → 驗證部署成功
+7. **通知完成** → 部署狀態通知
+
+### 手動部署
+
+#### 本地部署
+```bash
+# 1. 構建項目
+npm run build
+
+# 2. 測試
+npm test
+
+# 3. 部署到 GitHub Pages
+npm run deploy:pages
+
+# 4. 部署到 Netlify
+npm run deploy:netlify
+```
+
+#### Docker 部署
+```bash
+# 1. 構建映像
+docker build -t wati-automation .
+
+# 2. 推送到 Hub
+docker tag wati-automation your-username/wati-automation:latest
+docker push your-username/wati-automation:latest
+
+# 3. 部署到服務器
+docker-compose -f docker-compose.prod.yml up -d
+```
+
+### 監控和維護
+
+#### 部署狀態檢查
+- GitHub Actions 頁面查看部署狀態
+- 各平台控制台查看部署日誌
+- 健康檢查端點驗證服務狀態
+
+#### 回滾機制
+```bash
+# 回滾到指定版本
+git checkout v1.0.0
+git push origin main --force
+
+# Docker 回滾
+docker pull your-username/wati-automation:v1.0.0
+docker-compose -f docker-compose.prod.yml up -d
+```
+
+#### 性能監控
+- 部署時間監控
+- 服務響應時間
+- 錯誤率統計
+- 資源使用情況
+
 ## 快速開始
 
 ### 1. 純 PHP 環境（推薦）
