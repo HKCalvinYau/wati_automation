@@ -1,0 +1,69 @@
+# Cloudways 部署忽略文件
+# 這些文件和目錄不會被部署到 Cloudways
+
+# Git 相關
+.git/
+.github/
+.gitignore
+
+# Node.js 相關
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# 開發工具
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 系統文件
+.DS_Store
+Thumbs.db
+
+# 日誌文件
+*.log
+logs/
+
+# 環境變數
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# 備份文件
+*.backup
+*.bak
+*.tmp
+
+# 測試文件
+test/
+tests/
+__tests__/
+*.test.js
+*.spec.js
+
+# 文檔文件
+README.md
+docs/
+*.md
+
+# 部署腳本
+scripts/
+docker/
+docker-compose*.yml
+Dockerfile*
+
+# 構建文件
+dist/
+build/
+webpack.config.js
+babel.config.js
+
+# 其他
+.cache/
+.temp/ 
