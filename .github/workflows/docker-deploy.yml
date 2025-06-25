@@ -1,0 +1,96 @@
+name: Docker Deploy
+
+on:
+  push:
+    branches: [ main ]
+    tags: [ 'v*' ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  # 構建和測試 Docker 映像
+  build-and-test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Docker Buildx
+      uses: docker/setup-buildx-action@v3
+      
+    - name: Build Docker image
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        file: ./Dockerfile.simple
+        push: false
+        tags: wati-automation:test
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+        
+    - name: Test Docker image
+      run: |
+        echo "🧪 Testing Docker image..."
+        docker run --rm wati-automation:test php -v
+        docker run --rm wati-automation:test apache2 -v
+
+  # 推送到 Docker Hub
+  push-to-dockerhub:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Docker Buildx
+      uses: docker/setup-buildx-action@v3
+      
+    - name: Login to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        file: ./Dockerfile.simple
+        push: true
+        tags: |
+          ${{ secrets.DOCKER_USERNAME }}/wati-automation:latest
+          ${{ secrets.DOCKER_USERNAME }}/wati-automation:${{ github.sha }}
+          ${{ secrets.DOCKER_USERNAME }}/wati-automation:${{ github.run_number }}
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+        
+    - name: Show image info
+      run: |
+        echo "🐳 Docker image pushed successfully!"
+        echo "Image: ${{ secrets.DOCKER_USERNAME }}/wati-automation:latest"
+        echo "Tag: ${{ github.sha }}"
+
+  # 部署到雲端平台
+  deploy-to-cloud:
+    needs: push-to-dockerhub
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    
+    steps:
+    - name: Deploy to DigitalOcean App Platform
+      uses: digitalocean/app_action@main
+      with:
+        app_name: wati-automation
+        token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+        
+    - name: Deploy to Google Cloud Run
+      run: |
+        echo "☁️ Deploying to Google Cloud Run..."
+        # gcloud run deploy wati-automation \
+        #   --image ${{ secrets.DOCKER_USERNAME }}/wati-automation:latest \
+        #   --platform managed \
+        #   --region us-central1 \
+        #   --allow-unauthenticated 

@@ -3,13 +3,21 @@
  * 負責加載、過濾、顯示和管理所有模板
  */
 class TemplateManager {
-  constructor() {
+  constructor(app = null, autoInit = true) {
+    this.app = app;
     this.templates = [];
     this.filteredTemplates = [];
     this.currentCategory = "all";
     this.currentLanguage = "zh";
     this.searchQuery = "";
-    this.init();
+    
+    // 多選功能相關屬性
+    this.isSelectionMode = false;
+    this.selectedTemplates = new Set();
+    
+    if (autoInit) {
+      this.init();
+    }
   }
 
   /**
@@ -17,7 +25,9 @@ class TemplateManager {
    */
   async init() {
     try {
+      console.log("🔄 開始初始化模板管理器...");
       await this.loadTemplates();
+      console.log(`📊 載入完成，模板數量: ${this.templates.length}`);
       this.setupEventListeners();
       this.renderTemplates();
       console.log("✅ 模板管理器初始化完成");
@@ -33,7 +43,7 @@ class TemplateManager {
   async loadTemplates() {
     try {
       // 嘗試從 API 載入資料
-      const response = await fetch("/api/get-templates.php");
+      const response = await fetch("api/get-templates.php");
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -51,7 +61,7 @@ class TemplateManager {
       
       // 備用方案：從靜態檔案載入
       try {
-        const response = await fetch("/data/templates/template-data.json");
+        const response = await fetch("data/templates/template-data.json");
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -210,6 +220,8 @@ class TemplateManager {
                     <p>請嘗試調整搜索條件或選擇其他分類</p>
                 </div>
             `;
+      // 更新統計
+      this.updateStats();
       return;
     }
 
@@ -218,6 +230,9 @@ class TemplateManager {
       .join("");
 
     container.innerHTML = templatesHTML;
+    
+    // 更新統計
+    this.updateStats();
   }
 
   /**
@@ -230,9 +245,17 @@ class TemplateManager {
       template.description[this.currentLanguage] ||
       template.description.zh ||
       "";
+    
+    const isSelected = this.selectedTemplates.has(template.id);
+    const selectedClass = isSelected ? "selected" : "";
+    const checkboxChecked = isSelected ? "checked" : "";
 
     return `
-            <div class="template-card" data-template-id="${template.id}">
+            <div class="template-card ${selectedClass}" data-template-id="${template.id}">
+                ${this.isSelectionMode ? `
+                <input type="checkbox" class="template-checkbox" ${checkboxChecked} 
+                       onclick="event.stopPropagation(); templateManager.toggleTemplateSelection('${template.id}')">
+                ` : ''}
                 <div class="template-header">
                     <h3 class="template-title">${title}</h3>
                     <span class="template-code">${template.code}</span>
@@ -245,6 +268,10 @@ class TemplateManager {
                     <span class="template-status ${
                       template.status
                     }">${this.getStatusText(template.status)}</span>
+                    <span class="template-usage">
+                        <i class="fas fa-chart-line"></i>
+                        ${template.usageCount || 0} 次
+                    </span>
                 </div>
                 <div class="template-actions">
                     <button class="btn btn-primary btn-sm" onclick="event.stopPropagation(); templateManager.previewTemplate('${
@@ -349,11 +376,50 @@ class TemplateManager {
       template.content[this.currentLanguage] || template.content.zh || "";
 
     try {
+      // 複製到剪貼板
       await navigator.clipboard.writeText(content);
+      
+      // 統計使用次數
+      await this.incrementUsage(templateId);
+      
       this.showSuccess("模板內容已複製到剪貼板");
     } catch (error) {
       console.error("複製失敗:", error);
       this.showError("複製失敗，請手動複製");
+    }
+  }
+
+  /**
+   * 增加使用次數
+   */
+  async incrementUsage(templateId) {
+    try {
+      const response = await fetch('api/increment-usage.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          templateId: templateId
+        })
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        if (result.success) {
+          // 更新本地數據
+          const template = this.templates.find(t => t.id === templateId);
+          if (template) {
+            template.usageCount = result.data.usageCount;
+            template.lastUsed = result.data.lastUsed;
+            // 重新渲染以顯示更新後的使用次數
+            this.renderTemplates();
+          }
+        }
+      }
+    } catch (error) {
+      console.error('統計使用次數失敗:', error);
+      // 不顯示錯誤，因為這不影響主要功能
     }
   }
 
@@ -386,35 +452,47 @@ class TemplateManager {
    * 顯示成功訊息
    */
   showSuccess(message) {
-    this.showNotification(message, "success");
+    if (window.notificationManager) {
+      window.notificationManager.success(message, 2000);
+    } else {
+      this.showNotification(message, "success");
+    }
   }
 
   /**
    * 顯示錯誤訊息
    */
   showError(message) {
-    this.showNotification(message, "error");
+    if (window.notificationManager) {
+      window.notificationManager.error(message, 2000);
+    } else {
+      this.showNotification(message, "error");
+    }
   }
 
   /**
    * 顯示通知
    */
   showNotification(message, type = "info") {
-    const notification = document.createElement("div");
-    notification.className = `notification notification-${type}`;
-    notification.innerHTML = `
-            <span>${message}</span>
-            <button onclick="this.parentElement.remove()">×</button>
-        `;
+    if (window.notificationManager) {
+      window.notificationManager.show(message, type, 2000);
+    } else {
+      const notification = document.createElement("div");
+      notification.className = `notification notification-${type}`;
+      notification.innerHTML = `
+        <span>${message}</span>
+        <button onclick="this.parentElement.remove()">×</button>
+      `;
 
-    document.body.appendChild(notification);
+      document.body.appendChild(notification);
 
-    // 自動移除
-    setTimeout(() => {
-      if (notification.parentElement) {
-        notification.remove();
-      }
-    }, 3000);
+      // 自動移除
+      setTimeout(() => {
+        if (notification.parentElement) {
+          notification.remove();
+        }
+      }, 2000);
+    }
   }
 
   /**
@@ -425,83 +503,83 @@ class TemplateManager {
     const modal = document.createElement("div");
     modal.className = "modal-overlay";
     modal.innerHTML = `
-            <div class="modal-content modal-large">
-                <div class="modal-header">
-                    <h3><i class="fas fa-plus"></i> 新增模板</h3>
-                    <button class="modal-close" onclick="this.closest('.modal-overlay').remove()">×</button>
-                </div>
-                <div class="modal-body">
-                    <form id="template-form" class="template-form">
-                        <div class="form-group">
-                            <label for="template-code">模板代碼 *</label>
-                            <input type="text" id="template-code" name="code" required placeholder="例如: IC_WELCOME">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="template-category">分類 *</label>
-                            <select id="template-category" name="category" required>
-                                <option value="">請選擇分類</option>
-                                <option value="ic">初步諮詢</option>
-                                <option value="ac">安排服務</option>
-                                <option value="ps">後續服務</option>
-                                <option value="pp">產品推廣</option>
-                                <option value="pi">付款相關</option>
-                                <option value="ci">公司介紹</option>
-                                <option value="li">物流追蹤</option>
-                                <option value="oi">其他資訊</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="template-title-zh">標題 (繁體中文) *</label>
-                            <input type="text" id="template-title-zh" name="title_zh" required placeholder="輸入繁體中文標題">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="template-title-en">標題 (English)</label>
-                            <input type="text" id="template-title-en" name="title_en" placeholder="Enter English title">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="template-description-zh">描述 (繁體中文)</label>
-                            <textarea id="template-description-zh" name="description_zh" rows="3" placeholder="輸入繁體中文描述"></textarea>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="template-description-en">描述 (English)</label>
-                            <textarea id="template-description-en" name="description_en" rows="3" placeholder="Enter English description"></textarea>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="template-content-zh">內容 (繁體中文) *</label>
-                            <textarea id="template-content-zh" name="content_zh" rows="6" required placeholder="輸入繁體中文內容"></textarea>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="template-content-en">內容 (English)</label>
-                            <textarea id="template-content-en" name="content_en" rows="6" placeholder="Enter English content"></textarea>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="template-status">狀態</label>
-                            <select id="template-status" name="status">
-                                <option value="active">啟用</option>
-                                <option value="draft">草稿</option>
-                                <option value="inactive">停用</option>
-                            </select>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" onclick="this.closest('.modal-overlay').remove()">
-                        取消
-                    </button>
-                    <button class="btn btn-primary" onclick="templateManager.createTemplate()">
-                        <i class="fas fa-save"></i> 儲存模板
-                    </button>
-                </div>
+      <div class="modal-content modal-large">
+        <div class="modal-header">
+          <h3><i class="fas fa-plus"></i> 新增模板</h3>
+          <button class="modal-close" onclick="this.closest('.modal-overlay').remove()">×</button>
+        </div>
+        <div class="modal-body">
+          <form id="template-form" class="template-form">
+            <div class="form-group">
+              <label for="template-code">模板代碼 *</label>
+              <input type="text" id="template-code" name="code" required placeholder="例如: IC_WELCOME">
             </div>
-        `;
+            
+            <div class="form-group">
+              <label for="template-category">分類 *</label>
+              <select id="template-category" name="category" required>
+                <option value="">請選擇分類</option>
+                <option value="ic">初步諮詢</option>
+                <option value="ac">安排服務</option>
+                <option value="ps">後續服務</option>
+                <option value="pp">產品推廣</option>
+                <option value="pi">付款相關</option>
+                <option value="ci">公司介紹</option>
+                <option value="li">物流追蹤</option>
+                <option value="oi">其他資訊</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="template-title-zh">標題 (繁體中文) *</label>
+              <input type="text" id="template-title-zh" name="title_zh" required placeholder="輸入繁體中文標題">
+            </div>
+
+            <div class="form-group">
+              <label for="template-title-en">標題 (English)</label>
+              <input type="text" id="template-title-en" name="title_en" placeholder="Enter English title">
+            </div>
+
+            <div class="form-group">
+              <label for="template-description-zh">描述 (繁體中文)</label>
+              <textarea id="template-description-zh" name="description_zh" rows="3" placeholder="輸入繁體中文描述"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="template-description-en">描述 (English)</label>
+              <textarea id="template-description-en" name="description_en" rows="3" placeholder="Enter English description"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="template-content-zh">內容 (繁體中文) *</label>
+              <textarea id="template-content-zh" name="content_zh" rows="6" required placeholder="輸入繁體中文內容"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="template-content-en">內容 (English)</label>
+              <textarea id="template-content-en" name="content_en" rows="6" placeholder="Enter English content"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="template-status">狀態</label>
+              <select id="template-status" name="status">
+                <option value="active">啟用</option>
+                <option value="draft">草稿</option>
+                <option value="inactive">停用</option>
+              </select>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" onclick="this.closest('.modal-overlay').remove()">
+            取消
+          </button>
+          <button class="btn btn-primary" onclick="templateManager.createTemplate()">
+            <i class="fas fa-save"></i> 儲存模板
+          </button>
+        </div>
+      </div>
+    `;
 
     document.body.appendChild(modal);
   }
@@ -600,33 +678,196 @@ class TemplateManager {
   }
 
   /**
-   * 匯出模板數據
+   * 導出模板數據
    */
   exportTemplates() {
     try {
-      const exportData = {
+      const data = {
         templates: this.templates,
-        export_date: new Date().toISOString(),
-        total_count: this.templates.length,
+        metadata: {
+          totalTemplates: this.templates.length,
+          exportDate: new Date().toISOString(),
+          version: "2.0.0"
+        }
       };
 
-      const dataStr = JSON.stringify(exportData, null, 2);
-      const dataBlob = new Blob([dataStr], { type: "application/json" });
+      const blob = new Blob([JSON.stringify(data, null, 2)], {
+        type: "application/json"
+      });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `templates-${new Date().toISOString().split('T')[0]}.json`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
 
-      const link = document.createElement("a");
-      link.href = URL.createObjectURL(dataBlob);
-      link.download = `templates_export_${
-        new Date().toISOString().split("T")[0]
-      }.json`;
-      link.click();
-
-      this.showSuccess("模板數據匯出成功！");
+      this.showSuccess("模板數據已導出");
     } catch (error) {
-      console.error("匯出失敗:", error);
-      this.showError("匯出失敗，請重試");
+      console.error("❌ 導出失敗:", error);
+      this.showError("導出失敗: " + error.message);
+    }
+  }
+
+  /**
+   * 更新統計
+   */
+  updateStats() {
+    const totalCount = document.getElementById("total-count");
+    if (totalCount) {
+      totalCount.textContent = this.filteredTemplates.length;
+    }
+  }
+
+  /**
+   * 切換多選模式
+   */
+  toggleSelectionMode() {
+    this.isSelectionMode = !this.isSelectionMode;
+    this.selectedTemplates.clear();
+    
+    const selectionBtn = document.getElementById("selection-mode-btn");
+    const batchActions = document.getElementById("batch-actions");
+    const templatesContainer = document.getElementById("templates-container");
+    
+    if (this.isSelectionMode) {
+      selectionBtn.classList.add("active");
+      selectionBtn.innerHTML = '<i class="fas fa-times"></i> 退出多選';
+      batchActions.style.display = "flex";
+      templatesContainer.classList.add("selection-mode");
+    } else {
+      selectionBtn.classList.remove("active");
+      selectionBtn.innerHTML = '<i class="fas fa-check-square"></i> 多選模式';
+      batchActions.style.display = "none";
+      templatesContainer.classList.remove("selection-mode");
+    }
+    
+    this.updateSelectedCount();
+    this.renderTemplates();
+  }
+
+  /**
+   * 全選模板
+   */
+  selectAll() {
+    this.selectedTemplates.clear();
+    this.filteredTemplates.forEach(template => {
+      this.selectedTemplates.add(template.id);
+    });
+    this.updateSelectedCount();
+    this.renderTemplates();
+  }
+
+  /**
+   * 取消全選
+   */
+  deselectAll() {
+    this.selectedTemplates.clear();
+    this.updateSelectedCount();
+    this.renderTemplates();
+  }
+
+  /**
+   * 切換單個模板的選中狀態
+   */
+  toggleTemplateSelection(templateId) {
+    if (this.selectedTemplates.has(templateId)) {
+      this.selectedTemplates.delete(templateId);
+    } else {
+      this.selectedTemplates.add(templateId);
+    }
+    this.updateSelectedCount();
+    this.renderTemplates();
+  }
+
+  /**
+   * 更新已選擇數量顯示
+   */
+  updateSelectedCount() {
+    const selectedCount = document.getElementById("selected-count");
+    if (selectedCount) {
+      selectedCount.textContent = this.selectedTemplates.size;
+    }
+  }
+
+  /**
+   * 匯出選中的模板
+   */
+  exportSelectedTemplates() {
+    if (this.selectedTemplates.size === 0) {
+      this.showError("請先選擇要匯出的模板");
+      return;
+    }
+
+    try {
+      const selectedTemplatesData = this.templates.filter(template => 
+        this.selectedTemplates.has(template.id)
+      );
+
+      const data = {
+        templates: selectedTemplatesData,
+        metadata: {
+          totalTemplates: selectedTemplatesData.length,
+          exportDate: new Date().toISOString(),
+          version: "2.0.0",
+          exportType: "selected"
+        }
+      };
+
+      const blob = new Blob([JSON.stringify(data, null, 2)], {
+        type: "application/json"
+      });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `selected-templates-${new Date().toISOString().split('T')[0]}.json`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+
+      this.showSuccess(`已匯出 ${selectedTemplatesData.length} 個選中的模板`);
+    } catch (error) {
+      console.error("❌ 匯出選中模板失敗:", error);
+      this.showError("匯出失敗: " + error.message);
+    }
+  }
+
+  /**
+   * 刪除選中的模板
+   */
+  deleteSelectedTemplates() {
+    if (this.selectedTemplates.size === 0) {
+      this.showError("請先選擇要刪除的模板");
+      return;
+    }
+
+    const confirmMessage = `確定要刪除選中的 ${this.selectedTemplates.size} 個模板嗎？此操作無法復原。`;
+    if (!confirm(confirmMessage)) {
+      return;
+    }
+
+    try {
+      // 從模板列表中移除選中的模板
+      this.templates = this.templates.filter(template => 
+        !this.selectedTemplates.has(template.id)
+      );
+      
+      // 清空選中狀態
+      this.selectedTemplates.clear();
+      this.updateSelectedCount();
+      
+      // 重新應用過濾器
+      this.applyFilters();
+      
+      this.showSuccess(`已刪除 ${this.selectedTemplates.size} 個模板`);
+    } catch (error) {
+      console.error("❌ 刪除模板失敗:", error);
+      this.showError("刪除失敗: " + error.message);
     }
   }
 }
 
-// 全局實例
-window.templateManager = new TemplateManager();
+// 設為全域變數
+window.TemplateManager = TemplateManager;

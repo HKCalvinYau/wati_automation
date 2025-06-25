@@ -6,7 +6,10 @@ class TemplateDetail {
   constructor(templateId) {
     this.templateId = templateId;
     this.template = null;
-    this.currentLanguage = this.getStoredLanguage();
+    this.currentLanguage = 'zh';
+    this.editMode = false;
+    this.variablesEditMode = false;
+    this.variables = [];
     this.init();
   }
 
@@ -45,43 +48,22 @@ class TemplateDetail {
    */
   async loadTemplate() {
     try {
-      // 嘗試從 API 載入資料
-      const response = await fetch("/api/get-templates.php");
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      const result = await response.json();
+      const response = await fetch(`data/templates/template-data.json`);
+      const data = await response.json();
+      const templates = data.templates;
+      this.template = templates.find(t => t.id === this.templateId);
       
-      if (result.success) {
-        this.template = result.data.templates.find((t) => t.id === this.templateId);
-        if (!this.template) {
-          throw new Error(`模板 ${this.templateId} 不存在`);
-        }
-        console.log(`📚 成功從 API 載入模板: ${this.templateId}`);
-      } else {
-        throw new Error(result.message || 'API 返回錯誤');
+      if (!this.template) {
+        throw new Error('模板不存在');
       }
+
+      // 初始化變數
+      this.initVariables();
+      
+      this.renderTemplateDetail();
     } catch (error) {
-      console.warn("⚠️ API 載入失敗，嘗試從靜態檔案載入:", error);
-      
-      // 備用方案：從靜態檔案載入
-      try {
-        const response = await fetch("/data/templates/template-data.json");
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        this.template = data.templates.find((t) => t.id === this.templateId);
-
-        if (!this.template) {
-          throw new Error(`模板 ${this.templateId} 不存在`);
-        }
-
-        console.log(`📚 成功從靜態檔案載入模板: ${this.templateId}`);
-      } catch (fallbackError) {
-        console.error("❌ 所有載入方式都失敗:", fallbackError);
-        throw new Error("無法載入模板資料，請檢查網路連接或聯繫管理員");
-      }
+      console.error('載入模板失敗:', error);
+      this.showError('載入模板失敗');
     }
   }
 
@@ -161,6 +143,13 @@ class TemplateDetail {
     )}</span>
                             </div>
                             <div class="info-item">
+                                <label>使用次數</label>
+                                <span class="template-usage">
+                                    <i class="fas fa-chart-line"></i>
+                                    ${this.template.usageCount || 0} 次
+                                </span>
+                            </div>
+                            <div class="info-item">
                                 <label>創建時間</label>
                                 <span>${this.formatDate(
                                   this.template.createdAt
@@ -172,6 +161,14 @@ class TemplateDetail {
                                   this.template.updatedAt
                                 )}</span>
                             </div>
+                            ${this.template.lastUsed ? `
+                            <div class="info-item">
+                                <label>最後使用</label>
+                                <span>${this.formatDate(
+                                  this.template.lastUsed
+                                )}</span>
+                            </div>
+                            ` : ''}
                         </div>
                         <div class="template-description">
                             <label>描述</label>
@@ -211,12 +208,27 @@ class TemplateDetail {
                 <div class="template-content-card card">
                     <div class="card-header">
                         <h2>模板內容</h2>
+                        <div class="content-actions">
+                            <button class="btn btn-sm btn-secondary" onclick="templateDetail.toggleEditMode()">
+                                <i class="fas fa-edit"></i>
+                                ${this.editMode ? '取消編輯' : '編輯內容'}
+                            </button>
+                            ${this.editMode ? `
+                                <button class="btn btn-sm btn-primary" onclick="templateDetail.saveContent()">
+                                    <i class="fas fa-save"></i>
+                                    保存
+                                </button>
+                            ` : ''}
+                        </div>
                     </div>
                     <div class="card-body">
-                        <div class="content-preview">
-                            <pre class="template-content">${this.escapeHtml(
-                              content
-                            )}</pre>
+                        <div class="content-editor">
+                            <textarea 
+                                id="content-editor" 
+                                class="content-textarea" 
+                                ${this.editMode ? '' : 'readonly'}
+                                placeholder="輸入模板內容..."
+                            >${this.template.content[this.currentLanguage] || ''}</textarea>
                         </div>
                     </div>
                 </div>
@@ -225,10 +237,70 @@ class TemplateDetail {
                 <div class="template-variables-card card">
                     <div class="card-header">
                         <h2>變數說明</h2>
+                        <div class="variables-actions">
+                            <button class="btn btn-sm btn-secondary" onclick="templateDetail.toggleVariablesEditMode()">
+                                <i class="fas fa-edit"></i>
+                                ${this.variablesEditMode ? '取消編輯' : '編輯變數'}
+                            </button>
+                            ${this.variablesEditMode ? `
+                                <button class="btn btn-sm btn-primary" onclick="templateDetail.saveVariables()">
+                                    <i class="fas fa-save"></i>
+                                    保存
+                                </button>
+                            ` : ''}
+                        </div>
                     </div>
                     <div class="card-body">
-                        <div class="variables-list">
-                            ${this.generateVariablesList(content)}
+                        <div class="variables-editor">
+                            <div class="variables-list" id="variables-list">
+                                ${this.renderVariables()}
+                            </div>
+                            ${this.variablesEditMode ? `
+                                <div class="add-variable-section">
+                                    <button class="btn btn-sm btn-outline" onclick="templateDetail.addVariable()">
+                                        <i class="fas fa-plus"></i>
+                                        添加變數
+                                    </button>
+                                </div>
+                            ` : ''}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 相關圖片 -->
+                <div class="template-images-card card">
+                    <div class="card-header">
+                        <h2>相關圖片</h2>
+                        <button class="btn btn-sm btn-primary" onclick="templateDetail.addImage()">
+                            <i class="fas fa-plus"></i>
+                            添加圖片
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div class="images-container">
+                            ${this.renderImages()}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- JSON檔 -->
+                <div class="template-json-card card">
+                    <div class="card-header">
+                        <h2>JSON檔</h2>
+                        <div class="json-actions">
+                            <button class="btn btn-sm btn-secondary" onclick="templateDetail.copyJSON()">
+                                <i class="fas fa-copy"></i>
+                                複製JSON
+                            </button>
+                            <button class="btn btn-sm btn-primary" onclick="templateDetail.downloadJSON()">
+                                <i class="fas fa-download"></i>
+                                下載JSON
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="json-container">
+                            <pre class="json-content" id="template-json">${this.generateJSON()}</pre>
                         </div>
                     </div>
                 </div>
@@ -311,17 +383,50 @@ class TemplateDetail {
    * 複製模板內容
    */
   async copyTemplate() {
-    const content =
-      this.template.content[this.currentLanguage] ||
-      this.template.content.zh ||
-      "";
-
     try {
+      const content = this.template.content[this.currentLanguage] || this.template.content.zh || "";
+      
+      // 複製到剪貼板
       await navigator.clipboard.writeText(content);
+      
+      // 統計使用次數
+      await this.incrementUsage();
+      
       this.showSuccess("模板內容已複製到剪貼板");
     } catch (error) {
-      console.error("複製失敗:", error);
+      console.error("複製模板失敗:", error);
       this.showError("複製失敗，請手動複製");
+    }
+  }
+
+  /**
+   * 增加使用次數
+   */
+  async incrementUsage() {
+    try {
+      const response = await fetch('api/increment-usage.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          templateId: this.templateId
+        })
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        if (result.success) {
+          // 更新本地數據
+          this.template.usageCount = result.data.usageCount;
+          this.template.lastUsed = result.data.lastUsed;
+          // 重新渲染以顯示更新後的使用次數
+          this.renderTemplateDetail();
+        }
+      }
+    } catch (error) {
+      console.error('統計使用次數失敗:', error);
+      // 不顯示錯誤，因為這不影響主要功能
     }
   }
 
@@ -520,7 +625,7 @@ class TemplateDetail {
       }
       
       // 發送 API 請求
-      const response = await fetch('/api/save-template.php', {
+      const response = await fetch('api/save-template.php', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -625,23 +730,338 @@ class TemplateDetail {
     const uniqueVariables = [...new Set(variables)].sort();
 
     if (uniqueVariables.length === 0) {
-      return "<p>此模板沒有使用變數。</p>";
+      return '<p class="no-variables">此模板沒有使用變數</p>';
+    }
+
+    return uniqueVariables
+      .map((variable) => {
+        const number = variable.match(/\d+/)[0];
+        return `
+          <div class="variable-item">
+            <span class="variable-code">${variable}</span>
+            <span class="variable-description">變數 ${number}</span>
+          </div>
+        `;
+      })
+      .join("");
+  }
+
+  /**
+   * 渲染圖片列表
+   */
+  renderImages() {
+    const images = this.template.images || [];
+    
+    if (images.length === 0) {
+      return `
+        <div class="no-images">
+          <i class="fas fa-image"></i>
+          <p>暫無相關圖片</p>
+          <button class="btn btn-outline" onclick="templateDetail.addImage()">
+            <i class="fas fa-plus"></i>
+            添加第一張圖片
+          </button>
+        </div>
+      `;
     }
 
     return `
-            <div class="variables-grid">
-                ${uniqueVariables
-                  .map(
-                    (variable) => `
-                    <div class="variable-item">
-                        <span class="variable-code">${variable}</span>
-                        <span class="variable-desc">請根據實際情況替換此變數</span>
-                    </div>
-                `
-                  )
-                  .join("")}
+      <div class="images-grid">
+        ${images.map((image, index) => `
+          <div class="image-item" data-index="${index}">
+            <div class="image-preview">
+              <img src="${image.url}" alt="${image.title || '相關圖片'}" 
+                   onclick="templateDetail.previewImage('${image.url}', '${image.title || ''}')">
+              <div class="image-overlay">
+                <button class="btn btn-sm btn-light" onclick="templateDetail.editImage(${index})">
+                  <i class="fas fa-edit"></i>
+                </button>
+                <button class="btn btn-sm btn-danger" onclick="templateDetail.deleteImage(${index})">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </div>
             </div>
-        `;
+            <div class="image-info">
+              <h4>${image.title || '未命名圖片'}</h4>
+              <p>${image.description || ''}</p>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+  }
+
+  /**
+   * 添加圖片
+   */
+  addImage() {
+    const modal = document.createElement("div");
+    modal.className = "modal-overlay";
+    modal.innerHTML = `
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>添加相關圖片</h3>
+          <button class="modal-close" onclick="this.closest('.modal-overlay').remove()">×</button>
+        </div>
+        <div class="modal-body">
+          <form id="image-form" class="image-form">
+            <div class="form-group">
+              <label>圖片標題</label>
+              <input type="text" id="image-title" class="form-input" placeholder="輸入圖片標題">
+            </div>
+            <div class="form-group">
+              <label>圖片描述</label>
+              <textarea id="image-description" class="form-input" rows="3" placeholder="輸入圖片描述"></textarea>
+            </div>
+            <div class="form-group">
+              <label>圖片URL</label>
+              <input type="url" id="image-url" class="form-input" placeholder="https://example.com/image.jpg" required>
+              <small>請輸入圖片的完整URL地址</small>
+            </div>
+            <div class="form-group">
+              <label>或上傳圖片</label>
+              <input type="file" id="image-file" class="form-input" accept="image/*">
+              <small>支援 JPG, PNG, GIF 格式，最大 5MB</small>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" onclick="this.closest('.modal-overlay').remove()">
+            取消
+          </button>
+          <button class="btn btn-primary" onclick="templateDetail.saveImage()">
+            <i class="fas fa-save"></i>
+            保存圖片
+          </button>
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(modal);
+  }
+
+  /**
+   * 保存圖片
+   */
+  async saveImage() {
+    const title = document.getElementById("image-title").value.trim();
+    const description = document.getElementById("image-description").value.trim();
+    const url = document.getElementById("image-url").value.trim();
+    const file = document.getElementById("image-file").files[0];
+
+    if (!url && !file) {
+      this.showError("請輸入圖片URL或選擇圖片檔案");
+      return;
+    }
+
+    try {
+      let imageUrl = url;
+      
+      // 如果有上傳檔案，先處理檔案
+      if (file) {
+        imageUrl = await this.uploadImage(file);
+      }
+
+      const imageData = {
+        title: title || '未命名圖片',
+        description: description,
+        url: imageUrl,
+        addedAt: new Date().toISOString()
+      };
+
+      // 添加到模板的圖片列表
+      if (!this.template.images) {
+        this.template.images = [];
+      }
+      this.template.images.push(imageData);
+
+      // 保存到後端
+      await this.saveTemplateImages();
+
+      // 關閉模態框並重新渲染
+      document.querySelector(".modal-overlay").remove();
+      this.renderTemplateDetail();
+      this.showSuccess("圖片添加成功");
+    } catch (error) {
+      console.error("保存圖片失敗:", error);
+      this.showError("保存圖片失敗: " + error.message);
+    }
+  }
+
+  /**
+   * 上傳圖片
+   */
+  async uploadImage(file) {
+    // 這裡可以實現圖片上傳到伺服器的邏輯
+    // 目前先返回一個預設的URL
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        resolve(e.target.result); // 返回 base64 格式
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  /**
+   * 預覽圖片
+   */
+  previewImage(url, title) {
+    const modal = document.createElement("div");
+    modal.className = "modal-overlay";
+    modal.innerHTML = `
+      <div class="modal-content modal-large">
+        <div class="modal-header">
+          <h3>${title || '圖片預覽'}</h3>
+          <button class="modal-close" onclick="this.closest('.modal-overlay').remove()">×</button>
+        </div>
+        <div class="modal-body">
+          <div class="image-preview-container">
+            <img src="${url}" alt="${title || '圖片預覽'}" style="max-width: 100%; height: auto;">
+          </div>
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(modal);
+  }
+
+  /**
+   * 編輯圖片
+   */
+  editImage(index) {
+    const image = this.template.images[index];
+    if (!image) return;
+
+    const modal = document.createElement("div");
+    modal.className = "modal-overlay";
+    modal.innerHTML = `
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>編輯圖片</h3>
+          <button class="modal-close" onclick="this.closest('.modal-overlay').remove()">×</button>
+        </div>
+        <div class="modal-body">
+          <form id="edit-image-form" class="image-form">
+            <div class="form-group">
+              <label>圖片標題</label>
+              <input type="text" id="edit-image-title" class="form-input" value="${image.title || ''}" placeholder="輸入圖片標題">
+            </div>
+            <div class="form-group">
+              <label>圖片描述</label>
+              <textarea id="edit-image-description" class="form-input" rows="3" placeholder="輸入圖片描述">${image.description || ''}</textarea>
+            </div>
+            <div class="form-group">
+              <label>圖片URL</label>
+              <input type="url" id="edit-image-url" class="form-input" value="${image.url}" required>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" onclick="this.closest('.modal-overlay').remove()">
+            取消
+          </button>
+          <button class="btn btn-primary" onclick="templateDetail.updateImage(${index})">
+            <i class="fas fa-save"></i>
+            更新圖片
+          </button>
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(modal);
+  }
+
+  /**
+   * 更新圖片
+   */
+  async updateImage(index) {
+    const title = document.getElementById("edit-image-title").value.trim();
+    const description = document.getElementById("edit-image-description").value.trim();
+    const url = document.getElementById("edit-image-url").value.trim();
+
+    if (!url) {
+      this.showError("請輸入圖片URL");
+      return;
+    }
+
+    try {
+      this.template.images[index] = {
+        ...this.template.images[index],
+        title: title || '未命名圖片',
+        description: description,
+        url: url,
+        updatedAt: new Date().toISOString()
+      };
+
+      // 保存到後端
+      await this.saveTemplateImages();
+
+      // 關閉模態框並重新渲染
+      document.querySelector(".modal-overlay").remove();
+      this.renderTemplateDetail();
+      this.showSuccess("圖片更新成功");
+    } catch (error) {
+      console.error("更新圖片失敗:", error);
+      this.showError("更新圖片失敗: " + error.message);
+    }
+  }
+
+  /**
+   * 刪除圖片
+   */
+  async deleteImage(index) {
+    const image = this.template.images[index];
+    if (!image) return;
+
+    if (!confirm(`確定要刪除圖片「${image.title}」嗎？`)) {
+      return;
+    }
+
+    try {
+      this.template.images.splice(index, 1);
+      
+      // 保存到後端
+      await this.saveTemplateImages();
+
+      // 重新渲染
+      this.renderTemplateDetail();
+      this.showSuccess("圖片刪除成功");
+    } catch (error) {
+      console.error("刪除圖片失敗:", error);
+      this.showError("刪除圖片失敗: " + error.message);
+    }
+  }
+
+  /**
+   * 保存模板圖片到後端
+   */
+  async saveTemplateImages() {
+    try {
+      const response = await fetch('api/save-template-images.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          templateId: this.templateId,
+          images: this.template.images || []
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('保存失敗');
+      }
+
+      const result = await response.json();
+      if (!result.success) {
+        throw new Error(result.message || '保存失敗');
+      }
+    } catch (error) {
+      console.warn("保存圖片到後端失敗，使用本地存儲:", error);
+      // 備用方案：保存到本地存儲
+      localStorage.setItem(`template_images_${this.templateId}`, JSON.stringify(this.template.images || []));
+    }
   }
 
   /**
@@ -696,20 +1116,31 @@ class TemplateDetail {
    * 顯示成功訊息
    */
   showSuccess(message) {
+    if (window.notificationManager) {
+      window.notificationManager.success(message, 2000);
+    } else {
     this.showNotification(message, "success");
+    }
   }
 
   /**
    * 顯示錯誤訊息
    */
   showError(message) {
+    if (window.notificationManager) {
+      window.notificationManager.error(message, 2000);
+    } else {
     this.showNotification(message, "error");
+    }
   }
 
   /**
    * 顯示通知
    */
   showNotification(message, type = "info") {
+    if (window.notificationManager) {
+      window.notificationManager.show(message, type, 2000);
+    } else {
     const notification = document.createElement("div");
     notification.className = `notification notification-${type}`;
     notification.innerHTML = `
@@ -724,7 +1155,218 @@ class TemplateDetail {
       if (notification.parentElement) {
         notification.remove();
       }
-    }, 3000);
+      }, 2000);
+    }
+  }
+
+  /**
+   * 生成JSON
+   */
+  generateJSON() {
+    return JSON.stringify(this.template, null, 2);
+  }
+
+  /**
+   * 複製JSON
+   */
+  async copyJSON() {
+    const json = this.generateJSON();
+    try {
+      await navigator.clipboard.writeText(json);
+      this.showSuccess("JSON已複製到剪貼板");
+    } catch (error) {
+      console.error("複製JSON失敗:", error);
+      this.showError("複製JSON失敗，請手動複製");
+    }
+  }
+
+  /**
+   * 下載JSON
+   */
+  downloadJSON() {
+    const json = this.generateJSON();
+    const filename = `${this.template.code}_${this.currentLanguage}_template.json`;
+
+    if (window.utils && window.utils.fileUtils) {
+      window.utils.fileUtils.download(json, filename);
+      this.showSuccess("JSON已下載");
+    } else {
+      // 備用下載方法
+      const blob = new Blob([json], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      this.showSuccess("JSON已下載");
+    }
+  }
+
+  /**
+   * 切換編輯模式
+   */
+  toggleEditMode() {
+    this.editMode = !this.editMode;
+    this.renderTemplateDetail();
+  }
+
+  /**
+   * 保存內容
+   */
+  async saveContent() {
+    const content = document.getElementById('content-editor').value;
+    
+    try {
+      const response = await fetch('api/save-template.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id: this.templateId,
+          content: {
+            ...this.template.content,
+            [this.currentLanguage]: content
+          }
+        })
+      });
+
+      if (response.ok) {
+        this.template.content[this.currentLanguage] = content;
+        this.editMode = false;
+        this.showSuccess('內容保存成功');
+        this.renderTemplateDetail();
+      } else {
+        throw new Error('保存失敗');
+      }
+    } catch (error) {
+      console.error('保存內容失敗:', error);
+      this.showError('保存內容失敗');
+    }
+  }
+
+  /**
+   * 切換變數編輯模式
+   */
+  toggleVariablesEditMode() {
+    this.variablesEditMode = !this.variablesEditMode;
+    this.renderTemplateDetail();
+  }
+
+  /**
+   * 渲染變數列表
+   */
+  renderVariables() {
+    if (this.variablesEditMode) {
+      return this.variables.map((variable, index) => `
+        <div class="variable-item editable" data-index="${index}">
+          <div class="variable-inputs">
+            <input type="text" class="variable-name" value="${variable.name}" placeholder="變數名稱" onchange="templateDetail.updateVariable(${index}, 'name', this.value)">
+            <input type="text" class="variable-description" value="${variable.description}" placeholder="變數說明" onchange="templateDetail.updateVariable(${index}, 'description', this.value)">
+            <button class="btn btn-sm btn-danger" onclick="templateDetail.removeVariable(${index})">
+              <i class="fas fa-trash"></i>
+            </button>
+          </div>
+        </div>
+      `).join('');
+    } else {
+      return this.variables.map(variable => `
+        <div class="variable-item">
+          <div class="variable-name">${variable.name}</div>
+          <div class="variable-description">${variable.description}</div>
+        </div>
+      `).join('');
+    }
+  }
+
+  /**
+   * 添加變數
+   */
+  addVariable() {
+    this.variables.push({
+      name: '',
+      description: ''
+    });
+    this.renderTemplateDetail();
+  }
+
+  /**
+   * 更新變數
+   */
+  updateVariable(index, field, value) {
+    this.variables[index][field] = value;
+  }
+
+  /**
+   * 移除變數
+   */
+  removeVariable(index) {
+    this.variables.splice(index, 1);
+    this.renderTemplateDetail();
+  }
+
+  /**
+   * 保存變數
+   */
+  async saveVariables() {
+    try {
+      const response = await fetch('api/save-template.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id: this.templateId,
+          variables: this.variables
+        })
+      });
+
+      if (response.ok) {
+        this.template.variables = this.variables;
+        this.variablesEditMode = false;
+        this.showSuccess('變數說明保存成功');
+        this.renderTemplateDetail();
+      } else {
+        throw new Error('保存失敗');
+      }
+    } catch (error) {
+      console.error('保存變數失敗:', error);
+      this.showError('保存變數失敗');
+    }
+  }
+
+  /**
+   * 初始化變數
+   */
+  initVariables() {
+    if (this.template.variables && Array.isArray(this.template.variables)) {
+      this.variables = [...this.template.variables];
+    } else {
+      // 從內容中自動提取變數
+      this.variables = this.extractVariablesFromContent();
+    }
+  }
+
+  /**
+   * 從內容中提取變數
+   */
+  extractVariablesFromContent() {
+    const content = this.template.content[this.currentLanguage] || '';
+    const variableRegex = /\{\{([^}]+)\}\}/g;
+    const variables = new Set();
+    let match;
+
+    while ((match = variableRegex.exec(content)) !== null) {
+      variables.add(match[1].trim());
+    }
+
+    return Array.from(variables).map(name => ({
+      name: name,
+      description: ''
+    }));
   }
 }
 

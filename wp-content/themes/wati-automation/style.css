@@ -1,0 +1,207 @@
+/*
+Theme Name: WATI Automation
+Description: 寵物善終服務 WhatsApp 訊息模板管理系統主題
+Version: 2.0.0
+Author: 寵物善終服務團隊
+Author URI: https://github.com/HKCalvinYau/wati_automation
+Text Domain: wati-automation
+*/
+
+/* 引入主要樣式文件 */
+@import url('../../../css/main.css');
+
+/* WordPress 特定樣式覆蓋 */
+.wp-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* WordPress 管理欄適配 */
+.admin-bar .header {
+    top: 32px;
+}
+
+@media (max-width: 782px) {
+    .admin-bar .header {
+        top: 46px;
+    }
+}
+
+/* WordPress 小工具區域 */
+.widget-area {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+/* WordPress 評論區域 */
+.comments-area {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #e9ecef;
+}
+
+/* WordPress 分頁 */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin: 30px 0;
+}
+
+.pagination .page-numbers {
+    padding: 8px 12px;
+    margin: 0 4px;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #007cba;
+}
+
+.pagination .current {
+    background-color: #007cba;
+    color: white;
+    border-color: #007cba;
+}
+
+/* WordPress 表單樣式 */
+.wpcf7-form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.wpcf7-form input[type="text"],
+.wpcf7-form input[type="email"],
+.wpcf7-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+.wpcf7-form input[type="submit"] {
+    background-color: #007cba;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.wpcf7-form input[type="submit"]:hover {
+    background-color: #005a87;
+}
+
+/* WordPress 側邊欄 */
+.sidebar {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.sidebar .widget {
+    margin-bottom: 30px;
+}
+
+.sidebar .widget-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+/* WordPress 頁腳小工具 */
+.footer-widgets {
+    background: #2c3e50;
+    color: white;
+    padding: 40px 0;
+}
+
+.footer-widgets .widget {
+    margin-bottom: 20px;
+}
+
+.footer-widgets .widget-title {
+    color: white;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+/* WordPress 響應式設計 */
+@media (max-width: 768px) {
+    .wp-content {
+        padding: 10px;
+    }
+    
+    .sidebar {
+        margin-top: 20px;
+    }
+    
+    .footer-widgets {
+        padding: 20px 0;
+    }
+}
+
+/* WordPress 登入頁面樣式 */
+.login h1 a {
+    background-image: url('../../../favicon.ico');
+    background-size: contain;
+    width: 320px;
+    height: 120px;
+}
+
+.login form {
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* WordPress 管理後台樣式 */
+.wp-admin .wati-automation-admin {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.wp-admin .wati-automation-admin h1 {
+    color: #23282d;
+    border-bottom: 2px solid #007cba;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+/* WordPress 自定義文章類型樣式 */
+.post-type-wati-template .entry-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.post-type-wati-template .entry-title {
+    color: #007cba;
+    margin-bottom: 15px;
+}
+
+/* WordPress 自定義分類頁面 */
+.tax-wati-category .archive-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+.tax-wati-category .archive-title {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.tax-wati-category .archive-description {
+    font-size: 1.1em;
+    opacity: 0.9;
+} 

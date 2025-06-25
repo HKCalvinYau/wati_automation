@@ -1,0 +1,89 @@
+{
+  "categories": [
+    {
+      "code": "ic",
+      "name": { "zh": "初步諮詢", "en": "Initial Consultation" },
+      "description": {
+        "zh": "與客戶的初次接觸和諮詢",
+        "en": "Initial contact and consultation with clients"
+      },
+      "icon": "fas fa-handshake",
+      "templateCount": 0
+    },
+    {
+      "code": "ac",
+      "name": { "zh": "安排服務", "en": "Service Arrangement" },
+      "description": {
+        "zh": "服務預約的確認和安排",
+        "en": "Service appointment confirmation and arrangement"
+      },
+      "icon": "fas fa-calendar-check",
+      "templateCount": 0
+    },
+    {
+      "code": "ps",
+      "name": { "zh": "後續服務", "en": "Post Service" },
+      "description": {
+        "zh": "服務完成後的跟進和關懷",
+        "en": "Follow-up and care after service completion"
+      },
+      "icon": "fas fa-heart",
+      "templateCount": 0
+    },
+    {
+      "code": "pp",
+      "name": { "zh": "產品推廣", "en": "Product Promotion" },
+      "description": {
+        "zh": "產品和服務的推廣信息",
+        "en": "Product and service promotion information"
+      },
+      "icon": "fas fa-bullhorn",
+      "templateCount": 0
+    },
+    {
+      "code": "pi",
+      "name": { "zh": "付款相關", "en": "Payment Information" },
+      "description": {
+        "zh": "付款方式和費用相關信息",
+        "en": "Payment methods and fee-related information"
+      },
+      "icon": "fas fa-credit-card",
+      "templateCount": 0
+    },
+    {
+      "code": "ci",
+      "name": { "zh": "公司介紹", "en": "Company Introduction" },
+      "description": {
+        "zh": "公司介紹和服務說明",
+        "en": "Company introduction and service description"
+      },
+      "icon": "fas fa-building",
+      "templateCount": 0
+    },
+    {
+      "code": "li",
+      "name": { "zh": "物流追蹤", "en": "Logistics Tracking" },
+      "description": {
+        "zh": "物流和配送相關信息",
+        "en": "Logistics and delivery related information"
+      },
+      "icon": "fas fa-truck",
+      "templateCount": 0
+    },
+    {
+      "code": "oi",
+      "name": { "zh": "其他資訊", "en": "Other Information" },
+      "description": {
+        "zh": "其他相關信息和通知",
+        "en": "Other related information and notifications"
+      },
+      "icon": "fas fa-info-circle",
+      "templateCount": 0
+    }
+  ],
+  "metadata": {
+    "totalCategories": 8,
+    "lastUpdated": "2025-06-25T10:00:00Z",
+    "version": "1.0.0"
+  }
+} 

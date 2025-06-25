@@ -1,0 +1,72 @@
+services:
+  # PHP Apache 服務 - 使用官方 PHP 映像
+  web:
+    image: php:8.2-apache
+    platform: linux/arm64/v8
+    container_name: wati_automation_web
+    ports:
+      - "9090:80"
+    volumes:
+      # 掛載專案文件
+      - .:/var/www/html
+      # 掛載數據目錄
+      - ./data:/var/www/html/data
+    environment:
+      - PHP_MEMORY_LIMIT=256M
+      - PHP_MAX_EXECUTION_TIME=300
+      - PHP_DISPLAY_ERRORS=1
+      - PHP_DISPLAY_STARTUP_ERRORS=1
+    depends_on:
+      - mysql
+    networks:
+      - wati_network
+    restart: unless-stopped
+    # 安裝必要的 PHP 擴展
+    command: >
+      sh -c "
+      docker-php-ext-install mysqli pdo pdo_mysql &&
+      apache2-foreground
+      "
+
+  # MySQL 資料庫服務
+  mysql:
+    image: mysql:8.0
+    container_name: wati_automation_mysql
+    ports:
+      - "3308:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: wati_automation
+      MYSQL_USER: wati_user
+      MYSQL_PASSWORD: wati_password
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - wati_network
+    restart: unless-stopped
+    command: --default-authentication-plugin=mysql_native_password
+
+  # phpMyAdmin（資料庫管理）
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: wati_automation_phpmyadmin
+    ports:
+      - "9091:80"
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: root_password
+    depends_on:
+      - mysql
+    networks:
+      - wati_network
+    restart: unless-stopped
+
+volumes:
+  mysql_data:
+    driver: local
+
+networks:
+  wati_network:
+    driver: bridge 

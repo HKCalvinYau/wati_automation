@@ -84,8 +84,26 @@
     <div id="notification" class="notification"></div>
 
     <!-- JavaScript 文件 -->
-    <script src="js/utils/helpers.js"></script>
+    <!-- 工具模組 -->
+    <script src="js/utils/notification-manager.js"></script>
+    <script src="js/utils/modal-manager.js"></script>
+    <script src="js/utils/storage-manager.js"></script>
+    <script src="js/utils/category-manager.js"></script>
+    <script src="js/utils/language-manager.js"></script>
+    
+    <!-- 組件模組 -->
+    <script src="js/components/SearchManager.js"></script>
     <script src="js/components/TemplateDetail.js"></script>
+    <script src="js/components/ApprovalManager.js"></script>
+    <script src="js/components/UsageManager.js"></script>
+    <script src="js/components/VersionManager.js"></script>
+    <script src="js/components/TemplateManager.js"></script>
+    
+    <!-- 核心模組 -->
+    <script src="js/core/app.js"></script>
+    
+    <!-- 主入口文件 -->
+    <script src="js/main.js"></script>
 
     <!-- 初始化腳本 -->
     <script>
@@ -97,8 +115,15 @@
         const templateId = urlParams.get("id");
 
         if (templateId) {
-          // 初始化模板詳情組件
+          // 等待 app 初始化完成後初始化模板詳情
+          const initTemplateDetail = () => {
+            if (window.app && window.app.modules.template) {
           window.templateDetail = new TemplateDetail(templateId);
+            } else {
+              setTimeout(initTemplateDetail, 100);
+            }
+          };
+          initTemplateDetail();
         } else {
           // 顯示錯誤信息
           document.getElementById("template-detail").innerHTML = `

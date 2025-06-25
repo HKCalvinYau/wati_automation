@@ -1,0 +1,111 @@
+# 多階段構建：構建階段
+FROM node:18-alpine AS build
+
+WORKDIR /app
+
+# 複製 package.json 並安裝依賴
+COPY package*.json ./
+RUN npm ci --only=production
+
+# 複製源碼並構建
+COPY . .
+RUN npm run build:prod
+
+# 生產階段
+FROM php:8.2-apache
+
+# 設置工作目錄
+WORKDIR /var/www/html
+
+# 安裝系統依賴
+RUN apt-get update && apt-get install -y \
+    git \
+    curl \
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
+    zip \
+    unzip \
+    && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd opcache \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# 啟用 Apache 模組
+RUN a2enmod rewrite headers expires
+
+# 設置 Apache 配置
+RUN echo '<Directory /var/www/html>\n\
+    AllowOverride All\n\
+    Require all granted\n\
+</Directory>' > /etc/apache2/conf-available/docker-php.conf \
+    && a2enconf docker-php
+
+# 配置 PHP 生產環境設置
+RUN echo 'memory_limit = 512M\n\
+max_execution_time = 300\n\
+upload_max_filesize = 50M\n\
+post_max_size = 50M\n\
+opcache.enable = 1\n\
+opcache.memory_consumption = 128\n\
+opcache.interned_strings_buffer = 8\n\
+opcache.max_accelerated_files = 4000\n\
+opcache.revalidate_freq = 2\n\
+opcache.fast_shutdown = 1\n\
+expose_php = Off' > /usr/local/etc/php/conf.d/production.ini
+
+# 從構建階段複製構建好的文件
+COPY --from=build /app /var/www/html/
+
+# 設置檔案權限
+RUN chown -R www-data:www-data /var/www/html \
+    && chmod -R 755 /var/www/html \
+    && chmod -R 777 /var/www/html/data
+
+# 創建生產環境的 .htaccess
+RUN echo 'RewriteEngine On\n\
+RewriteCond %{REQUEST_FILENAME} !-f\n\
+RewriteCond %{REQUEST_FILENAME} !-d\n\
+RewriteRule ^(.*)$ index.html [QSA,L]\n\
+\n\
+# 安全頭設置\n\
+Header always set X-Content-Type-Options nosniff\n\
+Header always set X-Frame-Options DENY\n\
+Header always set X-XSS-Protection "1; mode=block"\n\
+Header always set Referrer-Policy "strict-origin-when-cross-origin"\n\
+\n\
+# CORS 設置\n\
+Header always set Access-Control-Allow-Origin "*"\n\
+Header always set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"\n\
+Header always set Access-Control-Allow-Headers "Content-Type, Authorization, X-Requested-With"\n\
+\n\
+# 快取控制\n\
+<FilesMatch "\.(css|js|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot)$">\n\
+    Header set Cache-Control "max-age=31536000, public, immutable"\n\
+</FilesMatch>\n\
+\n\
+<FilesMatch "\.(html|php)$">\n\
+    Header set Cache-Control "no-cache, no-store, must-revalidate"\n\
+</FilesMatch>\n\
+\n\
+# 壓縮設置\n\
+<IfModule mod_deflate.c>\n\
+    AddOutputFilterByType DEFLATE text/plain\n\
+    AddOutputFilterByType DEFLATE text/html\n\
+    AddOutputFilterByType DEFLATE text/xml\n\
+    AddOutputFilterByType DEFLATE text/css\n\
+    AddOutputFilterByType DEFLATE application/xml\n\
+    AddOutputFilterByType DEFLATE application/xhtml+xml\n\
+    AddOutputFilterByType DEFLATE application/rss+xml\n\
+    AddOutputFilterByType DEFLATE application/javascript\n\
+    AddOutputFilterByType DEFLATE application/x-javascript\n\
+</IfModule>' > .htaccess
+
+# 暴露端口
+EXPOSE 80
+
+# 健康檢查
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost/ || exit 1
+
+# 啟動 Apache
+CMD ["apache2-foreground"] 

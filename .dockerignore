@@ -1,0 +1,62 @@
+# Git 相關
+.git
+.gitignore
+.gitattributes
+
+# Node.js 相關
+node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 開發工具
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# 作業系統
+.DS_Store
+Thumbs.db
+
+# 日誌文件
+*.log
+logs/
+
+# 快取文件
+.cache
+.tmp
+
+# 測試文件
+test/
+tests/
+__tests__/
+*.test.js
+*.spec.js
+
+# 文檔
+README.md
+docs/
+*.md
+
+# 部署配置
+deploy.config.js
+build.config.js
+webpack.config.js
+netlify.toml
+
+# 本地開發
+local-test-server.js
+debug-*.html
+cloudways-*.html
+
+# Docker 相關
+Dockerfile
+docker-compose.yml
+.dockerignore
+docker/
+
+# 其他
+*.bak
+*.backup 

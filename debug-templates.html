@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模板調試頁面</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .debug-info { background: #f0f0f0; padding: 10px; margin: 10px 0; border-radius: 5px; }
+        .error { background: #ffebee; color: #c62828; }
+        .success { background: #e8f5e8; color: #2e7d32; }
+        button { padding: 10px 20px; margin: 5px; }
+    </style>
+</head>
+<body>
+    <h1>模板調試頁面</h1>
+    
+    <div class="debug-info">
+        <h3>調試信息</h3>
+        <div id="debug-output"></div>
+    </div>
+    
+    <div class="debug-info">
+        <h3>操作按鈕</h3>
+        <button onclick="testAPILoad()">測試 API 載入</button>
+        <button onclick="testStaticLoad()">測試靜態文件載入</button>
+        <button onclick="testTemplateManager()">測試 TemplateManager</button>
+        <button onclick="checkGlobalVars()">檢查全域變數</button>
+    </div>
+    
+    <div class="debug-info">
+        <h3>模板計數</h3>
+        <div id="template-count">未載入</div>
+    </div>
+
+    <!-- 載入必要的 JavaScript 文件 -->
+    <script src="js/utils/notification-manager.js"></script>
+    <script src="js/utils/modal-manager.js"></script>
+    <script src="js/utils/storage-manager.js"></script>
+    <script src="js/utils/category-manager.js"></script>
+    <script src="js/utils/language-manager.js"></script>
+    <script src="js/components/SearchManager.js"></script>
+    <script src="js/components/TemplateDetail.js"></script>
+    <script src="js/components/ApprovalManager.js"></script>
+    <script src="js/components/UsageManager.js"></script>
+    <script src="js/components/VersionManager.js"></script>
+    <script src="js/components/TemplateManager.js"></script>
+    <script src="js/core/app.js"></script>
+
+    <script>
+        const debugOutput = document.getElementById('debug-output');
+        const templateCount = document.getElementById('template-count');
+        
+        function log(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const className = type === 'error' ? 'error' : type === 'success' ? 'success' : '';
+            debugOutput.innerHTML += `<div class="${className}">[${timestamp}] ${message}</div>`;
+            console.log(`[${timestamp}] ${message}`);
+        }
+        
+        async function testAPILoad() {
+            try {
+                log('開始測試 API 載入...');
+                const response = await fetch('api/get-templates.php');
+                const data = await response.json();
+                log(`API 響應: ${JSON.stringify(data, null, 2)}`, 'success');
+            } catch (error) {
+                log(`API 載入失敗: ${error.message}`, 'error');
+            }
+        }
+        
+        async function testStaticLoad() {
+            try {
+                log('開始測試靜態文件載入...');
+                const response = await fetch('data/templates/template-data.json');
+                const data = await response.json();
+                log(`靜態文件載入成功，模板數量: ${data.templates?.length || 0}`, 'success');
+            } catch (error) {
+                log(`靜態文件載入失敗: ${error.message}`, 'error');
+            }
+        }
+        
+        function testTemplateManager() {
+            try {
+                log('開始測試 TemplateManager...');
+                if (window.templateManager) {
+                    log(`TemplateManager 存在，模板數量: ${window.templateManager.templates?.length || 0}`, 'success');
+                    log(`過濾後模板數量: ${window.templateManager.filteredTemplates?.length || 0}`, 'success');
+                } else {
+                    log('TemplateManager 不存在', 'error');
+                }
+            } catch (error) {
+                log(`TemplateManager 測試失敗: ${error.message}`, 'error');
+            }
+        }
+        
+        function checkGlobalVars() {
+            log('檢查全域變數...');
+            log(`window.app: ${typeof window.app}`);
+            log(`window.templateManager: ${typeof window.templateManager}`);
+            log(`window.notificationManager: ${typeof window.notificationManager}`);
+            log(`TemplateManager 類別: ${typeof TemplateManager}`);
+        }
+        
+        // 頁面載入完成後自動檢查
+        document.addEventListener('DOMContentLoaded', () => {
+            log('頁面載入完成');
+            setTimeout(() => {
+                checkGlobalVars();
+                if (window.templateManager) {
+                    templateCount.textContent = `總模板: ${window.templateManager.templates?.length || 0}, 過濾後: ${window.templateManager.filteredTemplates?.length || 0}`;
+                }
+            }, 2000);
+        });
+    </script>
+</body>
+</html> 

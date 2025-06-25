@@ -1,0 +1,112 @@
+version: '3.8'
+
+services:
+  # WordPress 服務
+  wordpress:
+    image: wordpress:6.4-apache
+    container_name: wati_automation_wordpress
+    ports:
+      - "8082:80"
+    volumes:
+      # 掛載專案文件到 WordPress 主題目錄
+      - .:/var/www/html/wp-content/themes/wati-automation
+      # WordPress 核心文件
+      - wordpress_data:/var/www/html
+      # 上傳文件
+      - wordpress_uploads:/var/www/html/wp-content/uploads
+    environment:
+      WORDPRESS_DB_HOST: mysql:3306
+      WORDPRESS_DB_USER: wordpress_user
+      WORDPRESS_DB_PASSWORD: wordpress_password
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_TABLE_PREFIX: wp_
+      WORDPRESS_DEBUG: 1
+      WORDPRESS_CONFIG_EXTRA: |
+        define('WP_DEBUG_LOG', true);
+        define('WP_DEBUG_DISPLAY', false);
+        define('WP_MEMORY_LIMIT', '256M');
+        define('WP_MAX_MEMORY_LIMIT', '512M');
+    depends_on:
+      - mysql
+    networks:
+      - wati_network
+    restart: unless-stopped
+
+  # MySQL 資料庫服務
+  mysql:
+    image: mysql:8.0
+    container_name: wati_automation_mysql
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress_user
+      MYSQL_PASSWORD: wordpress_password
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./docker/mysql/init:/docker-entrypoint-initdb.d
+    networks:
+      - wati_network
+    restart: unless-stopped
+    command: --default-authentication-plugin=mysql_native_password
+
+  # phpMyAdmin（資料庫管理）
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: wati_automation_phpmyadmin
+    ports:
+      - "8083:80"
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: root_password
+      MYSQL_ROOT_PASSWORD: root_password
+    depends_on:
+      - mysql
+    networks:
+      - wati_network
+    restart: unless-stopped
+
+  # Redis 快取服務
+  redis:
+    image: redis:7-alpine
+    container_name: wati_automation_redis
+    ports:
+      - "6380:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - wati_network
+    restart: unless-stopped
+
+  # Nginx 反向代理（可選）
+  nginx:
+    image: nginx:alpine
+    container_name: wati_automation_nginx
+    ports:
+      - "8084:80"
+      - "8443:443"
+    volumes:
+      - ./docker/nginx/wordpress.conf:/etc/nginx/nginx.conf
+      - ./docker/nginx/ssl:/etc/nginx/ssl
+    depends_on:
+      - wordpress
+    networks:
+      - wati_network
+    restart: unless-stopped
+
+volumes:
+  wordpress_data:
+    driver: local
+  wordpress_uploads:
+    driver: local
+  mysql_data:
+    driver: local
+  redis_data:
+    driver: local
+
+networks:
+  wati_network:
+    driver: bridge 

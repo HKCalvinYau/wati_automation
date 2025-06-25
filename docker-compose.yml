@@ -1,0 +1,82 @@
+version: '3.8'
+
+services:
+  # PHP Apache 服務
+  web:
+    build: .
+    container_name: wati_automation_web
+    ports:
+      - "9090:80"
+    volumes:
+      # 掛載專案文件（開發模式）
+      - .:/var/www/html
+      # 掛載數據目錄以保持數據持久化
+      - ./data:/var/www/html/data
+    environment:
+      - APACHE_DOCUMENT_ROOT=/var/www/html
+      - PHP_MEMORY_LIMIT=256M
+      - PHP_MAX_EXECUTION_TIME=300
+    depends_on:
+      - mysql
+    networks:
+      - wati_network
+    restart: unless-stopped
+
+  # MySQL 資料庫服務（可選）
+  mysql:
+    image: mysql:8.0
+    container_name: wati_automation_mysql
+    ports:
+      - "3308:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: wati_root_password
+      MYSQL_DATABASE: wati_automation
+      MYSQL_USER: wati_user
+      MYSQL_PASSWORD: wati_password
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./docker/mysql/init:/docker-entrypoint-initdb.d
+    networks:
+      - wati_network
+    restart: unless-stopped
+    command: --default-authentication-plugin=mysql_native_password
+
+  # phpMyAdmin（可選，用於資料庫管理）
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: wati_automation_phpmyadmin
+    ports:
+      - "9091:80"
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: wati_root_password
+      MYSQL_ROOT_PASSWORD: wati_root_password
+    depends_on:
+      - mysql
+    networks:
+      - wati_network
+    restart: unless-stopped
+
+  # Redis 快取服務（可選）
+  redis:
+    image: redis:7-alpine
+    container_name: wati_automation_redis
+    ports:
+      - "6380:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - wati_network
+    restart: unless-stopped
+
+volumes:
+  mysql_data:
+    driver: local
+  redis_data:
+    driver: local
+
+networks:
+  wati_network:
+    driver: bridge 

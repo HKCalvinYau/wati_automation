@@ -11,8 +11,8 @@ class App {
       defaultLanguage: "zh",
       supportedLanguages: ["zh", "en"],
       apiEndpoints: {
-        templates: "/data/templates/template-data.json",
-        categories: "/data/categories.json",
+        templates: "data/templates/template-data.json",
+        categories: "data/categories.json",
       },
     };
 
@@ -26,6 +26,10 @@ class App {
     };
 
     this.modules = {};
+    
+    // 設為全域變數
+    window.app = this;
+    
     this.init();
   }
 
@@ -67,12 +71,16 @@ class App {
 
     // 通知管理模組
     this.modules.notification = new NotificationManager();
+    // 設為全域變數，讓其他模組可以使用
+    window.notificationManager = this.modules.notification;
 
     // 模態對話框管理模組
     this.modules.modal = new ModalManager();
 
     // 模板管理模組
     this.modules.template = new TemplateManager(this);
+    // 設為全域變數，讓 HTML 中的 onclick 事件可以使用
+    window.templateManager = this.modules.template;
 
     // 類別管理模組
     this.modules.category = new CategoryManager(this);
@@ -256,7 +264,7 @@ class App {
     const searchInput = document.getElementById("search-input");
     if (searchInput) {
       searchInput.addEventListener("input", (e) => {
-        this.modules.search.handleSearchInput(e.target.value);
+        this.modules.search.handleSearchInput(e);
       });
 
       searchInput.addEventListener("keypress", (e) => {
@@ -413,13 +421,8 @@ class App {
   }
 }
 
-// 全局應用程序實例
-let app;
-
-// 頁面載入完成後初始化應用程序
-document.addEventListener("DOMContentLoaded", () => {
-  app = new App();
-});
-
-// 導出應用程序類
+// 設為全域變數
 window.App = App;
+
+// 全局實例
+window.app = new App();

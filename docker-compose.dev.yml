@@ -1,0 +1,99 @@
+version: '3.8'
+
+services:
+  # PHP Apache 服務（開發環境）
+  web:
+    build: .
+    container_name: wati_automation_web_dev
+    ports:
+      - "8080:80"
+    volumes:
+      # 掛載整個專案目錄用於開發
+      - .:/var/www/html
+      # 掛載數據目錄
+      - ./data:/var/www/html/data
+    environment:
+      - APACHE_DOCUMENT_ROOT=/var/www/html
+      - PHP_MEMORY_LIMIT=256M
+      - PHP_MAX_EXECUTION_TIME=300
+      - PHP_DISPLAY_ERRORS=1
+      - PHP_DISPLAY_STARTUP_ERRORS=1
+    depends_on:
+      - mysql
+    networks:
+      - wati_network
+    restart: unless-stopped
+
+  # MySQL 資料庫服務（開發環境）
+  mysql:
+    image: mysql:8.0
+    container_name: wati_automation_mysql_dev
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: dev_root_password
+      MYSQL_DATABASE: wati_automation_dev
+      MYSQL_USER: dev_user
+      MYSQL_PASSWORD: dev_password
+    volumes:
+      - mysql_data_dev:/var/lib/mysql
+      - ./docker/mysql/init:/docker-entrypoint-initdb.d
+    networks:
+      - wati_network
+    restart: unless-stopped
+    command: --default-authentication-plugin=mysql_native_password
+
+  # phpMyAdmin（開發環境）
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: wati_automation_phpmyadmin_dev
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: dev_root_password
+      MYSQL_ROOT_PASSWORD: dev_root_password
+    depends_on:
+      - mysql
+    networks:
+      - wati_network
+    restart: unless-stopped
+
+  # Redis 快取服務（開發環境）
+  redis:
+    image: redis:7-alpine
+    container_name: wati_automation_redis_dev
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data_dev:/data
+    networks:
+      - wati_network
+    restart: unless-stopped
+
+  # Node.js 開發服務器（可選）
+  node-dev:
+    image: node:18-alpine
+    container_name: wati_automation_node_dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    working_dir: /app
+    command: sh -c "npm install && npm run dev"
+    networks:
+      - wati_network
+    restart: unless-stopped
+
+volumes:
+  mysql_data_dev:
+    driver: local
+  redis_data_dev:
+    driver: local
+
+networks:
+  wati_network:
+    driver: bridge 

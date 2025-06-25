@@ -51,6 +51,19 @@ class SearchManager {
   }
 
   /**
+   * 設置搜索歷史
+   */
+  setupSearchHistory() {
+    // 初始化搜索歷史容器
+    const suggestions = document.querySelector(".search-suggestions");
+    if (suggestions) {
+      suggestions.style.display = "none";
+    }
+    
+    console.log("✅ 搜索歷史設置完成");
+  }
+
+  /**
    * 處理搜索輸入
    */
   handleSearchInput(e) {
@@ -106,7 +119,7 @@ class SearchManager {
    */
   async searchTemplates(query) {
     try {
-      const response = await fetch("/data/templates/template-data.json");
+      const response = await fetch("data/templates/template-data.json");
       const data = await response.json();
 
       return data.templates.filter((template) => {
@@ -238,5 +251,5 @@ class SearchManager {
   }
 }
 
-// 導出模組
-export default SearchManager;
+// 全局實例
+window.SearchManager = SearchManager;

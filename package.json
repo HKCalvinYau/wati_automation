@@ -6,8 +6,9 @@
   "scripts": {
     "start": "node local-test-server.js",
     "dev": "node local-test-server.js",
-    "build": "node build.js",
-    "build:prod": "NODE_ENV=production node build.js",
+    "build": "webpack --config webpack.config.js",
+    "build:prod": "NODE_ENV=production webpack --config webpack.config.js --mode=production",
+    "build:legacy": "node build.js",
     "deploy:staging": "node deploy.js --env=staging",
     "deploy:prod": "node deploy.js --env=production",
     "test": "jest",

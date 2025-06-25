@@ -25,7 +25,7 @@ class VersionManager {
    */
   async loadVersions() {
     try {
-      const response = await fetch("/data/templates/version-data.json");
+      const response = await fetch("data/templates/version-data.json");
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -75,7 +75,7 @@ class VersionManager {
   async saveVersions() {
     try {
       const versionsArray = Array.from(this.versions.values());
-      const response = await fetch("/data/templates/version-data.json", {
+      const response = await fetch("data/templates/version-data.json", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -181,5 +181,5 @@ class VersionManager {
   }
 }
 
-// 導出模組
-export default VersionManager;
+// 全局實例
+window.versionManager = new VersionManager();

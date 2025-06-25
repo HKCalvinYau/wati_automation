@@ -1,0 +1,32 @@
+FROM httpd:2.4-alpine
+
+# 安裝 PHP 和必要的擴展
+RUN apk add --no-cache \
+    php \
+    php-apache2 \
+    php-mysqli \
+    php-json \
+    php-mbstring \
+    php-xml \
+    php-curl \
+    php-zip \
+    php-gd \
+    php-opcache
+
+# 配置 Apache 支援 PHP
+RUN echo "LoadModule php_module /usr/lib/apache2/modules/libphp.so" >> /usr/local/apache2/conf/httpd.conf && \
+    echo "AddHandler php-script .php" >> /usr/local/apache2/conf/httpd.conf && \
+    echo "DirectoryIndex index.php index.html" >> /usr/local/apache2/conf/httpd.conf && \
+    echo "<Directory /var/www/html>" >> /usr/local/apache2/conf/httpd.conf && \
+    echo "    AllowOverride All" >> /usr/local/apache2/conf/httpd.conf && \
+    echo "    Require all granted" >> /usr/local/apache2/conf/httpd.conf && \
+    echo "</Directory>" >> /usr/local/apache2/conf/httpd.conf
+
+# 設置工作目錄
+WORKDIR /var/www/html
+
+# 暴露端口
+EXPOSE 80
+
+# 啟動 Apache
+CMD ["httpd-foreground"] 

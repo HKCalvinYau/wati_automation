@@ -1,0 +1,146 @@
+name: Simple Deploy
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  # 測試和驗證
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Check PHP syntax
+      run: |
+        echo "🔍 Checking PHP syntax..."
+        find api/ -name "*.php" -exec php -l {} \;
+        
+    - name: Validate HTML files
+      run: |
+        echo "🔍 Validating HTML files..."
+        # 簡單的 HTML 檢查
+        if ! grep -q "<!DOCTYPE html>" index.html; then
+          echo "❌ index.html missing DOCTYPE"
+          exit 1
+        fi
+        if ! grep -q "<!DOCTYPE html>" detail.html; then
+          echo "❌ detail.html missing DOCTYPE"
+          exit 1
+        fi
+        echo "✅ HTML validation passed"
+        
+    - name: Check file structure
+      run: |
+        echo "🔍 Checking file structure..."
+        required_files=("index.html" "detail.html" "css/main.css" "js/main.js")
+        for file in "${required_files[@]}"; do
+          if [ ! -f "$file" ]; then
+            echo "❌ Missing required file: $file"
+            exit 1
+          fi
+        done
+        echo "✅ File structure validation passed"
+
+  # 部署到 GitHub Pages
+  deploy-github-pages:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+      
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+      
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Pages
+      uses: actions/configure-pages@v4
+      
+    - name: Upload static files
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: |
+          index.html
+          detail.html
+          css/
+          js/
+          api/
+          data/
+          docs/
+          docker/
+          *.md
+          *.json
+          *.yml
+          *.yaml
+          
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
+      
+    - name: Show deployment URL
+      run: |
+        echo "🚀 Deployment URL: ${{ steps.deployment.outputs.page_url }}"
+
+  # 部署到 Netlify（可選）
+  deploy-netlify:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && vars.NETLIFY_ENABLED == 'true'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Deploy to Netlify
+      uses: nwtgck/actions-netlify@v3.0
+      with:
+        publish-dir: './'
+        production-branch: main
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        deploy-message: "🚀 Deploy from GitHub Actions - ${{ github.sha }}"
+      env:
+        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+      timeout-minutes: 1
+
+  # 通知
+  notify:
+    needs: [deploy-github-pages, deploy-netlify]
+    runs-on: ubuntu-latest
+    if: always()
+    
+    steps:
+    - name: Deployment Summary
+      run: |
+        echo "🎉 Deployment Summary:"
+        echo "GitHub Pages: ${{ needs.deploy-github-pages.result }}"
+        echo "Netlify: ${{ needs.deploy-netlify.result }}"
+        
+        if [ "${{ needs.deploy-github-pages.result }}" == "success" ]; then
+          echo "✅ GitHub Pages deployed successfully!"
+        fi
+        
+        if [ "${{ needs.deploy-netlify.result }}" == "success" ]; then
+          echo "✅ Netlify deployed successfully!"
+        fi 

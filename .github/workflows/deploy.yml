@@ -1,0 +1,226 @@
+name: Deploy WATI Automation System
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  # 測試和構建工作
+  test-and-build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Run tests (if any)
+      run: |
+        echo "Running tests..."
+        # npm test (如果有測試的話)
+        
+    - name: Build project
+      run: |
+        echo "Building project..."
+        # npm run build (如果需要構建的話)
+        
+    - name: Validate HTML
+      run: |
+        echo "Validating HTML files..."
+        # 可以添加 HTML 驗證
+        
+    - name: Check PHP syntax
+      run: |
+        echo "Checking PHP syntax..."
+        find api/ -name "*.php" -exec php -l {} \;
+        
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: build-files
+        path: |
+          *.html
+          css/
+          js/
+          api/
+          data/
+          docs/
+          docker/
+        retention-days: 7
+
+  # 部署到測試環境
+  deploy-staging:
+    needs: test-and-build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/develop'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Deploy to staging server
+      run: |
+        echo "Deploying to staging environment..."
+        # 這裡可以添加部署到測試服務器的腳本
+        # 例如：使用 rsync, scp, 或雲端平台的 CLI
+        
+    - name: Notify staging deployment
+      run: |
+        echo "Staging deployment completed!"
+        # 可以添加通知邏輯（Slack, Discord, Email 等）
+
+  # 部署到生產環境
+  deploy-production:
+    needs: test-and-build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    environment: production
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Docker Buildx
+      uses: docker/setup-buildx-action@v3
+      
+    - name: Login to Docker Hub (if needed)
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        file: ./Dockerfile
+        push: true
+        tags: |
+          your-dockerhub-username/wati-automation:latest
+          your-dockerhub-username/wati-automation:${{ github.sha }}
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+        
+    - name: Deploy to production server
+      run: |
+        echo "Deploying to production environment..."
+        # 部署腳本
+        # 1. 備份當前版本
+        # 2. 部署新版本
+        # 3. 健康檢查
+        # 4. 回滾機制（如果需要）
+        
+    - name: Health check
+      run: |
+        echo "Performing health check..."
+        # 檢查應用是否正常運行
+        # curl -f http://your-domain.com/health || exit 1
+        
+    - name: Notify production deployment
+      run: |
+        echo "Production deployment completed successfully!"
+        # 發送成功通知
+
+  # 部署到 GitHub Pages（靜態文件）
+  deploy-github-pages:
+    needs: test-and-build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+      
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+      
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Pages
+      uses: actions/configure-pages@v4
+      
+    - name: Upload static files
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: |
+          index.html
+          detail.html
+          css/
+          js/
+          docs/
+          data/
+          
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
+
+  # 部署到 Netlify（可選）
+  deploy-netlify:
+    needs: test-and-build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Deploy to Netlify
+      uses: nwtgck/actions-netlify@v3.0
+      with:
+        publish-dir: './'
+        production-branch: main
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        deploy-message: "Deploy from GitHub Actions"
+      env:
+        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+      timeout-minutes: 1
+
+  # 部署到 Vercel（可選）
+  deploy-vercel:
+    needs: test-and-build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Deploy to Vercel
+      uses: amondnet/vercel-action@v25
+      with:
+        vercel-token: ${{ secrets.VERCEL_TOKEN }}
+        vercel-org-id: ${{ secrets.ORG_ID }}
+        vercel-project-id: ${{ secrets.PROJECT_ID }}
+        vercel-args: '--prod'
+
+  # 通知工作
+  notify:
+    needs: [deploy-production, deploy-github-pages]
+    runs-on: ubuntu-latest
+    if: always()
+    
+    steps:
+    - name: Notify deployment status
+      run: |
+        if [ "${{ needs.deploy-production.result }}" == "success" ] && [ "${{ needs.deploy-github-pages.result }}" == "success" ]; then
+          echo "🎉 All deployments completed successfully!"
+          # 發送成功通知
+        else
+          echo "❌ Some deployments failed"
+          # 發送失敗通知
+        fi 

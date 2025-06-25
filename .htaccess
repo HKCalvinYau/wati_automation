@@ -20,6 +20,20 @@ RewriteRule . /index.php [L]
 </IfModule>
 # END WordPress
 
+# 防止 JSON 檔案被快取
+<FilesMatch "\.json$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+</FilesMatch>
+
+# 防止 PHP API 被快取
+<FilesMatch "\.php$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+</FilesMatch>
+
 # 啟用 GZIP 壓縮
 <IfModule mod_deflate.c>
     AddOutputFilterByType DEFLATE text/plain
@@ -31,6 +45,7 @@ RewriteRule . /index.php [L]
     AddOutputFilterByType DEFLATE application/rss+xml
     AddOutputFilterByType DEFLATE application/javascript
     AddOutputFilterByType DEFLATE application/x-javascript
+    AddOutputFilterByType DEFLATE application/json
 </IfModule>
 
 # 設定瀏覽器快取
@@ -45,7 +60,7 @@ RewriteRule . /index.php [L]
     ExpiresByType text/javascript "access plus 1 month"
     ExpiresByType application/javascript "access plus 1 month"
     ExpiresByType application/x-javascript "access plus 1 month"
-    ExpiresByType application/x-shockwave-flash "access plus 1 month"
+    ExpiresByType application/json "access plus 0 seconds"
     ExpiresByType image/x-icon "access plus 1 year"
     ExpiresDefault "access plus 2 days"
 </IfModule>
@@ -66,4 +81,11 @@ Options -Indexes
     Header set X-Content-Type-Options "nosniff"
     Header set Strict-Transport-Security "max-age=31536000; includeSubDomains"
     Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# 允許跨域請求（用於 API）
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+    Header set Access-Control-Allow-Headers "Content-Type"
 </IfModule> 

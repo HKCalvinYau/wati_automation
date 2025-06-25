@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>開發指南 - 寵物善終服務 WhatsApp 訊息模板管理系統</title>
+    <meta name="description" content="寵物善終服務 WhatsApp 訊息模板管理系統的完整開發指南">
+    
+    <!-- 樣式文件 -->
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        .dev-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .dev-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .dev-section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .code-block {
+            background: #2d3748;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+        
+        .code-block pre {
+            margin: 0;
+            color: #e2e8f0;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+        }
+    </style>
+</head>
+<body>
+    <!-- 頁面頭部 -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="../index.html" class="logo">
+                    <i class="fas fa-heart"></i>
+                    寵物善終服務
+                </a>
+                <nav class="nav">
+                    <a href="../index.html" class="nav-link">
+                        <i class="fas fa-home"></i>
+                        首頁
+                    </a>
+                    <a href="development.html" class="nav-link active">
+                        <i class="fas fa-book"></i>
+                        開發文檔
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主要內容 -->
+    <main class="main">
+        <div class="dev-container">
+            <!-- 開發文檔標題 -->
+            <div class="dev-header">
+                <h1><i class="fas fa-code"></i> 開發指南</h1>
+                <p>寵物善終服務 WhatsApp 訊息模板管理系統的完整開發文檔</p>
+            </div>
+
+            <!-- 系統概覽 -->
+            <section class="dev-section">
+                <h2><i class="fas fa-info-circle"></i> 系統概覽</h2>
+                <p>寵物善終服務 WhatsApp 訊息模板管理系統是一個現代化的 Web 應用程式，專為寵物善終服務業者設計，提供完整的訊息模板管理解決方案。</p>
+                
+                <h3>主要功能</h3>
+                <ul>
+                    <li>雙語支援（繁體中文/英文）</li>
+                    <li>智能搜索和過濾</li>
+                    <li>響應式設計</li>
+                    <li>使用次數統計</li>
+                    <li>圖片管理</li>
+                    <li>批量操作</li>
+                </ul>
+            </section>
+
+            <!-- 技術架構 -->
+            <section class="dev-section">
+                <h2><i class="fas fa-sitemap"></i> 技術架構</h2>
+                
+                <h3>技術棧</h3>
+                <ul>
+                    <li><strong>前端：</strong>HTML5, CSS3, JavaScript (ES6+)</li>
+                    <li><strong>後端：</strong>PHP 8.0+</li>
+                    <li><strong>容器化：</strong>Docker & Docker Compose</li>
+                    <li><strong>Web 服務器：</strong>Apache</li>
+                </ul>
+                
+                <h3>目錄結構</h3>
+                <div class="code-block">
+                    <pre><code>wati_automation/
+├── index.html                    # 首頁
+├── detail.html                   # 模板詳情頁面
+├── api/                          # API 端點
+│   ├── get-templates.php         # 獲取模板列表
+│   ├── save-template.php         # 保存模板
+│   ├── save-template-images.php  # 保存模板圖片
+│   └── increment-usage.php       # 統計使用次數
+├── css/                          # 樣式文件
+├── js/                           # JavaScript 文件
+│   ├── main.js                   # 主入口文件
+│   ├── core/                     # 核心模組
+│   ├── components/               # 組件模組
+│   └── utils/                    # 工具模組
+├── data/                         # 數據文件
+├── docker/                       # Docker 配置
+└── docs/                         # 文檔</code></pre>
+                </div>
+            </section>
+
+            <!-- API 文檔 -->
+            <section class="dev-section">
+                <h2><i class="fas fa-plug"></i> API 文檔</h2>
+                
+                <h3>基礎 URL</h3>
+                <p>所有 API 端點的基礎 URL：<code>http://localhost:9090/api/</code></p>
+                
+                <h3>API 端點</h3>
+                <ul>
+                    <li><strong>GET /get-templates.php</strong> - 獲取所有模板列表</li>
+                    <li><strong>POST /save-template.php</strong> - 保存或更新模板</li>
+                    <li><strong>POST /save-template-images.php</strong> - 保存模板相關圖片</li>
+                    <li><strong>POST /increment-usage.php</strong> - 增加模板使用次數</li>
+                </ul>
+            </section>
+
+            <!-- 部署指南 -->
+            <section class="dev-section">
+                <h2><i class="fas fa-rocket"></i> 部署指南</h2>
+                
+                <h3>Docker 部署</h3>
+                <div class="code-block">
+                    <pre><code># 啟動容器
+docker-compose -f docker-compose.simple.yml up -d
+
+# 訪問應用
+# 前端: http://localhost:9090
+# phpMyAdmin: http://localhost:9091</code></pre>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        // 平滑滾動
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

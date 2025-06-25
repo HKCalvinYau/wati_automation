@@ -85,7 +85,7 @@
           </div>
 
           <div class="filters-content">
-            <!-- 搜索框 -->
+            <!-- 只保留這個搜索框 -->
             <div class="filter-group">
               <label for="search-input" class="filter-label">
                 <i class="fas fa-search"></i>
@@ -149,6 +149,50 @@
               模板列表
             </h2>
             <div class="templates-actions">
+              <!-- 多選功能按鈕 -->
+              <button
+                class="btn btn-outline"
+                onclick="templateManager.toggleSelectionMode()"
+                id="selection-mode-btn"
+              >
+                <i class="fas fa-check-square"></i>
+                多選模式
+              </button>
+              
+              <!-- 批量操作按鈕組 -->
+              <div class="batch-actions" id="batch-actions" style="display: none;">
+                <span class="selected-count">已選擇: <span id="selected-count">0</span></span>
+                <button
+                  class="btn btn-secondary btn-sm"
+                  onclick="templateManager.selectAll()"
+                >
+                  <i class="fas fa-check-double"></i>
+                  全選
+                </button>
+                <button
+                  class="btn btn-secondary btn-sm"
+                  onclick="templateManager.deselectAll()"
+                >
+                  <i class="fas fa-square"></i>
+                  取消全選
+                </button>
+                <button
+                  class="btn btn-primary btn-sm"
+                  onclick="templateManager.exportSelectedTemplates()"
+                >
+                  <i class="fas fa-download"></i>
+                  匯出選中
+                </button>
+                <button
+                  class="btn btn-danger btn-sm"
+                  onclick="templateManager.deleteSelectedTemplates()"
+                >
+                  <i class="fas fa-trash"></i>
+                  刪除選中
+                </button>
+              </div>
+              
+              <!-- 原有按鈕 -->
               <button
                 class="btn btn-secondary"
                 onclick="templateManager.reloadTemplates()"
@@ -161,7 +205,7 @@
                 onclick="templateManager.exportTemplates()"
               >
                 <i class="fas fa-download"></i>
-                匯出數據
+                匯出全部
               </button>
               <button
                 class="btn btn-primary"
@@ -221,35 +265,38 @@
     </footer>
 
     <!-- JavaScript 文件 -->
-    <script src="js/utils/favicon-handler.js"></script>
-    <script src="js/components/TemplateManager.js"></script>
-    <script src="js/utils/helpers.js"></script>
+    <!-- 工具模組 -->
+    <script src="js/utils/notification-manager.js"></script>
+    <script src="js/utils/modal-manager.js"></script>
+    <script src="js/utils/storage-manager.js"></script>
+    <script src="js/utils/category-manager.js"></script>
+    <script src="js/utils/language-manager.js"></script>
+    
+    <!-- 組件模組 -->
     <script src="js/components/SearchManager.js"></script>
+    <script src="js/components/TemplateDetail.js"></script>
+    <script src="js/components/ApprovalManager.js"></script>
+    <script src="js/components/UsageManager.js"></script>
+    <script src="js/components/VersionManager.js"></script>
+    <script src="js/components/TemplateManager.js"></script>
+    
+    <!-- 核心模組 -->
+    <script src="js/core/app.js"></script>
+    
+    <!-- 主入口文件 -->
+    <script src="js/main.js"></script>
 
     <!-- 初始化腳本 -->
     <script>
       // 頁面加載完成後的初始化
       document.addEventListener("DOMContentLoaded", function () {
-        console.log("🚀 新系統頁面初始化開始");
+        console.log("🚀 系統頁面初始化開始");
 
-        // 更新統計信息
-        if (window.templateManager) {
-          const updateStats = () => {
-            const totalCount = document.getElementById("total-count");
-            if (totalCount && window.templateManager.templates) {
-              totalCount.textContent = window.templateManager.templates.length;
-            }
-          };
-
-          // 延遲更新統計，確保數據已加載
-          setTimeout(updateStats, 1000);
+        // 等待 app 初始化完成
+        if (window.app) {
+          console.log("✅ 系統頁面初始化完成");
         }
-
-        console.log("✅ 新系統頁面初始化完成");
       });
-
-      // 初始化搜索管理器
-      window.searchManager = new SearchManager();
     </script>
   </body>
 </html>

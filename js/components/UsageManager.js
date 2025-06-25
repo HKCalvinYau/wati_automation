@@ -26,7 +26,7 @@ class UsageManager {
    */
   async loadUsageStats() {
     try {
-      const response = await fetch("/data/templates/usage-data.json");
+      const response = await fetch("data/templates/usage-data.json");
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -134,7 +134,7 @@ class UsageManager {
   async saveUsageStats() {
     try {
       const statsArray = Array.from(this.usageStats.values());
-      const response = await fetch("/data/templates/usage-data.json", {
+      const response = await fetch("data/templates/usage-data.json", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -284,5 +284,5 @@ class UsageManager {
   }
 }
 
-// 導出模組
-export default UsageManager;
+// 全局實例
+window.usageManager = new UsageManager();

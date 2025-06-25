@@ -1,0 +1,83 @@
+services:
+  # 使用現有的 phpMyAdmin 映像作為臨時的 PHP 環境
+  web:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: wati_automation_web
+    ports:
+      - "9090:80"
+    volumes:
+      # 掛載專案文件
+      - .:/var/www/html
+      # 掛載數據目錄
+      - ./data:/var/www/html/data
+    environment:
+      - PMA_HOST=mysql
+      - PMA_PORT=3306
+      - PMA_USER=root
+      - PMA_PASSWORD=root_password
+      - MYSQL_ROOT_PASSWORD=root_password
+    depends_on:
+      - mysql
+    networks:
+      - wati_network
+    restart: unless-stopped
+    command: >
+      sh -c "
+      # 安裝 Apache 和 PHP
+      apk add --no-cache apache2 php php-apache2 php-mysqli php-json php-mbstring &&
+      # 配置 Apache 支援 PHP
+      echo 'LoadModule php_module /usr/lib/apache2/modules/libphp.so' >> /etc/apache2/httpd.conf &&
+      echo 'AddHandler php-script .php' >> /etc/apache2/httpd.conf &&
+      echo 'DirectoryIndex index.php index.html' >> /etc/apache2/httpd.conf &&
+      echo '<Directory /var/www/html>' >> /etc/apache2/httpd.conf &&
+      echo '    AllowOverride All' >> /etc/apache2/httpd.conf &&
+      echo '    Require all granted' >> /etc/apache2/httpd.conf &&
+      echo '</Directory>' >> /etc/apache2/httpd.conf &&
+      # 啟動 Apache
+      httpd-foreground
+      "
+
+  # MySQL 資料庫服務
+  mysql:
+    image: mysql:8.0
+    container_name: wati_automation_mysql
+    ports:
+      - "3308:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: wati_automation
+      MYSQL_USER: wati_user
+      MYSQL_PASSWORD: wati_password
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./docker/mysql/init:/docker-entrypoint-initdb.d
+    networks:
+      - wati_network
+    restart: unless-stopped
+    command: --default-authentication-plugin=mysql_native_password
+
+  # phpMyAdmin（資料庫管理）
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: wati_automation_phpmyadmin
+    ports:
+      - "9091:80"
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: root_password
+      MYSQL_ROOT_PASSWORD: root_password
+    depends_on:
+      - mysql
+    networks:
+      - wati_network
+    restart: unless-stopped
+
+volumes:
+  mysql_data:
+    driver: local
+
+networks:
+  wati_network:
+    driver: bridge 
