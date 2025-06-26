@@ -3,218 +3,308 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>保存功能診斷工具</title>
+    <title>保存問題診斷工具</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            max-width: 800px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
+            background-color: #f5f5f5;
         }
-        .test-section {
-            margin: 20px 0;
+        .container {
+            background: white;
             padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 15px;
             border: 1px solid #ddd;
             border-radius: 5px;
         }
-        .btn {
-            background: #007cba;
+        .section h2 {
+            color: #555;
+            margin-top: 0;
+        }
+        button {
+            background-color: #007bff;
             color: white;
             border: none;
             padding: 10px 20px;
-            border-radius: 3px;
+            border-radius: 5px;
             cursor: pointer;
             margin: 5px;
         }
-        .btn:hover {
-            background: #005a87;
+        button:hover {
+            background-color: #0056b3;
+        }
+        button.danger {
+            background-color: #dc3545;
+        }
+        button.danger:hover {
+            background-color: #c82333;
+        }
+        button.success {
+            background-color: #28a745;
+        }
+        button.success:hover {
+            background-color: #218838;
         }
         .result {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 15px;
             margin-top: 10px;
-            padding: 10px;
-            background: #f5f5f5;
-            border-radius: 3px;
             white-space: pre-wrap;
-        }
-        .success {
-            background: #d4edda;
-            color: #155724;
+            font-family: monospace;
+            max-height: 400px;
+            overflow-y: auto;
         }
         .error {
-            background: #f8d7da;
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
             color: #721c24;
         }
+        .success {
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+        }
         .warning {
-            background: #fff3cd;
+            background-color: #fff3cd;
+            border-color: #ffeaa7;
             color: #856404;
         }
-        .info {
-            background: #d1ecf1;
-            color: #0c5460;
+        .status {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .status.ok {
+            background-color: #28a745;
+            color: white;
+        }
+        .status.error {
+            background-color: #dc3545;
+            color: white;
+        }
+        .status.warning {
+            background-color: #ffc107;
+            color: black;
         }
     </style>
 </head>
 <body>
-    <h1>🔧 保存功能診斷工具</h1>
+    <h1>🔧 保存問題診斷工具</h1>
     
-    <div class="test-section">
-        <h2>1. 環境檢查</h2>
-        <button class="btn" onclick="checkEnvironment()">檢查環境</button>
-        <div id="env-result" class="result"></div>
-    </div>
-    
-    <div class="test-section">
-        <h2>2. API 連接測試</h2>
-        <button class="btn" onclick="testApiConnection()">測試 API 連接</button>
-        <div id="api-result" class="result"></div>
-    </div>
-    
-    <div class="test-section">
-        <h2>3. 獲取模板測試</h2>
-        <button class="btn" onclick="testGetTemplates()">測試獲取模板</button>
-        <div id="get-result" class="result"></div>
-    </div>
-    
-    <div class="test-section">
-        <h2>4. 保存模板測試</h2>
-        <button class="btn" onclick="testSaveTemplate()">測試保存模板</button>
-        <div id="save-result" class="result"></div>
-    </div>
-    
-    <div class="test-section">
-        <h2>5. 完整診斷</h2>
-        <button class="btn" onclick="runFullDiagnostic()">執行完整診斷</button>
-        <div id="diagnostic-result" class="result"></div>
+    <div class="container">
+        <div class="section">
+            <h2>📊 系統診斷</h2>
+            <p>點擊下方按鈕來診斷系統配置和權限問題：</p>
+            <button onclick="runDiagnosis()">🔍 運行診斷</button>
+            <button onclick="fixPermissions()" class="success">🔧 修復權限</button>
+            <button onclick="testSave()" class="success">💾 測試保存</button>
+            <div id="diagnosis-result" class="result" style="display: none;"></div>
+        </div>
+        
+        <div class="section">
+            <h2>🧪 保存測試</h2>
+            <p>測試模板保存功能：</p>
+            <button onclick="testSimpleSave()">簡單保存測試</button>
+            <button onclick="testFullSave()">完整保存測試</button>
+            <div id="save-test-result" class="result" style="display: none;"></div>
+        </div>
+        
+        <div class="section">
+            <h2>📋 常見問題解決</h2>
+            <div id="common-issues">
+                <h3>1. 文件權限問題</h3>
+                <p>如果診斷顯示權限問題，請：</p>
+                <ul>
+                    <li>點擊「修復權限」按鈕</li>
+                    <li>或手動設置目錄權限為 755</li>
+                    <li>或聯繫主機提供商</li>
+                </ul>
+                
+                <h3>2. 路徑問題</h3>
+                <p>如果路徑解析錯誤：</p>
+                <ul>
+                    <li>檢查文件結構是否正確</li>
+                    <li>確認相對路徑是否正確</li>
+                    <li>檢查大小寫是否匹配</li>
+                </ul>
+                
+                <h3>3. PHP 配置問題</h3>
+                <p>如果 PHP 設置有問題：</p>
+                <ul>
+                    <li>檢查 file_uploads 設置</li>
+                    <li>確認 memory_limit 足夠</li>
+                    <li>檢查 post_max_size 設置</li>
+                </ul>
+            </div>
+        </div>
     </div>
 
     <script>
-        let diagnosticResults = [];
-        
-        function log(message, type = 'info') {
-            const timestamp = new Date().toLocaleTimeString();
-            const logMessage = `[${timestamp}] ${message}`;
-            console.log(logMessage);
-            diagnosticResults.push({ message: logMessage, type });
-            return logMessage;
-        }
-        
-        function showResult(elementId, content, type = 'info') {
-            const element = document.getElementById(elementId);
-            element.textContent = content;
-            element.className = `result ${type}`;
-        }
-        
-        async function checkEnvironment() {
-            const resultDiv = document.getElementById('env-result');
-            let results = [];
+        // 運行診斷
+        async function runDiagnosis() {
+            const resultDiv = document.getElementById('diagnosis-result');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result';
+            resultDiv.textContent = '正在運行診斷...';
             
             try {
-                // 檢查瀏覽器環境
-                results.push(`✅ 瀏覽器: ${navigator.userAgent}`);
-                results.push(`✅ 語言: ${navigator.language}`);
-                results.push(`✅ 線上狀態: ${navigator.onLine ? '線上' : '離線'}`);
+                const response = await fetch('api/debug-save-issue.php', {
+                    method: 'GET'
+                });
                 
-                // 檢查 API 支援
-                results.push(`✅ Fetch API: ${typeof fetch !== 'undefined' ? '支援' : '不支援'}`);
-                results.push(`✅ JSON: ${typeof JSON !== 'undefined' ? '支援' : '不支援'}`);
-                
-                // 檢查當前 URL
-                results.push(`✅ 當前 URL: ${window.location.href}`);
-                results.push(`✅ 協議: ${window.location.protocol}`);
-                results.push(`✅ 主機: ${window.location.host}`);
-                results.push(`✅ 路徑: ${window.location.pathname}`);
-                
-                showResult('env-result', results.join('\n'), 'success');
-                log('環境檢查完成', 'success');
-                
-            } catch (error) {
-                showResult('env-result', `❌ 環境檢查失敗: ${error.message}`, 'error');
-                log(`環境檢查失敗: ${error.message}`, 'error');
-            }
-        }
-        
-        async function testApiConnection() {
-            const resultDiv = document.getElementById('api-result');
-            resultDiv.textContent = '測試中...';
-            
-            try {
-                // 測試不同的 API 端點
-                const endpoints = [
-                    'api/save-template.php',
-                    'api/get-templates.php',
-                    '/api/save-template.php',
-                    '/api/get-templates.php'
-                ];
-                
-                let results = [];
-                
-                for (const endpoint of endpoints) {
-                    try {
-                        const response = await fetch(endpoint, {
-                            method: 'OPTIONS'
-                        });
-                        results.push(`✅ ${endpoint}: ${response.status} ${response.statusText}`);
-                    } catch (error) {
-                        results.push(`❌ ${endpoint}: ${error.message}`);
-                    }
-                }
-                
-                showResult('api-result', results.join('\n'), 'info');
-                log('API 連接測試完成', 'info');
-                
-            } catch (error) {
-                showResult('api-result', `❌ API 測試失敗: ${error.message}`, 'error');
-                log(`API 測試失敗: ${error.message}`, 'error');
-            }
-        }
-        
-        async function testGetTemplates() {
-            const resultDiv = document.getElementById('get-result');
-            resultDiv.textContent = '測試中...';
-            
-            try {
-                const response = await fetch('api/get-templates.php');
                 const data = await response.json();
                 
-                if (data.success) {
-                    showResult('get-result', 
-                        `✅ 成功獲取模板\n` +
-                        `📊 模板數量: ${data.data.templates.length}\n` +
-                        `📅 最後更新: ${data.data.metadata.lastUpdated}\n` +
-                        `🔧 版本: ${data.data.metadata.version}`, 
-                        'success'
-                    );
-                    log('獲取模板測試成功', 'success');
+                if (response.ok) {
+                    resultDiv.className = 'result success';
+                    resultDiv.textContent = JSON.stringify(data, null, 2);
                 } else {
-                    showResult('get-result', `❌ 獲取失敗: ${data.message}`, 'error');
-                    log(`獲取模板失敗: ${data.message}`, 'error');
+                    resultDiv.className = 'result error';
+                    resultDiv.textContent = '診斷失敗: ' + JSON.stringify(data, null, 2);
                 }
             } catch (error) {
-                showResult('get-result', `❌ 請求失敗: ${error.message}`, 'error');
-                log(`獲取模板請求失敗: ${error.message}`, 'error');
+                resultDiv.className = 'result error';
+                resultDiv.textContent = '診斷錯誤: ' + error.message;
             }
         }
         
-        async function testSaveTemplate() {
-            const resultDiv = document.getElementById('save-result');
-            resultDiv.textContent = '測試中...';
+        // 修復權限
+        async function fixPermissions() {
+            const resultDiv = document.getElementById('diagnosis-result');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result';
+            resultDiv.textContent = '正在修復權限...';
             
-            const testTemplate = {
-                id: 'DEBUG_TEST_' + Date.now(),
-                code: 'DEBUG_TEST_' + Date.now(),
-                category: 'ic',
-                title: {
-                    zh: '診斷測試模板',
-                    en: 'Debug Test Template'
-                },
-                description: {
-                    zh: '這是一個診斷測試用的模板',
-                    en: 'This is a debug test template'
-                },
-                content: {
-                    zh: '測試內容 {{1}}',
-                    en: 'Test content {{1}}'
-                },
+            try {
+                const response = await fetch('api/fix-permissions.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({})
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok && data.success) {
+                    resultDiv.className = 'result success';
+                    resultDiv.textContent = '權限修復成功！\n\n' + JSON.stringify(data, null, 2);
+                } else {
+                    resultDiv.className = 'result error';
+                    resultDiv.textContent = '權限修復失敗: ' + JSON.stringify(data, null, 2);
+                }
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.textContent = '權限修復錯誤: ' + error.message;
+            }
+        }
+        
+        // 測試保存
+        async function testSave() {
+            const resultDiv = document.getElementById('save-test-result');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result';
+            resultDiv.textContent = '正在測試保存...';
+            
+            const testData = {
+                id: 'TEST_' + Date.now(),
+                code: 'TEST_CODE',
+                category: 'test',
+                title: '測試模板',
+                description: '這是一個測試模板',
+                content: '測試內容',
+                status: 'active'
+            };
+            
+            try {
+                const response = await fetch('api/save-template-simple.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(testData)
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok && data.success) {
+                    resultDiv.className = 'result success';
+                    resultDiv.textContent = '保存測試成功！\n\n' + JSON.stringify(data, null, 2);
+                } else {
+                    resultDiv.className = 'result error';
+                    resultDiv.textContent = '保存測試失敗: ' + JSON.stringify(data, null, 2);
+                }
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.textContent = '保存測試錯誤: ' + error.message;
+            }
+        }
+        
+        // 簡單保存測試
+        async function testSimpleSave() {
+            const resultDiv = document.getElementById('save-test-result');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result';
+            resultDiv.textContent = '正在測試簡單保存...';
+            
+            const testData = {
+                id: 'SIMPLE_TEST_' + Date.now(),
+                title: '簡單測試模板'
+            };
+            
+            try {
+                const response = await fetch('api/save-template-simple.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(testData)
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok && data.success) {
+                    resultDiv.className = 'result success';
+                    resultDiv.textContent = '簡單保存測試成功！\n\n' + JSON.stringify(data, null, 2);
+                } else {
+                    resultDiv.className = 'result error';
+                    resultDiv.textContent = '簡單保存測試失敗: ' + JSON.stringify(data, null, 2);
+                }
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.textContent = '簡單保存測試錯誤: ' + error.message;
+            }
+        }
+        
+        // 完整保存測試
+        async function testFullSave() {
+            const resultDiv = document.getElementById('save-test-result');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result';
+            resultDiv.textContent = '正在測試完整保存...';
+            
+            const testData = {
+                id: 'FULL_TEST_' + Date.now(),
+                code: 'FULL_TEST_CODE',
+                category: 'test',
+                title: '完整測試模板',
+                description: '這是一個完整的測試模板',
+                content: '完整的測試內容',
                 status: 'active'
             };
             
@@ -222,83 +312,25 @@
                 const response = await fetch('api/save-template.php', {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json',
+                        'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify(testTemplate)
+                    body: JSON.stringify(testData)
                 });
                 
                 const data = await response.json();
                 
-                if (data.success) {
-                    showResult('save-result', 
-                        `✅ 保存成功\n` +
-                        `🆔 模板 ID: ${data.data.templateId}\n` +
-                        `📊 總模板數: ${data.data.totalTemplates}\n` +
-                        `📅 更新時間: ${data.data.lastUpdated}\n` +
-                        `💬 訊息: ${data.message}`, 
-                        'success'
-                    );
-                    log('保存模板測試成功', 'success');
+                if (response.ok && data.success) {
+                    resultDiv.className = 'result success';
+                    resultDiv.textContent = '完整保存測試成功！\n\n' + JSON.stringify(data, null, 2);
                 } else {
-                    showResult('save-result', `❌ 保存失敗: ${data.message}`, 'error');
-                    log(`保存模板失敗: ${data.message}`, 'error');
+                    resultDiv.className = 'result error';
+                    resultDiv.textContent = '完整保存測試失敗: ' + JSON.stringify(data, null, 2);
                 }
             } catch (error) {
-                showResult('save-result', `❌ 請求失敗: ${error.message}`, 'error');
-                log(`保存模板請求失敗: ${error.message}`, 'error');
+                resultDiv.className = 'result error';
+                resultDiv.textContent = '完整保存測試錯誤: ' + error.message;
             }
         }
-        
-        async function runFullDiagnostic() {
-            const resultDiv = document.getElementById('diagnostic-result');
-            resultDiv.textContent = '執行完整診斷中...';
-            diagnosticResults = [];
-            
-            try {
-                // 1. 環境檢查
-                log('開始完整診斷...', 'info');
-                await checkEnvironment();
-                
-                // 2. API 連接測試
-                await testApiConnection();
-                
-                // 3. 獲取模板測試
-                await testGetTemplates();
-                
-                // 4. 保存模板測試
-                await testSaveTemplate();
-                
-                // 5. 總結
-                const successCount = diagnosticResults.filter(r => r.type === 'success').length;
-                const errorCount = diagnosticResults.filter(r => r.type === 'error').length;
-                const warningCount = diagnosticResults.filter(r => r.type === 'warning').length;
-                
-                const summary = `
-🔍 診斷完成
-
-📊 結果統計:
-✅ 成功: ${successCount}
-❌ 錯誤: ${errorCount}
-⚠️ 警告: ${warningCount}
-
-📋 詳細日誌:
-${diagnosticResults.map(r => r.message).join('\n')}
-
-💡 建議:
-${errorCount > 0 ? '❌ 發現問題，請檢查上述錯誤訊息' : '✅ 所有測試通過，保存功能應該正常'}
-                `;
-                
-                showResult('diagnostic-result', summary, errorCount > 0 ? 'error' : 'success');
-                
-            } catch (error) {
-                showResult('diagnostic-result', `❌ 診斷失敗: ${error.message}`, 'error');
-            }
-        }
-        
-        // 頁面載入時自動執行環境檢查
-        window.addEventListener('load', () => {
-            checkEnvironment();
-        });
     </script>
 </body>
 </html> 
