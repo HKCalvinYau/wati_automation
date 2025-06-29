@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用戶手冊 - 寵物善終服務</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .manual-container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+        .manual-header { text-align: center; margin-bottom: 3rem; padding: 2rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 12px; }
+        .manual-section { margin-bottom: 3rem; padding: 2rem; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .manual-section h2 { color: #007bff; border-bottom: 2px solid #e9ecef; padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin: 1.5rem 0; }
+        .feature-card { background: #f8f9fa; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #28a745; }
+        .code-block { background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 4px; padding: 1rem; font-family: monospace; margin: 1rem 0; }
+        .highlight { background: #fff3cd; padding: 0.25rem 0.5rem; border-radius: 4px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="../index.html" class="logo">
+                    <i class="fas fa-heart"></i>
+                    寵物善終服務
+                </a>
+                <nav class="nav">
+                    <a href="../index.html" class="nav-link">
+                        <i class="fas fa-home"></i>
+                        返回首頁
+                    </a>
+                    <a href="development.html" class="nav-link">
+                        <i class="fas fa-book"></i>
+                        開發文檔
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="manual-container">
+            <div class="manual-header">
+                <h1><i class="fas fa-book-open"></i> 用戶手冊</h1>
+                <p>寵物善終服務 WhatsApp 訊息模板管理系統</p>
+            </div>
+
+            <div class="manual-section">
+                <h2><i class="fas fa-magic"></i> 變數功能使用指南</h2>
+                
+                <h3>什麼是變數？</h3>
+                <p>變數是模板中的動態內容，使用 <span class="highlight">{{變數名稱}}</span> 格式。</p>
+                
+                <div class="code-block">
+親愛的 {{name}}，
+您的寵物 {{pet_name}} 的預約時間是 {{date}} {{time}}。
+                </div>
+
+                <h3>如何使用變數功能</h3>
+                
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4><i class="fas fa-edit"></i> 1. 添加變數</h4>
+                        <p>在模板內容中使用 <span class="highlight">{{變數名稱}}</span> 格式，系統會自動識別</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-keyboard"></i> 2. 輸入變數值</h4>
+                        <p>在「變數值輸入」區塊找到對應變數，在輸入框中輸入實際值</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-eye"></i> 3. 即時預覽</h4>
+                        <p>預覽區塊會即時顯示已帶入變數值的完整訊息</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-copy"></i> 4. 複製內容</h4>
+                        <p>點擊「複製預覽內容」按鈕，複製已帶入值的完整訊息</p>
+                    </div>
+                </div>
+
+                <h3>常見變數說明</h3>
+                <div class="code-block">
+{{name}} - 收件人姓名
+{{date}} - 日期
+{{time}} - 時間
+{{phone}} - 電話號碼
+{{email}} - 電子郵件
+{{pet_name}} - 寵物名稱
+{{service}} - 服務項目
+                </div>
+            </div>
+
+            <div class="manual-section">
+                <h2><i class="fas fa-home"></i> 首頁功能</h2>
+                
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4><i class="fas fa-search"></i> 搜索功能</h4>
+                        <p>在搜索框輸入關鍵字，系統會即時過濾相關模板</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-tags"></i> 分類過濾</h4>
+                        <p>點擊分類按鈕，只顯示該分類的模板</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-globe"></i> 語言切換</h4>
+                        <p>點擊語言按鈕切換中文/英文</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-check-square"></i> 多選模式</h4>
+                        <p>啟用多選模式，可以批量操作多個模板</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="manual-section">
+                <h2><i class="fas fa-file-alt"></i> 模板詳情頁面</h2>
+                
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4><i class="fas fa-info"></i> 模板信息</h4>
+                        <p>查看模板代碼、分類、狀態、使用次數等基本信息</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-tools"></i> 操作按鈕</h4>
+                        <p>複製模板內容、下載模板、編輯模板、預覽模板</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-edit"></i> 模板內容</h4>
+                        <p>顯示和編輯模板內容，包含變數使用提示</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-code"></i> JSON檔</h4>
+                        <p>查看模板的完整 JSON 資料，支援複製和下載</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="manual-section">
+                <h2><i class="fas fa-question-circle"></i> 常見問題</h2>
+                
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h4>如何添加新的變數？</h4>
+                        <p>在模板內容中直接輸入 <span class="highlight">{{變數名稱}}</span>，系統會自動識別。</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>如何重置變數值？</h4>
+                        <p>點擊「重設」按鈕可以清空所有變數值。</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>複製預覽內容會統計使用次數嗎？</h4>
+                        <p>是的，複製預覽內容會自動增加使用次數。</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>如何切換語言？</h4>
+                        <p>使用語言切換按鈕，或使用快捷鍵 Alt+Z（中文）和 Alt+E（英文）。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="manual-section">
+                <h2><i class="fas fa-keyboard"></i> 快捷鍵</h2>
+                
+                <div class="code-block">
+Alt + Z - 切換到繁體中文
+Alt + E - 切換到英文
+Ctrl + F - 搜索模板
+Ctrl + C - 複製內容（在預覽區塊）
+                </div>
+            </div>
+
+            <div class="manual-section">
+              <h2><i class="fas fa-tags"></i> 分類系統</h2>
+              <p>系統採用編號化的分類管理，每個分類都有獨特的編號和顏色標識：</p>
+              
+              <div class="category-overview">
+                <h3>主要業務分類</h3>
+                <ul>
+                  <li><strong>ic</strong> - 初步諮詢 (23個模板)</li>
+                  <li><strong>ac</strong> - 安排服務 (20個模板)</li>
+                  <li><strong>ps</strong> - 後續服務 (20個模板)</li>
+                  <li><strong>pp</strong> - 產品推廣 (4個模板)</li>
+                  <li><strong>pi</strong> - 付款相關 (10個模板)</li>
+                  <li><strong>ci</strong> - 公司介紹 (5個模板)</li>
+                  <li><strong>li</strong> - 物流追蹤 (9個模板)</li>
+                  <li><strong>oi</strong> - 其他資訊 (10個模板)</li>
+                </ul>
+                
+                <div class="manual-action">
+                  <a href="categories-list.html" class="btn btn-primary">
+                    <i class="fas fa-list"></i> 查看完整分類列表
+                  </a>
+                </div>
+              </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>關於系統</h3>
+                    <p>專業的寵物善終服務 WhatsApp 訊息模板管理系統。</p>
+                </div>
+                <div class="footer-section">
+                    <h3>快速連結</h3>
+                    <ul>
+                        <li><a href="../index.html">返回首頁</a></li>
+                        <li><a href="development.html">開發文檔</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 寵物善終服務. 保留所有權利.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html> 

@@ -172,6 +172,12 @@ docker-compose -f docker-compose.prod.yml up -d
 
 ## 快速開始
 
+### 📖 用戶手冊
+- **[用戶手冊](docs/user-manual.html)** - 完整的使用指南和功能說明
+- **[分類列表](docs/categories-list.html)** - 詳細的分類編號和說明
+- **[開發文檔](docs/development.html)** - 技術文檔和開發指南
+- **[遷移指南](docs/migration.html)** - 數據遷移和升級說明
+
 ### 1. 純 PHP 環境（推薦）
 
 這是最簡單的部署方式，適合大多數使用場景：

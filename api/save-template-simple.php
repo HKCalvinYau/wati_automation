@@ -43,11 +43,21 @@ if (!$data) {
 }
 
 // 驗證必要欄位（簡化版本）
-if (!isset($data['id']) || !isset($data['title'])) {
+if (!isset($data['id'])) {
     http_response_code(400);
     echo json_encode([
         'success' => false,
-        'message' => '缺少必要欄位: id 或 title'
+        'message' => '缺少必要欄位: id'
+    ]);
+    exit();
+}
+
+// 檢查是否有要更新的內容
+if (!isset($data['content']) && !isset($data['variables']) && !isset($data['title'])) {
+    http_response_code(400);
+    echo json_encode([
+        'success' => false,
+        'message' => '缺少更新內容: 需要提供 content、variables 或 title'
     ]);
     exit();
 }
@@ -84,18 +94,6 @@ try {
         ];
     }
     
-    // 準備模板資料（使用預設值填充缺失欄位）
-    $templateData = [
-        'id' => $data['id'],
-        'code' => $data['code'] ?? $data['id'],
-        'category' => $data['category'] ?? '未分類',
-        'title' => $data['title'],
-        'description' => $data['description'] ?? $data['title'],
-        'content' => $data['content'] ?? $data['title'],
-        'status' => $data['status'] ?? 'active',
-        'updatedAt' => date('c')
-    ];
-    
     // 檢查是否為更新或新增
     $templateIndex = -1;
     foreach ($existingData['templates'] as $index => $template) {
@@ -105,14 +103,56 @@ try {
         }
     }
     
-    // 如果是新模板，添加創建時間
     if ($templateIndex === -1) {
-        $templateData['createdAt'] = date('c');
+        // 新增模板
+        $templateData = [
+            'id' => $data['id'],
+            'code' => $data['code'] ?? $data['id'],
+            'category' => $data['category'] ?? '未分類',
+            'title' => $data['title'],
+            'description' => $data['description'] ?? $data['title'],
+            'content' => $data['content'] ?? $data['title'],
+            'status' => $data['status'] ?? 'active',
+            'createdAt' => date('c'),
+            'updatedAt' => date('c')
+        ];
+        
+        // 添加變數（如果提供）
+        if (isset($data['variables'])) {
+            $templateData['variables'] = $data['variables'];
+        }
+        
         $existingData['templates'][] = $templateData;
     } else {
-        // 保留原始創建時間
-        $templateData['createdAt'] = $existingData['templates'][$templateIndex]['createdAt'];
-        $existingData['templates'][$templateIndex] = $templateData;
+        // 更新現有模板
+        $existingTemplate = $existingData['templates'][$templateIndex];
+        
+        // 更新內容（如果提供）
+        if (isset($data['content'])) {
+            $existingTemplate['content'] = $data['content'];
+        }
+        
+        // 更新變數（如果提供）
+        if (isset($data['variables'])) {
+            $existingTemplate['variables'] = $data['variables'];
+        }
+        
+        // 更新其他欄位（如果提供）
+        if (isset($data['title'])) {
+            $existingTemplate['title'] = $data['title'];
+        }
+        if (isset($data['description'])) {
+            $existingTemplate['description'] = $data['description'];
+        }
+        if (isset($data['category'])) {
+            $existingTemplate['category'] = $data['category'];
+        }
+        if (isset($data['status'])) {
+            $existingTemplate['status'] = $data['status'];
+        }
+        
+        $existingTemplate['updatedAt'] = date('c');
+        $existingData['templates'][$templateIndex] = $existingTemplate;
     }
     
     // 更新元資料

@@ -6,10 +6,12 @@ class TemplateDetail {
   constructor(templateId) {
     this.templateId = templateId;
     this.template = null;
-    this.currentLanguage = 'zh';
+    this.currentLanguage = this.getStoredLanguage();
     this.editMode = false;
     this.variablesEditMode = false;
     this.variables = [];
+    this.variableValues = {};
+    this.showOriginalTemplate = false;
     this.init();
   }
 
@@ -230,39 +232,47 @@ class TemplateDetail {
                                 placeholder="輸入模板內容..."
                             >${this.template.content[this.currentLanguage] || ''}</textarea>
                         </div>
+                        <div class="content-hint">
+                            <i class="fas fa-info-circle"></i>
+                            如需要加變數，請輸入 {{變量名稱}}
+                        </div>
                     </div>
                 </div>
 
                 <!-- 變數說明 -->
                 <div class="template-variables-card card">
                     <div class="card-header">
-                        <h2>變數說明</h2>
+                        <h2>變數值輸入</h2>
                         <div class="variables-actions">
-                            <button class="btn btn-sm btn-secondary" onclick="templateDetail.toggleVariablesEditMode()">
-                                <i class="fas fa-edit"></i>
-                                ${this.variablesEditMode ? '取消編輯' : '編輯變數'}
+                            <button class="btn btn-sm btn-secondary" onclick="templateDetail.toggleShowOriginalTemplate()">
+                                <i class="fas fa-eye"></i>
+                                ${this.showOriginalTemplate ? '顯示預覽' : '顯示原始模板'}
                             </button>
-                            ${this.variablesEditMode ? `
-                                <button class="btn btn-sm btn-primary" onclick="templateDetail.saveVariables()">
-                                    <i class="fas fa-save"></i>
-                                    保存
-                                </button>
-                            ` : ''}
+                            <button class="btn btn-sm btn-outline" onclick="templateDetail.resetVariableValues()">
+                                <i class="fas fa-undo"></i>
+                                重設
+                            </button>
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="variables-editor">
-                            <div class="variables-list" id="variables-list">
-                                ${this.renderVariables()}
+                        <div class="variables-input-section">
+                            <div class="variables-input-list" id="variables-input-list">
+                                ${this.renderVariableInputs()}
                             </div>
-                            ${this.variablesEditMode ? `
-                                <div class="add-variable-section">
-                                    <button class="btn btn-sm btn-outline" onclick="templateDetail.addVariable()">
-                                        <i class="fas fa-plus"></i>
-                                        添加變數
-                                    </button>
-                                </div>
-                            ` : ''}
+                        </div>
+                        
+                        <!-- 預覽區塊 -->
+                        <div class="template-preview-section">
+                            <div class="preview-header">
+                                <h3>訊息預覽</h3>
+                                <button class="btn btn-sm btn-primary" onclick="templateDetail.copyPreviewContent()">
+                                    <i class="fas fa-copy"></i>
+                                    複製預覽內容
+                                </button>
+                            </div>
+                            <div class="preview-content" id="preview-content">
+                                ${this.generatePreviewContent()}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1163,7 +1173,22 @@ class TemplateDetail {
    * 生成JSON
    */
   generateJSON() {
-    return JSON.stringify(this.template, null, 2);
+    // 創建包含最新資料的模板物件
+    const templateData = {
+      ...this.template,
+      // 包含最新的變數資料
+      variables: this.variables,
+      // 包含當前變數值
+      variableValues: this.variableValues,
+      // 包含預覽內容
+      previewContent: this.generatePreviewContent(),
+      // 添加生成時間戳
+      generatedAt: new Date().toISOString(),
+      // 添加當前語言
+      currentLanguage: this.currentLanguage
+    };
+    
+    return JSON.stringify(templateData, null, 2);
   }
 
   /**
@@ -1220,7 +1245,7 @@ class TemplateDetail {
     const content = document.getElementById('content-editor').value;
     
     try {
-      const response = await fetch('api/save-template.php', {
+      const response = await fetch('api/save-template-simple.php', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -1240,11 +1265,12 @@ class TemplateDetail {
         this.showSuccess('內容保存成功');
         this.renderTemplateDetail();
       } else {
-        throw new Error('保存失敗');
+        const errorData = await response.json();
+        throw new Error(errorData.message || '保存失敗');
       }
     } catch (error) {
       console.error('保存內容失敗:', error);
-      this.showError('保存內容失敗');
+      this.showError('保存內容失敗: ' + error.message);
     }
   }
 
@@ -1313,7 +1339,7 @@ class TemplateDetail {
    */
   async saveVariables() {
     try {
-      const response = await fetch('api/save-template.php', {
+      const response = await fetch('api/save-template-simple.php', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -1330,11 +1356,12 @@ class TemplateDetail {
         this.showSuccess('變數說明保存成功');
         this.renderTemplateDetail();
       } else {
-        throw new Error('保存失敗');
+        const errorData = await response.json();
+        throw new Error(errorData.message || '保存失敗');
       }
     } catch (error) {
       console.error('保存變數失敗:', error);
-      this.showError('保存變數失敗');
+      this.showError('保存變數失敗: ' + error.message);
     }
   }
 
@@ -1342,31 +1369,190 @@ class TemplateDetail {
    * 初始化變數
    */
   initVariables() {
-    if (this.template.variables && Array.isArray(this.template.variables)) {
-      this.variables = [...this.template.variables];
-    } else {
-      // 從內容中自動提取變數
-      this.variables = this.extractVariablesFromContent();
-    }
+    console.log('🔧 開始初始化變數...');
+    console.log('📋 模板內容:', this.template.content);
+    console.log('🌐 當前語言:', this.currentLanguage);
+    
+    // 強制從內容中提取變數，不使用現有變數
+    console.log('🔍 從內容中提取變數...');
+    this.variables = this.extractVariablesFromContent();
+    
+    // 初始化變數值
+    this.variables.forEach(variable => {
+      if (!this.variableValues[variable.name]) {
+        this.variableValues[variable.name] = '';
+      }
+    });
+    
+    console.log('✅ 變數初始化完成:', this.variables);
   }
 
   /**
    * 從內容中提取變數
    */
   extractVariablesFromContent() {
-    const content = this.template.content[this.currentLanguage] || '';
+    const content = this.template.content[this.currentLanguage] || this.template.content.zh || '';
+    console.log('🔍 正在提取變數，內容:', content);
+    
     const variableRegex = /\{\{([^}]+)\}\}/g;
     const variables = new Set();
     let match;
 
     while ((match = variableRegex.exec(content)) !== null) {
-      variables.add(match[1].trim());
+      const variableName = match[1].trim();
+      console.log('📝 找到變數:', variableName);
+      variables.add(variableName);
     }
 
-    return Array.from(variables).map(name => ({
+    const result = Array.from(variables).map(name => ({
       name: name,
-      description: ''
+      description: this.getDefaultVariableDescription(name)
     }));
+    
+    console.log('✅ 提取到的變數:', result);
+    return result;
+  }
+
+  /**
+   * 獲取變數的預設說明
+   */
+  getDefaultVariableDescription(variableName) {
+    const descriptions = {
+      'name': '收件人姓名',
+      'date': '日期',
+      'time': '時間',
+      'phone': '電話號碼',
+      'email': '電子郵件',
+      'address': '地址',
+      'price': '價格',
+      'service': '服務項目',
+      'pet': '寵物名稱',
+      'owner': '主人姓名',
+      'appointment': '預約時間',
+      'location': '地點',
+      'payment': '付款方式',
+      'status': '狀態',
+      'id': '編號',
+      'code': '代碼',
+      'amount': '金額',
+      'quantity': '數量',
+      'product': '產品名稱',
+      'company': '公司名稱'
+    };
+    
+    return descriptions[variableName.toLowerCase()] || `請輸入${variableName}的值`;
+  }
+
+  /**
+   * 渲染變數輸入列表
+   */
+  renderVariableInputs() {
+    if (this.variables.length === 0) {
+      return '<div class="no-variables">此模板沒有變數</div>';
+    }
+    
+    return this.variables.map((variable, index) => `
+      <div class="variable-input-item">
+        <div class="variable-info">
+          <div class="variable-name">${variable.name}</div>
+          <div class="variable-description">${variable.description || '請輸入變數值'}</div>
+        </div>
+        <div class="variable-value-input">
+          <input 
+            type="text" 
+            class="variable-value" 
+            value="${this.variableValues[variable.name] || ''}" 
+            placeholder="請輸入 ${variable.name} 的值"
+            oninput="templateDetail.updateVariableValue('${variable.name}', this.value)"
+          />
+        </div>
+      </div>
+    `).join('');
+  }
+
+  /**
+   * 生成預覽內容
+   */
+  generatePreviewContent() {
+    let content = this.template.content[this.currentLanguage] || this.template.content.zh || '';
+    
+    if (this.showOriginalTemplate) {
+      return content;
+    }
+    
+    // 替換變數
+    this.variables.forEach(variable => {
+      const variableName = variable.name;
+      const variableValue = this.variableValues[variableName] || `{{${variableName}}}`;
+      const regex = new RegExp(`\\{\\{${variableName}\\}\\}`, 'g');
+      content = content.replace(regex, variableValue);
+    });
+    
+    return content;
+  }
+
+  /**
+   * 複製預覽內容
+   */
+  async copyPreviewContent() {
+    const previewContent = this.generatePreviewContent();
+    try {
+      await navigator.clipboard.writeText(previewContent);
+      
+      // 增加使用次數統計
+      await this.incrementUsage();
+      
+      this.showSuccess("預覽內容已複製到剪貼板");
+    } catch (error) {
+      console.error("複製預覽內容失敗:", error);
+      this.showError("複製預覽內容失敗，請手動複製");
+    }
+  }
+
+  /**
+   * 切換顯示原始模板
+   */
+  toggleShowOriginalTemplate() {
+    this.showOriginalTemplate = !this.showOriginalTemplate;
+    this.renderTemplateDetail();
+  }
+
+  /**
+   * 重設變數值
+   */
+  resetVariableValues() {
+    this.variableValues = {};
+    this.renderTemplateDetail();
+    this.updateJSONDisplay();
+  }
+
+  /**
+   * 更新變數值
+   */
+  updateVariableValue(variableName, value) {
+    this.variableValues[variableName] = value;
+    this.updatePreviewContent();
+    this.updateJSONDisplay();
+  }
+
+  /**
+   * 更新預覽內容
+   */
+  updatePreviewContent() {
+    const previewElement = document.getElementById('preview-content');
+    if (previewElement) {
+      previewElement.textContent = this.generatePreviewContent();
+    }
+  }
+
+  /**
+   * 更新JSON顯示
+   */
+  updateJSONDisplay() {
+    const jsonElement = document.getElementById('template-json');
+    if (jsonElement) {
+      jsonElement.textContent = this.generateJSON();
+    }
   }
 }
 

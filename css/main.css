@@ -1858,3 +1858,147 @@ body {
     font-size: 13px;
   }
 }
+
+/* 變數輸入區塊樣式 */
+.variables-input-section {
+  margin-bottom: 2rem;
+}
+
+.variables-input-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.variable-input-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+}
+
+.variable-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.variable-info .variable-name {
+  font-weight: 600;
+  color: #495057;
+  margin-bottom: 0.25rem;
+}
+
+.variable-info .variable-description {
+  font-size: 0.875rem;
+  color: #6c757d;
+}
+
+.variable-value-input {
+  flex: 1;
+  max-width: 300px;
+}
+
+.variable-value {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  transition: border-color 0.15s ease-in-out;
+}
+
+.variable-value:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.no-variables {
+  text-align: center;
+  padding: 2rem;
+  color: #6c757d;
+  font-style: italic;
+}
+
+/* 預覽區塊樣式 */
+.template-preview-section {
+  border-top: 1px solid #e9ecef;
+  padding-top: 1.5rem;
+}
+
+.preview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.preview-header h3 {
+  margin: 0;
+  color: #495057;
+  font-size: 1.1rem;
+}
+
+.preview-content {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 1.5rem;
+  min-height: 100px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-family: inherit;
+  line-height: 1.6;
+  color: #495057;
+}
+
+.preview-content:empty::before {
+  content: "輸入變數值後，預覽內容將在此顯示";
+  color: #6c757d;
+  font-style: italic;
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+  .variable-input-item {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+  
+  .variable-value-input {
+    max-width: none;
+  }
+  
+  .preview-header {
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: stretch;
+  }
+  
+  .preview-header .btn {
+    align-self: flex-start;
+  }
+}
+
+/* 模板內容提示文字 */
+.content-hint {
+  margin-top: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  color: #6c757d;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.content-hint i {
+  color: #007bff;
+  font-size: 0.875rem;
+}

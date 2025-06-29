@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>分類列表 - 寵物善終服務</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .categories-container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+        .categories-header { text-align: center; margin-bottom: 3rem; padding: 2rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 12px; }
+        .categories-header h1 { margin: 0; font-size: 2.5rem; }
+        .categories-header p { margin: 1rem 0 0; opacity: 0.9; }
+        
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+        .stat-card { background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); text-align: center; }
+        .stat-number { font-size: 2.5rem; font-weight: bold; color: #007bff; margin-bottom: 0.5rem; }
+        .stat-label { color: #6c757d; font-size: 0.9rem; }
+        
+        .categories-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; }
+        .category-card { background: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); overflow: hidden; transition: transform 0.3s ease; }
+        .category-card:hover { transform: translateY(-5px); }
+        .category-header { padding: 1.5rem; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-bottom: 1px solid #dee2e6; }
+        .category-code { display: inline-block; background: #007bff; color: white; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem; font-weight: bold; margin-bottom: 0.5rem; }
+        .category-title { font-size: 1.3rem; font-weight: bold; color: #333; margin-bottom: 0.5rem; }
+        .category-subtitle { color: #6c757d; font-size: 0.9rem; }
+        .category-content { padding: 1.5rem; }
+        .category-description { color: #555; line-height: 1.6; margin-bottom: 1rem; }
+        .category-meta { display: flex; justify-content: space-between; align-items: center; padding-top: 1rem; border-top: 1px solid #eee; }
+        .template-count { background: #28a745; color: white; padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.8rem; font-weight: bold; }
+        .category-icon { font-size: 1.2rem; color: #007bff; }
+        
+        .back-button { display: inline-block; background: #6c757d; color: white; padding: 0.8rem 1.5rem; text-decoration: none; border-radius: 8px; margin-bottom: 2rem; transition: background 0.3s ease; }
+        .back-button:hover { background: #5a6268; }
+        
+        .language-toggle { text-align: center; margin-bottom: 2rem; }
+        .language-btn { background: #f8f9fa; border: 1px solid #dee2e6; padding: 0.5rem 1rem; margin: 0 0.25rem; border-radius: 5px; cursor: pointer; transition: all 0.3s ease; }
+        .language-btn.active { background: #007bff; color: white; border-color: #007bff; }
+        
+        @media (max-width: 768px) {
+            .categories-container { padding: 1rem; }
+            .categories-header h1 { font-size: 2rem; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .categories-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="categories-container">
+        <!-- 返回按鈕 -->
+        <a href="../index.html" class="back-button">
+            <i class="fas fa-arrow-left"></i> 返回首頁
+        </a>
+        
+        <!-- 頁面標題 -->
+        <div class="categories-header">
+            <h1><i class="fas fa-tags"></i> 分類列表</h1>
+            <p>寵物善終服務 WhatsApp 訊息模板完整分類指南</p>
+        </div>
+        
+        <!-- 語言切換 -->
+        <div class="language-toggle">
+            <button class="language-btn active" onclick="switchLanguage('zh')">繁體中文</button>
+            <button class="language-btn" onclick="switchLanguage('en')">English</button>
+        </div>
+        
+        <!-- 統計資訊 -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">107</div>
+                <div class="stat-label">總模板數量</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">10</div>
+                <div class="stat-label">分類總數</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">8</div>
+                <div class="stat-label">主要業務分類</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">23</div>
+                <div class="stat-label">最多模板分類</div>
+            </div>
+        </div>
+        
+        <!-- 分類列表 -->
+        <div class="categories-grid" id="categories-grid">
+            <!-- 分類卡片將由 JavaScript 動態生成 -->
+        </div>
+    </div>
+
+    <script>
+        // 分類數據
+        const categoriesData = {
+            zh: [
+                {
+                    code: "ic",
+                    title: "初步諮詢",
+                    subtitle: "Initial Consultation",
+                    description: "與客戶的初次接觸和諮詢，包括服務介紹、需求了解、初步報價等。這是客戶服務流程的第一步，建立良好的第一印象至關重要。",
+                    icon: "fas fa-handshake",
+                    templateCount: 23,
+                    color: "#007bff"
+                },
+                {
+                    code: "ac",
+                    title: "安排服務",
+                    subtitle: "Service Arrangement",
+                    description: "服務預約的確認和安排，包括時間安排、地點確認、服務人員分配、所需設備準備等。確保服務順利進行的重要環節。",
+                    icon: "fas fa-calendar-check",
+                    templateCount: 20,
+                    color: "#28a745"
+                },
+                {
+                    code: "ps",
+                    title: "後續服務",
+                    subtitle: "Post Service",
+                    description: "服務完成後的跟進和關懷，包括客戶回訪、服務評價收集、後續需求了解、關懷慰問等。維護客戶關係的重要步驟。",
+                    icon: "fas fa-heart",
+                    templateCount: 20,
+                    color: "#dc3545"
+                },
+                {
+                    code: "pp",
+                    title: "產品推廣",
+                    subtitle: "Product Promotion",
+                    description: "產品和服務的推廣信息，包括新服務介紹、優惠活動、產品特色說明、客戶推薦等。擴大業務影響力的重要工具。",
+                    icon: "fas fa-bullhorn",
+                    templateCount: 4,
+                    color: "#ffc107"
+                },
+                {
+                    code: "pi",
+                    title: "付款相關",
+                    subtitle: "Payment Information",
+                    description: "付款方式和費用相關信息，包括價格說明、付款方式、發票開具、退款處理等。確保財務流程順暢的重要環節。",
+                    icon: "fas fa-credit-card",
+                    templateCount: 10,
+                    color: "#17a2b8"
+                },
+                {
+                    code: "ci",
+                    title: "公司介紹",
+                    subtitle: "Company Introduction",
+                    description: "公司介紹和服務說明，包括公司背景、服務理念、專業團隊、服務承諾等。建立客戶信任的重要內容。",
+                    icon: "fas fa-building",
+                    templateCount: 5,
+                    color: "#6f42c1"
+                },
+                {
+                    code: "li",
+                    title: "物流追蹤",
+                    subtitle: "Logistics Tracking",
+                    description: "物流和配送相關信息，包括配送安排、追蹤查詢、配送狀態更新、異常處理等。確保服務品質的重要保障。",
+                    icon: "fas fa-truck",
+                    templateCount: 9,
+                    color: "#fd7e14"
+                },
+                {
+                    code: "oi",
+                    title: "其他資訊",
+                    subtitle: "Other Information",
+                    description: "其他相關信息和通知，包括政策更新、服務調整、緊急通知、一般性公告等。保持信息透明的重要渠道。",
+                    icon: "fas fa-info-circle",
+                    templateCount: 10,
+                    color: "#6c757d"
+                },
+                {
+                    code: "test",
+                    title: "測試分類",
+                    subtitle: "Test Category",
+                    description: "用於系統測試和開發的模板分類，包含各種測試場景的模板，不建議在正式環境中使用。",
+                    icon: "fas fa-flask",
+                    templateCount: 4,
+                    color: "#e83e8c"
+                },
+                {
+                    code: "未分類",
+                    title: "未分類",
+                    subtitle: "Uncategorized",
+                    description: "尚未歸類的模板，需要進一步整理和分類。建議定期檢查並將這些模板分配到適當的分類中。",
+                    icon: "fas fa-question-circle",
+                    templateCount: 1,
+                    color: "#adb5bd"
+                }
+            ],
+            en: [
+                {
+                    code: "ic",
+                    title: "Initial Consultation",
+                    subtitle: "初步諮詢",
+                    description: "Initial contact and consultation with clients, including service introduction, needs assessment, preliminary quotes, etc. This is the first step in the customer service process, and making a good first impression is crucial.",
+                    icon: "fas fa-handshake",
+                    templateCount: 23,
+                    color: "#007bff"
+                },
+                {
+                    code: "ac",
+                    title: "Service Arrangement",
+                    subtitle: "安排服務",
+                    description: "Service appointment confirmation and arrangement, including scheduling, location confirmation, staff allocation, equipment preparation, etc. A crucial step to ensure smooth service delivery.",
+                    icon: "fas fa-calendar-check",
+                    templateCount: 20,
+                    color: "#28a745"
+                },
+                {
+                    code: "ps",
+                    title: "Post Service",
+                    subtitle: "後續服務",
+                    description: "Follow-up and care after service completion, including customer follow-up, service evaluation collection, subsequent needs understanding, care and condolences, etc. Important steps to maintain customer relationships.",
+                    icon: "fas fa-heart",
+                    templateCount: 20,
+                    color: "#dc3545"
+                },
+                {
+                    code: "pp",
+                    title: "Product Promotion",
+                    subtitle: "產品推廣",
+                    description: "Product and service promotion information, including new service introductions, promotional activities, product feature descriptions, customer referrals, etc. Important tools for expanding business influence.",
+                    icon: "fas fa-bullhorn",
+                    templateCount: 4,
+                    color: "#ffc107"
+                },
+                {
+                    code: "pi",
+                    title: "Payment Information",
+                    subtitle: "付款相關",
+                    description: "Payment methods and fee-related information, including price explanations, payment methods, invoice issuance, refund processing, etc. Important aspects to ensure smooth financial processes.",
+                    icon: "fas fa-credit-card",
+                    templateCount: 10,
+                    color: "#17a2b8"
+                },
+                {
+                    code: "ci",
+                    title: "Company Introduction",
+                    subtitle: "公司介紹",
+                    description: "Company introduction and service descriptions, including company background, service philosophy, professional team, service commitments, etc. Important content for building customer trust.",
+                    icon: "fas fa-building",
+                    templateCount: 5,
+                    color: "#6f42c1"
+                },
+                {
+                    code: "li",
+                    title: "Logistics Tracking",
+                    subtitle: "物流追蹤",
+                    description: "Logistics and delivery related information, including delivery arrangements, tracking inquiries, delivery status updates, exception handling, etc. Important guarantees to ensure service quality.",
+                    icon: "fas fa-truck",
+                    templateCount: 9,
+                    color: "#fd7e14"
+                },
+                {
+                    code: "oi",
+                    title: "Other Information",
+                    subtitle: "其他資訊",
+                    description: "Other related information and notifications, including policy updates, service adjustments, emergency notices, general announcements, etc. Important channels for maintaining information transparency.",
+                    icon: "fas fa-info-circle",
+                    templateCount: 10,
+                    color: "#6c757d"
+                },
+                {
+                    code: "test",
+                    title: "Test Category",
+                    subtitle: "測試分類",
+                    description: "Template category for system testing and development, containing templates for various test scenarios. Not recommended for use in production environments.",
+                    icon: "fas fa-flask",
+                    templateCount: 4,
+                    color: "#e83e8c"
+                },
+                {
+                    code: "未分類",
+                    title: "Uncategorized",
+                    subtitle: "未分類",
+                    description: "Templates that have not yet been categorized and need further organization and classification. It is recommended to regularly review and assign these templates to appropriate categories.",
+                    icon: "fas fa-question-circle",
+                    templateCount: 1,
+                    color: "#adb5bd"
+                }
+            ]
+        };
+
+        let currentLanguage = 'zh';
+
+        // 切換語言
+        function switchLanguage(lang) {
+            currentLanguage = lang;
+            
+            // 更新按鈕狀態
+            document.querySelectorAll('.language-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // 重新渲染分類列表
+            renderCategories();
+        }
+
+        // 渲染分類列表
+        function renderCategories() {
+            const grid = document.getElementById('categories-grid');
+            const categories = categoriesData[currentLanguage];
+            
+            grid.innerHTML = categories.map(category => `
+                <div class="category-card">
+                    <div class="category-header">
+                        <div class="category-code" style="background-color: ${category.color}">${category.code}</div>
+                        <div class="category-title">${category.title}</div>
+                        <div class="category-subtitle">${category.subtitle}</div>
+                    </div>
+                    <div class="category-content">
+                        <div class="category-description">${category.description}</div>
+                        <div class="category-meta">
+                            <div class="template-count">
+                                <i class="fas fa-file-alt"></i> ${category.templateCount} 個模板
+                            </div>
+                            <div class="category-icon">
+                                <i class="${category.icon}"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // 頁面載入時初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            renderCategories();
+        });
+    </script>
+</body>
+</html> 
